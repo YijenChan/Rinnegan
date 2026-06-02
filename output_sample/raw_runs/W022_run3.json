@@ -1,0 +1,26 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W022",
+      "approx_timestamp": "2026-01-20 12:42:15",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "portal-sync:4022@portal-web-01",
+      "src_type": "process",
+      "relation": "read",
+      "dst_entity": "/var/www/portal/.cache/portal-sync",
+      "dst_type": "file",
+      "command": "read",
+      "args": "read portal helper before beacon",
+      "supporting_side_views": [
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "M001134",
+        "E0050"
+      ],
+      "confidence_rationale": "Observed network peaks and missing log context suggest periodic beacon activity."
+    }
+  ]
+}

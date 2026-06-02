@@ -1,0 +1,32 @@
+Rinnegan Stage-3: Graph Initialization Summary
+
+Graph sizes
+  clean nodes/edges:      539 / 5656
+  corrupted nodes/edges:  534 / 5641
+  remediated nodes/edges: 576 / 5662
+
+Observed/recovered edges
+  clean observed edges:      5656
+  corrupted observed edges:  5641
+  remediated observed edges: 5641
+  remediated recovered edges:21
+
+Attack edge labels
+  clean attack edges:      56
+  corrupted attack edges:  41
+  remediated attack edges: 55
+
+Deltas
+  clean_minus_corrupted_edges: 15
+  remediated_minus_corrupted_edges: 21
+  remediated_minus_clean_edges: 6
+  clean_minus_corrupted_attack_edges: 15
+  remediated_minus_corrupted_attack_edges: 14
+  remediated_minus_clean_attack_edges: -1
+  remediated_recovered_edges: 21
+  remediated_recovered_copy_nodes: 42
+
+Output folders
+  F:\Rinnegan\outputs\rinnegan_stage3_graph_init\clean_graph
+  F:\Rinnegan\outputs\rinnegan_stage3_graph_init\corrupted_graph
+  F:\Rinnegan\outputs\rinnegan_stage3_graph_init\remediated_graph

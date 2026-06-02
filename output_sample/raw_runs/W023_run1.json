@@ -1,0 +1,27 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W023",
+      "approx_timestamp": "2026-01-20 12:55:13",
+      "host": "ws-finance-01",
+      "user": "u_fin",
+      "src_entity": "syswatch:3001@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "syswatch",
+      "args": "beacon-like periodicity",
+      "supporting_side_views": [
+        "traffic",
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "F0013",
+        "ME0011"
+      ],
+      "confidence_rationale": "Beacon-like periodic traffic and host metric anomaly detected; no matching audit event."
+    }
+  ]
+}

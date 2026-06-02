@@ -1,0 +1,25 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W024",
+      "approx_timestamp": "2026-01-20 13:08:17",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "nginx:1301@portal-web-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "periodic tls-like beacon to c2",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0014"
+      ],
+      "confidence_rationale": "Network flow F0014 indicates a beacon-like connection from portal-web-01 to 198.51.100.77:443, which is not supported by any audit log event in W024."
+    }
+  ]
+}

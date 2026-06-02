@@ -1,0 +1,52 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W021",
+      "approx_timestamp": "2026-01-20 12:31:10",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "syswatch:3280@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "beacon",
+      "supporting_side_views": [
+        "traffic",
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "F0009",
+        "ME0009",
+        "E0042"
+      ],
+      "confidence_rationale": "Network flow F0009 shows periodic outbound TLS-like flow matching the syswatch process, supported by metric clue ME0009 and log event E0042 indicating a read from a session file before beaconing."
+    },
+    {
+      "window_id": "W021",
+      "approx_timestamp": "2026-01-20 12:33:10",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "portal-sync:4022@portal-web-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "beacon",
+      "supporting_side_views": [
+        "traffic",
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "F0010",
+        "ME0010",
+        "E0043"
+      ],
+      "confidence_rationale": "Network flow F0010 shows outbound TLS-like flow matching portal-sync process, supported by metric clue ME0010 and log event E0043 indicating a read from a portal cache before beaconing."
+    }
+  ]
+}

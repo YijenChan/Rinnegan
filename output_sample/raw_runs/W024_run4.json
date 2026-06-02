@@ -1,0 +1,26 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W024",
+      "approx_timestamp": "2026-01-20 13:08:15",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "nginx:1301@portal-web-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "periodic tls-like beacon to c2",
+      "supporting_side_views": [
+        "traffic",
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "F0014"
+      ],
+      "confidence_rationale": "Network flow evidence (F0014) indicates a beacon-like HTTPS connection from portal-web-01 to external IP 198.51.100.77:443 during W024, consistent with attack-related activity."
+    }
+  ]
+}

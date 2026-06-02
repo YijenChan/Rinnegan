@@ -1,0 +1,48 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W021",
+      "approx_timestamp": "2026-01-20 12:31:04",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "syswatch:3280@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "syswatch",
+      "args": "TLS-like beacon to external endpoint",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0009",
+        "ME0009"
+      ],
+      "confidence_rationale": "Periodic outbound network burst (ME0009) aligns with unsupported external flow (F0009)."
+    },
+    {
+      "window_id": "W021",
+      "approx_timestamp": "2026-01-20 12:33:08",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "portal-sync:4022@portal-web-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "portal-sync",
+      "args": "TLS-like beacon to external endpoint",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0010",
+        "ME0010"
+      ],
+      "confidence_rationale": "Periodic outbound network burst (ME0010) aligns with unsupported external flow (F0010)."
+    }
+  ]
+}

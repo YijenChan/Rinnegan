@@ -1,0 +1,520 @@
+# Target corrupted window: W002
+Neighbor context C_t = ['W001', 'W002', 'W003']
+Stage-1 inconsistency clues for target: corruption_score=7.328671434852988, unsupported_flow_count=2, unsupported_external_flow_count=1, unsupported_metric_clue_count=0, unsupported_metric_zsum=0.0
+
+Important instruction: recover missing audit events only for the TARGET window, not for neighboring windows.
+Neighboring windows are provided only for temporal continuity.
+
+## Window W001
+
+### Observed corrupted audit log snippets
+- B000103 | 2026-01-20 09:10:08 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000107 | 2026-01-20 09:10:08 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.12:6514 (socket) | cmd=connect | args=collect syslog stream from ws-dev-02
+- B000106 | 2026-01-20 09:10:10 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.11:6514 (socket) | cmd=connect | args=collect syslog stream from ws-finance-01
+- B000102 | 2026-01-20 09:10:12 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000101 | 2026-01-20 09:10:17 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000105 | 2026-01-20 09:10:17 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000104 | 2026-01-20 09:10:18 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000109 | 2026-01-20 09:10:19 | W001 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --connect--> 192.0.2.40:993 (socket) | cmd=connect | args=imap mail synchronization
+- B000108 | 2026-01-20 09:10:21 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.31:6514 (socket) | cmd=connect | args=collect syslog stream from portal-web-01
+- B000110 | 2026-01-20 09:10:21 | W001 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --write--> /home/u_fin/.thunderbird/cache/index.sqlite (file) | cmd=write | args=update mail cache
+- B000115 | 2026-01-20 09:10:22 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000111 | 2026-01-20 09:10:28 | W001 | host=ws-finance-01 user=u_fin process=updatedb | updatedb:1902@ws-finance-01 --connect--> 192.0.2.10:443 (socket) | cmd=connect | args=benign package metadata check
+- B000112 | 2026-01-20 09:10:34 | W001 | host=ws-finance-01 user=u_fin process=updatedb | updatedb:1902@ws-finance-01 --write--> /var/cache/apt/pkgcache.bin (file) | cmd=write | args=benign package cache update
+- B004085 | 2026-01-20 09:10:38 | W001 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B003859 | 2026-01-20 09:10:44 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --write--> /var/lib/prometheus/wal/000001 (file) | cmd=write | args=normal metric wal write
+- B003629 | 2026-01-20 09:11:06 | W001 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B000117 | 2026-01-20 09:11:11 | W001 | host=ws-dev-02 user=u_dev process=ssh | ssh:2201@ws-dev-02 --connect--> 10.20.1.31:22 (socket) | cmd=connect | args=normal developer ssh to portal
+- B005524 | 2026-01-20 09:11:14 | W001 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B000120 | 2026-01-20 09:11:16 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000116 | 2026-01-20 09:11:20 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B004865 | 2026-01-20 09:11:48 | W001 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B004748 | 2026-01-20 09:11:55 | W001 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B000122 | 2026-01-20 09:12:02 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000124 | 2026-01-20 09:12:04 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000121 | 2026-01-20 09:12:06 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000132 | 2026-01-20 09:12:11 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000123 | 2026-01-20 09:12:14 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000126 | 2026-01-20 09:12:14 | W001 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- B000127 | 2026-01-20 09:12:15 | W001 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --write--> /home/u_fin/.cache/mozilla/portal-cache.sqlite (file) | cmd=write | args=update browser portal cache
+- B004640 | 2026-01-20 09:12:26 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B005324 | 2026-01-20 09:12:26 | W001 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B005268 | 2026-01-20 09:12:36 | W001 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B000125 | 2026-01-20 09:12:41 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B004008 | 2026-01-20 09:12:54 | W001 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B005493 | 2026-01-20 09:13:00 | W001 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B000137 | 2026-01-20 09:13:12 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B005117 | 2026-01-20 09:13:22 | W001 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B003623 | 2026-01-20 09:13:23 | W001 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B005511 | 2026-01-20 09:13:26 | W001 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B005237 | 2026-01-20 09:13:27 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --write--> /var/lib/prometheus/wal/000001 (file) | cmd=write | args=normal metric wal write
+- B004127 | 2026-01-20 09:13:37 | W001 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B000134 | 2026-01-20 09:13:42 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B005475 | 2026-01-20 09:13:48 | W001 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B000140 | 2026-01-20 09:14:02 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000139 | 2026-01-20 09:14:02 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000141 | 2026-01-20 09:14:11 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000138 | 2026-01-20 09:14:14 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000142 | 2026-01-20 09:14:17 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000146 | 2026-01-20 09:14:23 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000144 | 2026-01-20 09:14:25 | W001 | host=file-srv-01 user=svc_backup process=smbd | smbd:1201@file-srv-01 --write--> /srv/share/finance/vendor_invoice.pdf.lock (file) | cmd=write | args=benign lock/update file created by share service
+- B005497 | 2026-01-20 09:14:41 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B000153 | 2026-01-20 09:15:03 | W001 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --connect--> 192.0.2.40:993 (socket) | cmd=connect | args=imap mail synchronization
+- B000154 | 2026-01-20 09:15:05 | W001 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --write--> /home/u_fin/.thunderbird/cache/index.sqlite (file) | cmd=write | args=update mail cache
+- B000156 | 2026-01-20 09:15:08 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000149 | 2026-01-20 09:15:10 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.12:6514 (socket) | cmd=connect | args=collect syslog stream from ws-dev-02
+- B004938 | 2026-01-20 09:15:11 | W001 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B000147 | 2026-01-20 09:15:19 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000151 | 2026-01-20 09:15:20 | W001 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- B000152 | 2026-01-20 09:15:21 | W001 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --write--> /home/u_fin/.cache/mozilla/portal-cache.sqlite (file) | cmd=write | args=update browser portal cache
+- B005422 | 2026-01-20 09:15:24 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B004403 | 2026-01-20 09:15:28 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --write--> /var/lib/prometheus/wal/000001 (file) | cmd=write | args=normal metric wal write
+- B000148 | 2026-01-20 09:15:30 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.11:6514 (socket) | cmd=connect | args=collect syslog stream from ws-finance-01
+- B000150 | 2026-01-20 09:15:48 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.31:6514 (socket) | cmd=connect | args=collect syslog stream from portal-web-01
+- B000160 | 2026-01-20 09:16:02 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000158 | 2026-01-20 09:16:03 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000164 | 2026-01-20 09:16:04 | W001 | host=ws-dev-02 user=u_dev process=ssh | ssh:2201@ws-dev-02 --connect--> 10.20.1.31:22 (socket) | cmd=connect | args=normal developer ssh to portal
+- B000162 | 2026-01-20 09:16:05 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000161 | 2026-01-20 09:16:09 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000159 | 2026-01-20 09:16:11 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000166 | 2026-01-20 09:16:31 | W001 | host=ws-dev-02 user=u_dev process=curl | curl:2221@ws-dev-02 --connect--> 192.0.2.30:443 (socket) | cmd=connect | args=normal package/source repository access
+- B000167 | 2026-01-20 09:16:34 | W001 | host=ws-dev-02 user=u_dev process=curl | curl:2221@ws-dev-02 --write--> /home/u_dev/src/portal/requirements.txt (file) | cmd=write | args=normal development file/cache update
+- B000171 | 2026-01-20 09:16:36 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000168 | 2026-01-20 09:16:55 | W001 | host=ws-dev-02 user=u_dev process=python3 | python3:2232@ws-dev-02 --execute--> /home/u_dev/src/portal/tests/test_api.py (file) | cmd=execute | args=normal local development/test activity
+- B000175 | 2026-01-20 09:17:11 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000172 | 2026-01-20 09:17:25 | W001 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B005585 | 2026-01-20 09:17:25 | W001 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B005567 | 2026-01-20 09:17:25 | W001 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B005454 | 2026-01-20 09:17:43 | W001 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B000173 | 2026-01-20 09:17:51 | W001 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /var/lib/docker/tmp/build-context.tar (file) | cmd=read | args=normal local development/test activity
+- B004889 | 2026-01-20 09:18:01 | W001 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B000177 | 2026-01-20 09:18:02 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000179 | 2026-01-20 09:18:04 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000176 | 2026-01-20 09:18:09 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000178 | 2026-01-20 09:18:10 | W001 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B003949 | 2026-01-20 09:18:14 | W001 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B004254 | 2026-01-20 09:18:18 | W001 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B000188 | 2026-01-20 09:18:23 | W001 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000185 | 2026-01-20 09:18:31 | W001 | host=file-srv-01 user=svc_backup process=backup-agent | backup-agent:1230@file-srv-01 --connect--> 10.20.1.41:873 (socket) | cmd=connect | args=backup metadata sync to monitoring server
+- B000181 | 2026-01-20 09:18:37 | W001 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- B000191 | 2026-01-20 09:19:14 | W001 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /home/u_dev/src/portal/requirements.txt (file) | cmd=read | args=normal local development/test activity
+- ... 55 additional audit rows omitted for W001
+
+### Network flow side-view evidence
+- BF000040 | 2026-01-20 09:10:02~2026-01-20 09:10:06 | W001 | mon-srv-01 10.20.1.41:57277 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1117 bytes_in=3540 | related_audit=B000101
+- BF000043 | 2026-01-20 09:10:11~2026-01-20 09:10:15 | W001 | mon-srv-01 10.20.1.41:59054 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1311 bytes_in=7615 | related_audit=B000104
+- BF000041 | 2026-01-20 09:10:12~2026-01-20 09:10:16 | W001 | mon-srv-01 10.20.1.41:55063 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1040 bytes_in=8936 | related_audit=B000102
+- BF000042 | 2026-01-20 09:10:13~2026-01-20 09:10:18 | W001 | mon-srv-01 10.20.1.41:56276 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1708 bytes_in=3860 | related_audit=B000103
+- BF000047 | 2026-01-20 09:10:19~2026-01-20 09:10:39 | W001 | ws-finance-01 10.20.1.11:56702 -> 192.0.2.40:993 | service=IMAPS pattern=mail_sync | bytes_out=2971 bytes_in=31023 | related_audit=B000109
+- BF000048 | 2026-01-20 09:10:28~2026-01-20 09:10:58 | W001 | ws-finance-01 10.20.1.11:57637 -> 192.0.2.10:443 | service=HTTPS pattern=benign_update | bytes_out=2379 bytes_in=58872 | related_audit=B000111
+- BF000046 | 2026-01-20 09:10:53~2026-01-20 09:11:01 | W001 | mon-srv-01 10.20.1.41:47835 -> 10.20.1.31:6514 | service=SYSLOG pattern=log_collection | bytes_out=2326 bytes_in=9486 | related_audit=B000108
+- BF000044 | 2026-01-20 09:10:53~2026-01-20 09:11:01 | W001 | mon-srv-01 10.20.1.41:42151 -> 10.20.1.11:6514 | service=SYSLOG pattern=log_collection | bytes_out=1820 bytes_in=16853 | related_audit=B000106
+- BF000045 | 2026-01-20 09:10:54~2026-01-20 09:11:01 | W001 | mon-srv-01 10.20.1.41:53950 -> 10.20.1.12:6514 | service=SYSLOG pattern=log_collection | bytes_out=1292 bytes_in=5945 | related_audit=B000107
+- BF000049 | 2026-01-20 09:11:11~2026-01-20 09:11:59 | W001 | ws-dev-02 10.20.1.12:50198 -> 10.20.1.31:22 | service=SSH pattern=dev_ssh | bytes_out=26537 bytes_in=33258 | related_audit=B000117
+- BF000053 | 2026-01-20 09:12:06~2026-01-20 09:12:11 | W001 | mon-srv-01 10.20.1.41:57923 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1594 bytes_in=5393 | related_audit=B000124
+- BF000051 | 2026-01-20 09:12:10~2026-01-20 09:12:13 | W001 | mon-srv-01 10.20.1.41:49069 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1356 bytes_in=8488 | related_audit=B000122
+- BF000054 | 2026-01-20 09:12:14~2026-01-20 09:12:29 | W001 | ws-finance-01 10.20.1.11:58603 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=2681 bytes_in=14373 | related_audit=B000126
+- BF000050 | 2026-01-20 09:12:20~2026-01-20 09:12:22 | W001 | mon-srv-01 10.20.1.41:60612 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1662 bytes_in=8364 | related_audit=B000121
+- BF000052 | 2026-01-20 09:12:21~2026-01-20 09:12:24 | W001 | mon-srv-01 10.20.1.41:49655 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1670 bytes_in=7052 | related_audit=B000123
+- BF000056 | 2026-01-20 09:14:07~2026-01-20 09:14:09 | W001 | mon-srv-01 10.20.1.41:59657 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1732 bytes_in=6722 | related_audit=B000139
+- BF000057 | 2026-01-20 09:14:08~2026-01-20 09:14:10 | W001 | mon-srv-01 10.20.1.41:47724 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1012 bytes_in=8238 | related_audit=B000140
+- BF000055 | 2026-01-20 09:14:09~2026-01-20 09:14:11 | W001 | mon-srv-01 10.20.1.41:45003 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1355 bytes_in=7161 | related_audit=B000138
+- BF000058 | 2026-01-20 09:14:13~2026-01-20 09:14:18 | W001 | mon-srv-01 10.20.1.41:50791 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=862 bytes_in=7550 | related_audit=B000141
+- BF000063 | 2026-01-20 09:15:03~2026-01-20 09:15:15 | W001 | ws-finance-01 10.20.1.11:43910 -> 192.0.2.40:993 | service=IMAPS pattern=mail_sync | bytes_out=3793 bytes_in=37223 | related_audit=B000153
+- BF000059 | 2026-01-20 09:15:11~2026-01-20 09:15:20 | W001 | mon-srv-01 10.20.1.41:50727 -> 10.20.1.11:6514 | service=SYSLOG pattern=log_collection | bytes_out=1359 bytes_in=15790 | related_audit=B000148
+- BF000062 | 2026-01-20 09:15:20~2026-01-20 09:15:38 | W001 | ws-finance-01 10.20.1.11:45181 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=2598 bytes_in=23479 | related_audit=B000151
+- BF000060 | 2026-01-20 09:15:34~2026-01-20 09:15:41 | W001 | mon-srv-01 10.20.1.41:60006 -> 10.20.1.12:6514 | service=SYSLOG pattern=log_collection | bytes_out=1978 bytes_in=14948 | related_audit=B000149
+- BF000061 | 2026-01-20 09:15:42~2026-01-20 09:15:50 | W001 | mon-srv-01 10.20.1.41:43255 -> 10.20.1.31:6514 | service=SYSLOG pattern=log_collection | bytes_out=1410 bytes_in=18608 | related_audit=B000150
+- BF000067 | 2026-01-20 09:16:02~2026-01-20 09:16:06 | W001 | mon-srv-01 10.20.1.41:46550 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1030 bytes_in=3639 | related_audit=B000161
+- BF000069 | 2026-01-20 09:16:04~2026-01-20 09:17:10 | W001 | ws-dev-02 10.20.1.12:49788 -> 10.20.1.31:22 | service=SSH pattern=dev_ssh | bytes_out=6592 bytes_in=13779 | related_audit=B000164
+- BF000066 | 2026-01-20 09:16:10~2026-01-20 09:16:15 | W001 | mon-srv-01 10.20.1.41:53589 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1344 bytes_in=8757 | related_audit=B000160
+- BF000064 | 2026-01-20 09:16:18~2026-01-20 09:16:24 | W001 | mon-srv-01 10.20.1.41:42105 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1356 bytes_in=7737 | related_audit=B000158
+- BF000065 | 2026-01-20 09:16:18~2026-01-20 09:16:23 | W001 | mon-srv-01 10.20.1.41:59172 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1234 bytes_in=4489 | related_audit=B000159
+- BF000068 | 2026-01-20 09:16:19~2026-01-20 09:16:27 | W001 | ws-finance-01 10.20.1.11:51929 -> 10.20.1.21:445 | service=SMB pattern=file_server_access | bytes_out=1343 bytes_in=346127 | related_audit=B000163
+- BF000070 | 2026-01-20 09:16:31~2026-01-20 09:16:56 | W001 | ws-dev-02 10.20.1.12:59127 -> 192.0.2.30:443 | service=HTTPS pattern=dev_repo_access | bytes_out=4379 bytes_in=101564 | related_audit=B000166
+- BF000071 | 2026-01-20 09:18:09~2026-01-20 09:18:12 | W001 | mon-srv-01 10.20.1.41:43476 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1659 bytes_in=5764 | related_audit=B000176
+- BF000073 | 2026-01-20 09:18:10~2026-01-20 09:18:16 | W001 | mon-srv-01 10.20.1.41:57730 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1658 bytes_in=5593 | related_audit=B000178
+- BF000072 | 2026-01-20 09:18:12~2026-01-20 09:18:16 | W001 | mon-srv-01 10.20.1.41:57049 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1067 bytes_in=4949 | related_audit=B000177
+- BF000074 | 2026-01-20 09:18:15~2026-01-20 09:18:18 | W001 | mon-srv-01 10.20.1.41:60990 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1696 bytes_in=6985 | related_audit=B000179
+- BF000076 | 2026-01-20 09:18:31~2026-01-20 09:20:17 | W001 | file-srv-01 10.20.1.21:58996 -> 10.20.1.41:873 | service=RSYNC pattern=backup_sync | bytes_out=100862 bytes_in=16570 | related_audit=B000185
+- BF000075 | 2026-01-20 09:18:37~2026-01-20 09:18:46 | W001 | ws-finance-01 10.20.1.11:56013 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=2055 bytes_in=61848 | related_audit=B000181
+
+### Host metric samples
+- M000055 | 2026-01-20 09:10:00 | W001 | host=mon-srv-01 | cpu=26.18 mem=62.66 disk_read=118823 disk_write=195938 net_in=12719 net_out=5500 proc_count=120 open_files=405 | hint=prometheus | note=normal baseline
+- M000054 | 2026-01-20 09:10:00 | W001 | host=portal-web-01 | cpu=23.86 mem=56.55 disk_read=99074 disk_write=98059 net_in=12501 net_out=9630 proc_count=105 open_files=369 | hint=nginx | note=normal baseline
+- M000052 | 2026-01-20 09:10:00 | W001 | host=ws-dev-02 | cpu=22.66 mem=50.4 disk_read=164604 disk_write=126827 net_in=4658 net_out=5877 proc_count=127 open_files=360 | hint=dev-shell | note=normal baseline
+- M000060 | 2026-01-20 09:11:00 | W001 | host=mon-srv-01 | cpu=24.58 mem=62.39 disk_read=113474 disk_write=114505 net_in=11520 net_out=6489 proc_count=114 open_files=404 | hint=prometheus | note=normal baseline
+- M000059 | 2026-01-20 09:11:00 | W001 | host=portal-web-01 | cpu=21.74 mem=56.72 disk_read=75436 disk_write=98319 net_in=11271 net_out=9785 proc_count=106 open_files=352 | hint=nginx | note=normal baseline
+- M000057 | 2026-01-20 09:11:00 | W001 | host=ws-dev-02 | cpu=21.02 mem=51.48 disk_read=153015 disk_write=81291 net_in=5372 net_out=8078 proc_count=124 open_files=376 | hint=dev-shell | note=normal baseline
+- M000065 | 2026-01-20 09:12:00 | W001 | host=mon-srv-01 | cpu=24.02 mem=62.06 disk_read=99300 disk_write=214191 net_in=15485 net_out=10415 proc_count=119 open_files=407 | hint=prometheus | note=normal baseline
+- M000064 | 2026-01-20 09:12:00 | W001 | host=portal-web-01 | cpu=22.88 mem=57.13 disk_read=118221 disk_write=134299 net_in=7320 net_out=7613 proc_count=102 open_files=386 | hint=nginx | note=normal baseline
+- M000062 | 2026-01-20 09:12:00 | W001 | host=ws-dev-02 | cpu=24.38 mem=51.49 disk_read=120791 disk_write=133771 net_in=4858 net_out=5467 proc_count=128 open_files=326 | hint=dev-shell | note=normal baseline
+- M000070 | 2026-01-20 09:13:00 | W001 | host=mon-srv-01 | cpu=20.12 mem=62.35 disk_read=105485 disk_write=215992 net_in=8390 net_out=9275 proc_count=119 open_files=424 | hint=prometheus | note=normal baseline
+- M000067 | 2026-01-20 09:13:00 | W001 | host=ws-dev-02 | cpu=24.37 mem=50.04 disk_read=101314 disk_write=139947 net_in=5206 net_out=4663 proc_count=125 open_files=354 | hint=dev-shell | note=normal baseline
+- M000075 | 2026-01-20 09:14:00 | W001 | host=mon-srv-01 | cpu=22.76 mem=61.21 disk_read=115817 disk_write=264794 net_in=11862 net_out=6961 proc_count=121 open_files=409 | hint=prometheus | note=normal baseline
+- M000074 | 2026-01-20 09:14:00 | W001 | host=portal-web-01 | cpu=23.69 mem=55.84 disk_read=98285 disk_write=96102 net_in=9528 net_out=7010 proc_count=105 open_files=368 | hint=nginx | note=normal baseline
+- M000072 | 2026-01-20 09:14:00 | W001 | host=ws-dev-02 | cpu=23.38 mem=50.06 disk_read=130672 disk_write=125335 net_in=5478 net_out=5324 proc_count=127 open_files=399 | hint=dev-shell | note=normal baseline
+- M000080 | 2026-01-20 09:15:00 | W001 | host=mon-srv-01 | cpu=22.54 mem=62.04 disk_read=116016 disk_write=189657 net_in=18908 net_out=8031 proc_count=119 open_files=373 | hint=prometheus | note=normal baseline
+- M000079 | 2026-01-20 09:15:00 | W001 | host=portal-web-01 | cpu=22.29 mem=57.42 disk_read=93897 disk_write=106845 net_in=8059 net_out=11499 proc_count=102 open_files=370 | hint=nginx | note=normal baseline
+- M000077 | 2026-01-20 09:15:00 | W001 | host=ws-dev-02 | cpu=25.65 mem=50.37 disk_read=170465 disk_write=131439 net_in=6437 net_out=5072 proc_count=121 open_files=373 | hint=dev-shell | note=normal baseline
+- M000076 | 2026-01-20 09:15:00 | W001 | host=ws-finance-01 | cpu=21.26 mem=47.16 disk_read=44927 disk_write=66598 net_in=5634 net_out=1912 proc_count=106 open_files=313 | hint=office-apps | note=normal baseline
+- M000085 | 2026-01-20 09:16:00 | W001 | host=mon-srv-01 | cpu=25.07 mem=63.07 disk_read=71424 disk_write=246883 net_in=12393 net_out=7393 proc_count=115 open_files=420 | hint=prometheus | note=normal baseline
+- M000081 | 2026-01-20 09:16:00 | W001 | host=ws-finance-01 | cpu=21.95 mem=48.49 disk_read=92469 disk_write=102113 net_in=3954 net_out=2784 proc_count=111 open_files=290 | hint=office-apps | note=normal baseline
+- M000088 | 2026-01-20 09:17:00 | W001 | host=file-srv-01 | cpu=20.49 mem=44.98 disk_read=183072 disk_write=95346 net_in=5885 net_out=6164 proc_count=94 open_files=393 | hint=smbd | note=normal baseline
+- M000090 | 2026-01-20 09:17:00 | W001 | host=mon-srv-01 | cpu=26.02 mem=61.89 disk_read=104091 disk_write=158043 net_in=12730 net_out=7684 proc_count=118 open_files=446 | hint=prometheus | note=normal baseline
+- M000089 | 2026-01-20 09:17:00 | W001 | host=portal-web-01 | cpu=20.62 mem=56.79 disk_read=90696 disk_write=95007 net_in=8583 net_out=6269 proc_count=97 open_files=391 | hint=nginx | note=normal baseline
+- M000087 | 2026-01-20 09:17:00 | W001 | host=ws-dev-02 | cpu=25.75 mem=51.94 disk_read=107926 disk_write=93144 net_in=3789 net_out=4529 proc_count=125 open_files=352 | hint=dev-shell | note=normal baseline
+- M000093 | 2026-01-20 09:18:00 | W001 | host=file-srv-01 | cpu=19.32 mem=44.54 disk_read=220153 disk_write=112705 net_in=9281 net_out=3092 proc_count=95 open_files=379 | hint=smbd | note=normal baseline
+- M000095 | 2026-01-20 09:18:00 | W001 | host=mon-srv-01 | cpu=26.06 mem=62.03 disk_read=116882 disk_write=233263 net_in=12501 net_out=13335 proc_count=119 open_files=385 | hint=prometheus | note=normal baseline
+- M000092 | 2026-01-20 09:18:00 | W001 | host=ws-dev-02 | cpu=24.83 mem=51.16 disk_read=126069 disk_write=72640 net_in=10016 net_out=6562 proc_count=125 open_files=334 | hint=dev-shell | note=normal baseline
+- M000091 | 2026-01-20 09:18:00 | W001 | host=ws-finance-01 | cpu=19.52 mem=47.02 disk_read=111046 disk_write=94816 net_in=4260 net_out=3017 proc_count=112 open_files=329 | hint=office-apps | note=normal baseline
+- M000100 | 2026-01-20 09:19:00 | W001 | host=mon-srv-01 | cpu=22.74 mem=62.21 disk_read=121834 disk_write=154595 net_in=18036 net_out=8701 proc_count=120 open_files=395 | hint=prometheus | note=normal baseline
+- M000099 | 2026-01-20 09:19:00 | W001 | host=portal-web-01 | cpu=22.3 mem=57.67 disk_read=29783 disk_write=130963 net_in=6289 net_out=7011 proc_count=106 open_files=358 | hint=nginx | note=normal baseline
+
+### Host metric clue events
+- none
+
+---
+
+## Window W002
+
+### Observed corrupted audit log snippets
+- B000207 | 2026-01-20 09:20:02 | W002 | host=file-srv-01 user=svc_backup process=smbd | smbd:1201@file-srv-01 --write--> /srv/share/finance/budget_q1.xlsx.lock (file) | cmd=write | args=benign lock/update file created by share service
+- B000195 | 2026-01-20 09:20:04 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000197 | 2026-01-20 09:20:06 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000194 | 2026-01-20 09:20:09 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000196 | 2026-01-20 09:20:14 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000209 | 2026-01-20 09:20:25 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000199 | 2026-01-20 09:20:26 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.11:6514 (socket) | cmd=connect | args=collect syslog stream from ws-finance-01
+- B000204 | 2026-01-20 09:20:27 | W002 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --connect--> 192.0.2.40:993 (socket) | cmd=connect | args=imap mail synchronization
+- B000205 | 2026-01-20 09:20:29 | W002 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --write--> /home/u_fin/.thunderbird/cache/index.sqlite (file) | cmd=write | args=update mail cache
+- B000200 | 2026-01-20 09:20:32 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.12:6514 (socket) | cmd=connect | args=collect syslog stream from ws-dev-02
+- B005520 | 2026-01-20 09:20:35 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --write--> /var/lib/prometheus/wal/000001 (file) | cmd=write | args=normal metric wal write
+- B004130 | 2026-01-20 09:20:36 | W002 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B000198 | 2026-01-20 09:20:47 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000203 | 2026-01-20 09:20:49 | W002 | host=ws-finance-01 user=u_fin process=libreoffice | libreoffice:2112@ws-finance-01 --write--> /srv/share/finance/monthly_summary_autosave.xlsx (file) | cmd=write | args=autosave office document
+- B000201 | 2026-01-20 09:20:50 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.31:6514 (socket) | cmd=connect | args=collect syslog stream from portal-web-01
+- B004468 | 2026-01-20 09:20:56 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B000217 | 2026-01-20 09:21:01 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000210 | 2026-01-20 09:21:15 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B003736 | 2026-01-20 09:21:27 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --write--> /var/lib/prometheus/wal/000001 (file) | cmd=write | args=normal metric wal write
+- B000213 | 2026-01-20 09:21:41 | W002 | host=ws-dev-02 user=u_dev process=ssh | ssh:2201@ws-dev-02 --connect--> 10.20.1.31:22 (socket) | cmd=connect | args=normal developer ssh to portal
+- B000211 | 2026-01-20 09:21:47 | W002 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- B000212 | 2026-01-20 09:21:48 | W002 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --write--> /home/u_fin/.cache/mozilla/portal-cache.sqlite (file) | cmd=write | args=update browser portal cache
+- B003742 | 2026-01-20 09:21:50 | W002 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B000219 | 2026-01-20 09:22:02 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000223 | 2026-01-20 09:22:03 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B004858 | 2026-01-20 09:22:05 | W002 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B004460 | 2026-01-20 09:22:07 | W002 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B000220 | 2026-01-20 09:22:08 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000222 | 2026-01-20 09:22:11 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000226 | 2026-01-20 09:22:11 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000221 | 2026-01-20 09:22:18 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B005537 | 2026-01-20 09:22:31 | W002 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B003801 | 2026-01-20 09:22:41 | W002 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B003959 | 2026-01-20 09:22:52 | W002 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B000231 | 2026-01-20 09:23:03 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B004140 | 2026-01-20 09:23:16 | W002 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B000227 | 2026-01-20 09:23:18 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B004382 | 2026-01-20 09:23:29 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --write--> /var/lib/prometheus/wal/000001 (file) | cmd=write | args=normal metric wal write
+- B000228 | 2026-01-20 09:23:39 | W002 | host=ws-dev-02 user=u_dev process=curl | curl:2221@ws-dev-02 --connect--> 192.0.2.30:443 (socket) | cmd=connect | args=normal package/source repository access
+- B005113 | 2026-01-20 09:23:39 | W002 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B000229 | 2026-01-20 09:23:42 | W002 | host=ws-dev-02 user=u_dev process=curl | curl:2221@ws-dev-02 --write--> /home/u_dev/src/portal/app/config.yaml (file) | cmd=write | args=normal development file/cache update
+- B000232 | 2026-01-20 09:24:04 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000245 | 2026-01-20 09:24:04 | W002 | host=portal-web-01 user=svc_web process=logrotate | logrotate:1335@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=create new access log
+- B000242 | 2026-01-20 09:24:05 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000235 | 2026-01-20 09:24:05 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000234 | 2026-01-20 09:24:05 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000233 | 2026-01-20 09:24:09 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000236 | 2026-01-20 09:24:28 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B005337 | 2026-01-20 09:24:34 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --write--> /var/lib/prometheus/wal/000001 (file) | cmd=write | args=normal metric wal write
+- B004204 | 2026-01-20 09:24:36 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B000237 | 2026-01-20 09:24:43 | W002 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- B000238 | 2026-01-20 09:24:44 | W002 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --write--> /home/u_fin/.cache/mozilla/portal-cache.sqlite (file) | cmd=write | args=update browser portal cache
+- E0002 | 2026-01-20 09:24:51 | W002 | host=ws-finance-01 user=u_fin process=firefox | firefox:2412@ws-finance-01 --write--> /home/u_fin/Downloads/report_update.pdf (file) | cmd=write | args=downloaded suspicious update container
+- B004871 | 2026-01-20 09:25:00 | W002 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B000252 | 2026-01-20 09:25:03 | W002 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /home/u_dev/src/portal/app/config.yaml (file) | cmd=read | args=normal local development/test activity
+- B000246 | 2026-01-20 09:25:04 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000250 | 2026-01-20 09:25:08 | W002 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --connect--> 192.0.2.40:993 (socket) | cmd=connect | args=imap mail synchronization
+- B000251 | 2026-01-20 09:25:10 | W002 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --write--> /home/u_fin/.thunderbird/cache/index.sqlite (file) | cmd=write | args=update mail cache
+- B000254 | 2026-01-20 09:25:16 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000249 | 2026-01-20 09:25:16 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.31:6514 (socket) | cmd=connect | args=collect syslog stream from portal-web-01
+- B000247 | 2026-01-20 09:25:28 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.11:6514 (socket) | cmd=connect | args=collect syslog stream from ws-finance-01
+- B000248 | 2026-01-20 09:25:35 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.12:6514 (socket) | cmd=connect | args=collect syslog stream from ws-dev-02
+- B004735 | 2026-01-20 09:25:50 | W002 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B000256 | 2026-01-20 09:26:04 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000257 | 2026-01-20 09:26:07 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000258 | 2026-01-20 09:26:09 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000260 | 2026-01-20 09:26:17 | W002 | host=ws-dev-02 user=u_dev process=ssh | ssh:2201@ws-dev-02 --connect--> 10.20.1.31:22 (socket) | cmd=connect | args=normal developer ssh to portal
+- B000255 | 2026-01-20 09:26:18 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000263 | 2026-01-20 09:26:19 | W002 | host=file-srv-01 user=svc_backup process=smbd | smbd:1201@file-srv-01 --write--> /srv/share/dev/release_notes.txt.lock (file) | cmd=write | args=benign lock/update file created by share service
+- B000259 | 2026-01-20 09:26:20 | W002 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B003836 | 2026-01-20 09:26:21 | W002 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B000265 | 2026-01-20 09:26:27 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B003528 | 2026-01-20 09:26:40 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B005464 | 2026-01-20 09:26:45 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --write--> /var/lib/prometheus/wal/000001 (file) | cmd=write | args=normal metric wal write
+- B003820 | 2026-01-20 09:26:46 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B004060 | 2026-01-20 09:26:57 | W002 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B004868 | 2026-01-20 09:27:00 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B003993 | 2026-01-20 09:27:03 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B000271 | 2026-01-20 09:27:07 | W002 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000267 | 2026-01-20 09:27:12 | W002 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- B000268 | 2026-01-20 09:27:13 | W002 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --write--> /home/u_fin/.cache/mozilla/portal-cache.sqlite (file) | cmd=write | args=update browser portal cache
+- B004913 | 2026-01-20 09:27:56 | W002 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B000276 | 2026-01-20 09:28:05 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000273 | 2026-01-20 09:28:13 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000274 | 2026-01-20 09:28:13 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000275 | 2026-01-20 09:28:13 | W002 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B004422 | 2026-01-20 09:28:36 | W002 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B005078 | 2026-01-20 09:29:10 | W002 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B000284 | 2026-01-20 09:29:30 | W002 | host=ws-dev-02 user=u_dev process=python3 | python3:2232@ws-dev-02 --execute--> /var/lib/docker/tmp/build-context.tar (file) | cmd=read | args=normal local development/test activity
+- E0006 | 2026-01-20 09:29:48 | W002 | host=ws-finance-01 user=u_fin process=update-check | update-check:2440@ws-finance-01 --write--> /tmp/.session-x1 (file) | cmd=write | args=create local session marker
+- ... 64 additional audit rows omitted for W002
+
+### Network flow side-view evidence
+- BF000079 | 2026-01-20 09:20:04~2026-01-20 09:20:07 | W002 | mon-srv-01 10.20.1.41:59002 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1476 bytes_in=7356 | related_audit=B000196
+- BF000077 | 2026-01-20 09:20:11~2026-01-20 09:20:16 | W002 | mon-srv-01 10.20.1.41:49215 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=844 bytes_in=5954 | related_audit=B000194
+- BF000080 | 2026-01-20 09:20:12~2026-01-20 09:20:16 | W002 | mon-srv-01 10.20.1.41:57144 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1730 bytes_in=3371 | related_audit=B000197
+- BF000078 | 2026-01-20 09:20:15~2026-01-20 09:20:21 | W002 | mon-srv-01 10.20.1.41:52410 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=928 bytes_in=5897 | related_audit=B000195
+- BF000081 | 2026-01-20 09:20:17~2026-01-20 09:20:23 | W002 | mon-srv-01 10.20.1.41:44512 -> 10.20.1.11:6514 | service=SYSLOG pattern=log_collection | bytes_out=1956 bytes_in=7136 | related_audit=B000199
+- BF000085 | 2026-01-20 09:20:27~2026-01-20 09:20:39 | W002 | ws-finance-01 10.20.1.11:52283 -> 192.0.2.40:993 | service=IMAPS pattern=mail_sync | bytes_out=2250 bytes_in=24797 | related_audit=B000204
+- BF000082 | 2026-01-20 09:20:32~2026-01-20 09:20:36 | W002 | mon-srv-01 10.20.1.41:57762 -> 10.20.1.12:6514 | service=SYSLOG pattern=log_collection | bytes_out=1310 bytes_in=6776 | related_audit=B000200
+- BF000084 | 2026-01-20 09:20:47~2026-01-20 09:20:59 | W002 | ws-finance-01 10.20.1.11:42712 -> 10.20.1.21:445 | service=SMB pattern=file_server_access | bytes_out=6839 bytes_in=336349 | related_audit=B000202
+- BF000083 | 2026-01-20 09:20:54~2026-01-20 09:21:01 | W002 | mon-srv-01 10.20.1.41:44086 -> 10.20.1.31:6514 | service=SYSLOG pattern=log_collection | bytes_out=1946 bytes_in=15859 | related_audit=B000201
+- BF000087 | 2026-01-20 09:21:41~2026-01-20 09:22:07 | W002 | ws-dev-02 10.20.1.12:46309 -> 10.20.1.31:22 | service=SSH pattern=dev_ssh | bytes_out=35369 bytes_in=16980 | related_audit=B000213
+- BF000086 | 2026-01-20 09:21:47~2026-01-20 09:22:00 | W002 | ws-finance-01 10.20.1.11:49296 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=3823 bytes_in=28388 | related_audit=B000211
+- BF000090 | 2026-01-20 09:22:07~2026-01-20 09:22:11 | W002 | mon-srv-01 10.20.1.41:59587 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1649 bytes_in=7159 | related_audit=B000221
+- BF000091 | 2026-01-20 09:22:20~2026-01-20 09:22:24 | W002 | mon-srv-01 10.20.1.41:46878 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=803 bytes_in=4481 | related_audit=B000222
+- BF000089 | 2026-01-20 09:22:22~2026-01-20 09:22:26 | W002 | mon-srv-01 10.20.1.41:55783 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1379 bytes_in=8926 | related_audit=B000220
+- BF000088 | 2026-01-20 09:22:22~2026-01-20 09:22:28 | W002 | mon-srv-01 10.20.1.41:57601 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1509 bytes_in=8286 | related_audit=B000219
+- BF000092 | 2026-01-20 09:23:39~2026-01-20 09:23:48 | W002 | ws-dev-02 10.20.1.12:47530 -> 192.0.2.30:443 | service=HTTPS pattern=dev_repo_access | bytes_out=2988 bytes_in=27364 | related_audit=B000228
+- BF000095 | 2026-01-20 09:24:08~2026-01-20 09:24:11 | W002 | mon-srv-01 10.20.1.41:54879 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=965 bytes_in=3152 | related_audit=B000234
+- BF000093 | 2026-01-20 09:24:08~2026-01-20 09:24:12 | W002 | mon-srv-01 10.20.1.41:56925 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1702 bytes_in=4137 | related_audit=B000232
+- BF000094 | 2026-01-20 09:24:08~2026-01-20 09:24:11 | W002 | mon-srv-01 10.20.1.41:56801 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1209 bytes_in=4643 | related_audit=B000233
+- F0001 | 2026-01-20 09:24:17~2026-01-20 09:24:55 | W002 | ws-finance-01 10.20.1.11:49152 -> 198.51.100.23:443 | service=HTTPS pattern=payload_download | bytes_out=1840 bytes_in=91240 | related_audit=E0001,E0002
+- BF000096 | 2026-01-20 09:24:17~2026-01-20 09:24:20 | W002 | mon-srv-01 10.20.1.41:53696 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1249 bytes_in=7700 | related_audit=B000235
+- BF000097 | 2026-01-20 09:24:43~2026-01-20 09:24:54 | W002 | ws-finance-01 10.20.1.11:59068 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=4289 bytes_in=20095 | related_audit=B000237
+- BF000101 | 2026-01-20 09:25:08~2026-01-20 09:25:22 | W002 | ws-finance-01 10.20.1.11:52544 -> 192.0.2.40:993 | service=IMAPS pattern=mail_sync | bytes_out=2947 bytes_in=20947 | related_audit=B000250
+- BF000100 | 2026-01-20 09:25:28~2026-01-20 09:25:36 | W002 | mon-srv-01 10.20.1.41:54155 -> 10.20.1.31:6514 | service=SYSLOG pattern=log_collection | bytes_out=1282 bytes_in=13919 | related_audit=B000249
+- BF000099 | 2026-01-20 09:25:45~2026-01-20 09:25:53 | W002 | mon-srv-01 10.20.1.41:51760 -> 10.20.1.12:6514 | service=SYSLOG pattern=log_collection | bytes_out=1457 bytes_in=6436 | related_audit=B000248
+- BF000098 | 2026-01-20 09:25:50~2026-01-20 09:25:57 | W002 | mon-srv-01 10.20.1.41:60653 -> 10.20.1.11:6514 | service=SYSLOG pattern=log_collection | bytes_out=1296 bytes_in=15944 | related_audit=B000247
+- BF000104 | 2026-01-20 09:26:05~2026-01-20 09:26:11 | W002 | mon-srv-01 10.20.1.41:47972 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=877 bytes_in=4763 | related_audit=B000257
+- BF000102 | 2026-01-20 09:26:06~2026-01-20 09:26:10 | W002 | mon-srv-01 10.20.1.41:48883 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=941 bytes_in=7000 | related_audit=B000255
+- BF000103 | 2026-01-20 09:26:07~2026-01-20 09:26:11 | W002 | mon-srv-01 10.20.1.41:53850 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1024 bytes_in=8589 | related_audit=B000256
+- BF000106 | 2026-01-20 09:26:17~2026-01-20 09:26:51 | W002 | ws-dev-02 10.20.1.12:54700 -> 10.20.1.31:22 | service=SSH pattern=dev_ssh | bytes_out=37257 bytes_in=52318 | related_audit=B000260
+- BF000105 | 2026-01-20 09:26:20~2026-01-20 09:26:26 | W002 | mon-srv-01 10.20.1.41:49013 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1185 bytes_in=7091 | related_audit=B000258
+- BF000107 | 2026-01-20 09:27:12~2026-01-20 09:27:27 | W002 | ws-finance-01 10.20.1.11:44168 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=3720 bytes_in=51034 | related_audit=B000267
+- BF000108 | 2026-01-20 09:28:02~2026-01-20 09:28:04 | W002 | mon-srv-01 10.20.1.41:49305 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1571 bytes_in=6839 | related_audit=B000273
+- BF000109 | 2026-01-20 09:28:03~2026-01-20 09:28:07 | W002 | mon-srv-01 10.20.1.41:56359 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=959 bytes_in=6950 | related_audit=B000274
+- BF000111 | 2026-01-20 09:28:04~2026-01-20 09:28:06 | W002 | mon-srv-01 10.20.1.41:47611 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1136 bytes_in=4574 | related_audit=B000276
+- BF000110 | 2026-01-20 09:28:11~2026-01-20 09:28:13 | W002 | mon-srv-01 10.20.1.41:53277 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1626 bytes_in=3302 | related_audit=B000275
+
+### Host metric samples
+- M000105 | 2026-01-20 09:20:00 | W002 | host=mon-srv-01 | cpu=26.18 mem=63.28 disk_read=110735 disk_write=265611 net_in=15193 net_out=9929 proc_count=119 open_files=429 | hint=prometheus | note=normal baseline
+- M000102 | 2026-01-20 09:20:00 | W002 | host=ws-dev-02 | cpu=23.33 mem=51.44 disk_read=123498 disk_write=90814 net_in=7164 net_out=6376 proc_count=122 open_files=377 | hint=dev-shell | note=normal baseline
+- M000110 | 2026-01-20 09:21:00 | W002 | host=mon-srv-01 | cpu=21.62 mem=62.2 disk_read=124534 disk_write=167469 net_in=9570 net_out=11686 proc_count=113 open_files=410 | hint=prometheus | note=normal baseline
+- M000109 | 2026-01-20 09:21:00 | W002 | host=portal-web-01 | cpu=21.74 mem=57.31 disk_read=105068 disk_write=120086 net_in=7249 net_out=11751 proc_count=105 open_files=386 | hint=nginx | note=normal baseline
+- M000107 | 2026-01-20 09:21:00 | W002 | host=ws-dev-02 | cpu=26.91 mem=51.04 disk_read=114576 disk_write=140631 net_in=7151 net_out=8186 proc_count=127 open_files=393 | hint=dev-shell | note=normal baseline
+- M000115 | 2026-01-20 09:22:00 | W002 | host=mon-srv-01 | cpu=24.77 mem=62.69 disk_read=165383 disk_write=204967 net_in=11148 net_out=11518 proc_count=116 open_files=398 | hint=prometheus | note=normal baseline
+- M000114 | 2026-01-20 09:22:00 | W002 | host=portal-web-01 | cpu=22.68 mem=56.51 disk_read=100602 disk_write=102715 net_in=8131 net_out=6703 proc_count=104 open_files=372 | hint=nginx | note=normal baseline
+- M000112 | 2026-01-20 09:22:00 | W002 | host=ws-dev-02 | cpu=21.93 mem=50.59 disk_read=122480 disk_write=79017 net_in=4788 net_out=6410 proc_count=126 open_files=367 | hint=dev-shell | note=normal baseline
+- M000120 | 2026-01-20 09:23:00 | W002 | host=mon-srv-01 | cpu=23.51 mem=61.52 disk_read=129730 disk_write=201422 net_in=8214 net_out=6880 proc_count=119 open_files=395 | hint=prometheus | note=normal baseline
+- M000117 | 2026-01-20 09:23:00 | W002 | host=ws-dev-02 | cpu=26.14 mem=51.24 disk_read=127678 disk_write=122750 net_in=5748 net_out=3977 proc_count=124 open_files=373 | hint=dev-shell | note=normal baseline
+- M000125 | 2026-01-20 09:24:00 | W002 | host=mon-srv-01 | cpu=24.26 mem=63.65 disk_read=126728 disk_write=225105 net_in=14250 net_out=8901 proc_count=118 open_files=435 | hint=prometheus | note=normal baseline
+- M000124 | 2026-01-20 09:24:00 | W002 | host=portal-web-01 | cpu=21.74 mem=55.27 disk_read=86075 disk_write=93591 net_in=11339 net_out=8222 proc_count=99 open_files=362 | hint=nginx | note=normal baseline
+- M000122 | 2026-01-20 09:24:00 | W002 | host=ws-dev-02 | cpu=23.37 mem=53.26 disk_read=84635 disk_write=79996 net_in=5040 net_out=5748 proc_count=124 open_files=409 | hint=dev-shell | note=normal baseline
+- M000121 | 2026-01-20 09:24:00 | W002 | host=ws-finance-01 | cpu=31.2 mem=47.5 disk_read=128000 disk_write=310000 net_in=18000 net_out=2233 proc_count=119 open_files=346 | hint=firefox | note=pre-download activity
+- M000128 | 2026-01-20 09:25:00 | W002 | host=file-srv-01 | cpu=21.68 mem=44.1 disk_read=173046 disk_write=56426 net_in=6666 net_out=12274 proc_count=87 open_files=454 | hint=smbd | note=normal baseline
+- M000130 | 2026-01-20 09:25:00 | W002 | host=mon-srv-01 | cpu=21.18 mem=61.55 disk_read=138018 disk_write=184194 net_in=9868 net_out=11524 proc_count=118 open_files=425 | hint=prometheus | note=normal baseline
+- M000129 | 2026-01-20 09:25:00 | W002 | host=portal-web-01 | cpu=24.06 mem=58.16 disk_read=124412 disk_write=73063 net_in=12891 net_out=7351 proc_count=99 open_files=360 | hint=nginx | note=normal baseline
+- M000127 | 2026-01-20 09:25:00 | W002 | host=ws-dev-02 | cpu=22.27 mem=52.07 disk_read=93543 disk_write=101930 net_in=5515 net_out=4185 proc_count=124 open_files=364 | hint=dev-shell | note=normal baseline
+- M000126 | 2026-01-20 09:25:00 | W002 | host=ws-finance-01 | cpu=64.8 mem=49.2 disk_read=244000 disk_write=1420000 net_in=93400 net_out=3200 proc_count=126 open_files=388 | hint=update-check | note=payload download and write burst
+- M000135 | 2026-01-20 09:26:00 | W002 | host=mon-srv-01 | cpu=26.18 mem=61.24 disk_read=137929 disk_write=197826 net_in=13362 net_out=8802 proc_count=117 open_files=395 | hint=prometheus | note=normal baseline
+- M000132 | 2026-01-20 09:26:00 | W002 | host=ws-dev-02 | cpu=26.41 mem=50.66 disk_read=153677 disk_write=142205 net_in=6589 net_out=3972 proc_count=128 open_files=342 | hint=dev-shell | note=normal baseline
+- M000131 | 2026-01-20 09:26:00 | W002 | host=ws-finance-01 | cpu=58.1 mem=49.0 disk_read=196000 disk_write=940000 net_in=12600 net_out=5004 proc_count=127 open_files=376 | hint=update-check | note=short process and disk burst
+- M000140 | 2026-01-20 09:27:00 | W002 | host=mon-srv-01 | cpu=27.62 mem=62.96 disk_read=107955 disk_write=191959 net_in=12791 net_out=8961 proc_count=117 open_files=408 | hint=prometheus | note=normal baseline
+- M000139 | 2026-01-20 09:27:00 | W002 | host=portal-web-01 | cpu=21.78 mem=54.6 disk_read=87173 disk_write=122021 net_in=9363 net_out=6524 proc_count=96 open_files=346 | hint=nginx | note=normal baseline
+- M000137 | 2026-01-20 09:27:00 | W002 | host=ws-dev-02 | cpu=23.21 mem=54.7 disk_read=92056 disk_write=95835 net_in=3691 net_out=5468 proc_count=126 open_files=337 | hint=dev-shell | note=normal baseline
+- M000145 | 2026-01-20 09:28:00 | W002 | host=mon-srv-01 | cpu=23.54 mem=62.52 disk_read=131178 disk_write=157593 net_in=22021 net_out=7763 proc_count=118 open_files=411 | hint=prometheus | note=normal baseline
+- M000144 | 2026-01-20 09:28:00 | W002 | host=portal-web-01 | cpu=20.37 mem=55.8 disk_read=94825 disk_write=111003 net_in=7954 net_out=9549 proc_count=101 open_files=367 | hint=nginx | note=normal baseline
+- M000142 | 2026-01-20 09:28:00 | W002 | host=ws-dev-02 | cpu=28.0 mem=52.17 disk_read=115064 disk_write=104378 net_in=6916 net_out=5148 proc_count=124 open_files=384 | hint=dev-shell | note=normal baseline
+- M000150 | 2026-01-20 09:29:00 | W002 | host=mon-srv-01 | cpu=27.39 mem=60.43 disk_read=109901 disk_write=183884 net_in=15318 net_out=12277 proc_count=115 open_files=420 | hint=prometheus | note=normal baseline
+- M000147 | 2026-01-20 09:29:00 | W002 | host=ws-dev-02 | cpu=20.61 mem=51.46 disk_read=136947 disk_write=99593 net_in=6634 net_out=4632 proc_count=122 open_files=349 | hint=dev-shell | note=normal baseline
+
+### Host metric clue events
+- ME0001 | 2026-01-20 09:24:00~2026-01-20 09:27:00 | W002 | host=ws-finance-01 event_type=download_and_disk_burst metric=net_in_bytes+disk_write_bytes z=5.6 | hint=firefox/update-check | desc=large inbound transfer followed by local payload write
+
+---
+
+## Window W003
+
+### Observed corrupted audit log snippets
+- B000291 | 2026-01-20 09:30:05 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000290 | 2026-01-20 09:30:07 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000289 | 2026-01-20 09:30:07 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000297 | 2026-01-20 09:30:11 | W003 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --connect--> 192.0.2.40:993 (socket) | cmd=connect | args=imap mail synchronization
+- B000288 | 2026-01-20 09:30:12 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000298 | 2026-01-20 09:30:13 | W003 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --write--> /home/u_fin/.thunderbird/cache/index.sqlite (file) | cmd=write | args=update mail cache
+- B000287 | 2026-01-20 09:30:15 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000292 | 2026-01-20 09:30:17 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.11:6514 (socket) | cmd=connect | args=collect syslog stream from ws-finance-01
+- B000304 | 2026-01-20 09:30:20 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000299 | 2026-01-20 09:30:25 | W003 | host=ws-dev-02 user=u_dev process=curl | curl:2221@ws-dev-02 --connect--> 192.0.2.30:443 (socket) | cmd=connect | args=normal package/source repository access
+- B000293 | 2026-01-20 09:30:26 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.12:6514 (socket) | cmd=connect | args=collect syslog stream from ws-dev-02
+- B000300 | 2026-01-20 09:30:28 | W003 | host=ws-dev-02 user=u_dev process=curl | curl:2221@ws-dev-02 --write--> /var/lib/docker/tmp/build-context.tar (file) | cmd=write | args=normal development file/cache update
+- B000294 | 2026-01-20 09:30:32 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.31:6514 (socket) | cmd=connect | args=collect syslog stream from portal-web-01
+- B000295 | 2026-01-20 09:30:35 | W003 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- B000296 | 2026-01-20 09:30:36 | W003 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --write--> /home/u_fin/.cache/mozilla/portal-cache.sqlite (file) | cmd=write | args=update browser portal cache
+- B000307 | 2026-01-20 09:31:22 | W003 | host=ws-dev-02 user=u_dev process=ssh | ssh:2201@ws-dev-02 --connect--> 10.20.1.31:22 (socket) | cmd=connect | args=normal developer ssh to portal
+- B000306 | 2026-01-20 09:31:22 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B004807 | 2026-01-20 09:31:25 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B004408 | 2026-01-20 09:31:32 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B000311 | 2026-01-20 09:31:35 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B005554 | 2026-01-20 09:31:44 | W003 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B000309 | 2026-01-20 09:31:54 | W003 | host=ws-dev-02 user=u_dev process=python3 | python3:2250@ws-dev-02 --execute--> /home/u_dev/src/portal/app/config.yaml (file) | cmd=read | args=normal local development/test activity
+- B000315 | 2026-01-20 09:32:05 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000312 | 2026-01-20 09:32:10 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000313 | 2026-01-20 09:32:10 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000314 | 2026-01-20 09:32:12 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000321 | 2026-01-20 09:32:28 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000316 | 2026-01-20 09:32:50 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B004021 | 2026-01-20 09:32:52 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --write--> /var/lib/prometheus/wal/000001 (file) | cmd=write | args=normal metric wal write
+- B000329 | 2026-01-20 09:33:02 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000326 | 2026-01-20 09:33:04 | W003 | host=file-srv-01 user=svc_backup process=backup-agent | backup-agent:1230@file-srv-01 --connect--> 10.20.1.41:873 (socket) | cmd=connect | args=backup metadata sync to monitoring server
+- B000322 | 2026-01-20 09:33:23 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000325 | 2026-01-20 09:33:32 | W003 | host=ws-dev-02 user=u_dev process=python3 | python3:2250@ws-dev-02 --execute--> /home/u_dev/src/portal/tests/test_api.py (file) | cmd=execute | args=normal local development/test activity
+- B004543 | 2026-01-20 09:33:40 | W003 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B004926 | 2026-01-20 09:33:43 | W003 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B004793 | 2026-01-20 09:33:48 | W003 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B000323 | 2026-01-20 09:33:51 | W003 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- B000324 | 2026-01-20 09:33:52 | W003 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --write--> /home/u_fin/.cache/mozilla/portal-cache.sqlite (file) | cmd=write | args=update browser portal cache
+- B000331 | 2026-01-20 09:34:02 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000338 | 2026-01-20 09:34:03 | W003 | host=file-srv-01 user=svc_backup process=smbd | smbd:1201@file-srv-01 --write--> /srv/share/finance/vendor_invoice.pdf.lock (file) | cmd=write | args=benign lock/update file created by share service
+- B000333 | 2026-01-20 09:34:07 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000334 | 2026-01-20 09:34:09 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B005031 | 2026-01-20 09:34:14 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=normal web access log append
+- B000332 | 2026-01-20 09:34:18 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B003886 | 2026-01-20 09:34:19 | W003 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B000335 | 2026-01-20 09:34:22 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000340 | 2026-01-20 09:34:45 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000343 | 2026-01-20 09:35:08 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.12:6514 (socket) | cmd=connect | args=collect syslog stream from ws-dev-02
+- B000345 | 2026-01-20 09:35:12 | W003 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --connect--> 192.0.2.40:993 (socket) | cmd=connect | args=imap mail synchronization
+- B000346 | 2026-01-20 09:35:14 | W003 | host=ws-finance-01 user=u_fin process=thunderbird | thunderbird:2124@ws-finance-01 --write--> /home/u_fin/.thunderbird/cache/index.sqlite (file) | cmd=write | args=update mail cache
+- B000348 | 2026-01-20 09:35:40 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B000341 | 2026-01-20 09:35:47 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000342 | 2026-01-20 09:35:48 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.11:6514 (socket) | cmd=connect | args=collect syslog stream from ws-finance-01
+- B000344 | 2026-01-20 09:35:51 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --connect--> 10.20.1.31:6514 (socket) | cmd=connect | args=collect syslog stream from portal-web-01
+- B000349 | 2026-01-20 09:36:03 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000350 | 2026-01-20 09:36:10 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- E0007 | 2026-01-20 09:36:10 | W003 | host=ws-finance-01 user=u_fin process=update-check | update-check:2440@ws-finance-01 --read--> /home/u_fin/.ssh/config (file) | cmd=read | args=collect ssh configuration
+- B000352 | 2026-01-20 09:36:11 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000353 | 2026-01-20 09:36:16 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000351 | 2026-01-20 09:36:16 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000358 | 2026-01-20 09:36:26 | W003 | host=ws-dev-02 user=u_dev process=ssh | ssh:2201@ws-dev-02 --connect--> 10.20.1.31:22 (socket) | cmd=connect | args=normal developer ssh to portal
+- E0008 | 2026-01-20 09:36:29 | W003 | host=ws-finance-01 user=u_fin process=update-check | update-check:2440@ws-finance-01 --read--> /etc/hosts (file) | cmd=read | args=collect host aliases
+- B000354 | 2026-01-20 09:36:34 | W003 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- B000355 | 2026-01-20 09:36:35 | W003 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --write--> /home/u_fin/.cache/mozilla/portal-cache.sqlite (file) | cmd=write | args=update browser portal cache
+- B000357 | 2026-01-20 09:36:41 | W003 | host=ws-finance-01 user=u_fin process=libreoffice | libreoffice:2112@ws-finance-01 --write--> /home/u_fin/docs/budget_q1_autosave.xlsx (file) | cmd=write | args=autosave office document
+- B004462 | 2026-01-20 09:36:45 | W003 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B000363 | 2026-01-20 09:36:51 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B005572 | 2026-01-20 09:36:55 | W003 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B005319 | 2026-01-20 09:36:56 | W003 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- E0009 | 2026-01-20 09:37:05 | W003 | host=ws-finance-01 user=u_fin process=update-check | update-check:2440@ws-finance-01 --spawn--> bash:2502@ws-finance-01 (process) | cmd=spawn | args=open local shell for environment checks
+- E0010 | 2026-01-20 09:37:08 | W003 | host=ws-finance-01 user=u_fin process=bash | bash:2502@ws-finance-01 --execute--> /usr/bin/whoami (file) | cmd=execute | args=identity check
+- E0011 | 2026-01-20 09:37:17 | W003 | host=ws-finance-01 user=u_fin process=bash | bash:2502@ws-finance-01 --execute--> /usr/bin/hostname (file) | cmd=execute | args=host check
+- B000365 | 2026-01-20 09:37:19 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- B000369 | 2026-01-20 09:37:29 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B005075 | 2026-01-20 09:37:40 | W003 | host=ws-finance-01 user=u_fin process=gvfsd | gvfsd:1120@ws-finance-01 --write--> /run/user/1001/gvfs/metadata (file) | cmd=write | args=desktop metadata update
+- B000366 | 2026-01-20 09:37:44 | W003 | host=ws-dev-02 user=u_dev process=git | git:2212@ws-dev-02 --connect--> 192.0.2.30:443 (socket) | cmd=connect | args=normal package/source repository access
+- B005066 | 2026-01-20 09:37:45 | W003 | host=file-srv-01 user=svc_backup process=rsyncd | rsyncd:1214@file-srv-01 --write--> /var/log/rsyncd.log (file) | cmd=write | args=normal rsync log append
+- B000367 | 2026-01-20 09:37:47 | W003 | host=ws-dev-02 user=u_dev process=git | git:2212@ws-dev-02 --write--> /home/u_dev/src/portal/app/config.yaml (file) | cmd=write | args=normal development file/cache update
+- B004182 | 2026-01-20 09:38:01 | W003 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B000377 | 2026-01-20 09:38:02 | W003 | host=portal-web-01 user=svc_web process=nginx | nginx:1301@portal-web-01 --write--> /var/log/nginx/access.log (file) | cmd=write | args=append benign portal access log
+- B005251 | 2026-01-20 09:38:06 | W003 | host=ws-dev-02 user=u_dev process=bash | bash:2250@ws-dev-02 --execute--> /usr/bin/make (file) | cmd=execute | args=normal build command
+- B000373 | 2026-01-20 09:38:06 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.31:9100 (socket) | cmd=connect | args=scrape node_exporter on portal-web-01
+- B000372 | 2026-01-20 09:38:08 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.21:9100 (socket) | cmd=connect | args=scrape node_exporter on file-srv-01
+- B000371 | 2026-01-20 09:38:10 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.12:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-dev-02
+- B000370 | 2026-01-20 09:38:17 | W003 | host=mon-srv-01 user=svc_mon process=prometheus | prometheus:1401@mon-srv-01 --connect--> 10.20.1.11:9100 (socket) | cmd=connect | args=scrape node_exporter on ws-finance-01
+- B000374 | 2026-01-20 09:38:39 | W003 | host=mon-srv-01 user=svc_mon process=log_collector | log_collector:1410@mon-srv-01 --write--> /var/log/collector/ingest.log (file) | cmd=write | args=append log ingestion summary
+- E0012 | 2026-01-20 09:38:40 | W003 | host=ws-finance-01 user=u_fin process=update-check | update-check:2440@ws-finance-01 --connect--> 10.20.1.21:445 (socket) | cmd=connect | args=probe file server smb
+- B004298 | 2026-01-20 09:38:46 | W003 | host=mon-srv-01 user=svc_mon process=suricata | suricata:1420@mon-srv-01 --write--> /var/log/suricata/eve.json (file) | cmd=write | args=normal network sensor write
+- B000379 | 2026-01-20 09:39:14 | W003 | host=ws-finance-01 user=u_fin process=firefox | firefox:2101@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=open internal portal page
+- E0013 | 2026-01-20 09:39:16 | W003 | host=ws-finance-01 user=u_fin process=update-check | update-check:2440@ws-finance-01 --connect--> 10.20.1.31:443 (socket) | cmd=connect | args=probe internal portal
+- ... 61 additional audit rows omitted for W003
+
+### Network flow side-view evidence
+- BF000114 | 2026-01-20 09:30:02~2026-01-20 09:30:04 | W003 | mon-srv-01 10.20.1.41:55456 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1509 bytes_in=3387 | related_audit=B000289
+- BF000120 | 2026-01-20 09:30:11~2026-01-20 09:30:17 | W003 | ws-finance-01 10.20.1.11:56919 -> 192.0.2.40:993 | service=IMAPS pattern=mail_sync | bytes_out=3649 bytes_in=42250 | related_audit=B000297
+- BF000113 | 2026-01-20 09:30:13~2026-01-20 09:30:18 | W003 | mon-srv-01 10.20.1.41:54974 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=854 bytes_in=5432 | related_audit=B000288
+- BF000112 | 2026-01-20 09:30:17~2026-01-20 09:30:22 | W003 | mon-srv-01 10.20.1.41:48222 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1025 bytes_in=5064 | related_audit=B000287
+- BF000115 | 2026-01-20 09:30:20~2026-01-20 09:30:23 | W003 | mon-srv-01 10.20.1.41:49251 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=849 bytes_in=8490 | related_audit=B000290
+- BF000121 | 2026-01-20 09:30:25~2026-01-20 09:30:43 | W003 | ws-dev-02 10.20.1.12:52936 -> 192.0.2.30:443 | service=HTTPS pattern=dev_repo_access | bytes_out=2058 bytes_in=227951 | related_audit=B000299
+- BF000117 | 2026-01-20 09:30:26~2026-01-20 09:30:35 | W003 | mon-srv-01 10.20.1.41:53842 -> 10.20.1.12:6514 | service=SYSLOG pattern=log_collection | bytes_out=2156 bytes_in=13864 | related_audit=B000293
+- BF000118 | 2026-01-20 09:30:29~2026-01-20 09:30:38 | W003 | mon-srv-01 10.20.1.41:50864 -> 10.20.1.31:6514 | service=SYSLOG pattern=log_collection | bytes_out=2184 bytes_in=12499 | related_audit=B000294
+- BF000119 | 2026-01-20 09:30:35~2026-01-20 09:30:43 | W003 | ws-finance-01 10.20.1.11:56558 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=1544 bytes_in=47410 | related_audit=B000295
+- BF000116 | 2026-01-20 09:30:39~2026-01-20 09:30:46 | W003 | mon-srv-01 10.20.1.41:54392 -> 10.20.1.11:6514 | service=SYSLOG pattern=log_collection | bytes_out=1449 bytes_in=11778 | related_audit=B000292
+- BF000122 | 2026-01-20 09:31:22~2026-01-20 09:32:26 | W003 | ws-dev-02 10.20.1.12:43823 -> 10.20.1.31:22 | service=SSH pattern=dev_ssh | bytes_out=26663 bytes_in=9370 | related_audit=B000307
+- BF000125 | 2026-01-20 09:32:04~2026-01-20 09:32:09 | W003 | mon-srv-01 10.20.1.41:58143 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1645 bytes_in=5630 | related_audit=B000314
+- BF000123 | 2026-01-20 09:32:09~2026-01-20 09:32:13 | W003 | mon-srv-01 10.20.1.41:58398 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=803 bytes_in=7734 | related_audit=B000312
+- BF000124 | 2026-01-20 09:32:13~2026-01-20 09:32:15 | W003 | mon-srv-01 10.20.1.41:60194 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1307 bytes_in=7286 | related_audit=B000313
+- BF000126 | 2026-01-20 09:32:16~2026-01-20 09:32:21 | W003 | mon-srv-01 10.20.1.41:50463 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1337 bytes_in=6361 | related_audit=B000315
+- BF000128 | 2026-01-20 09:33:04~2026-01-20 09:33:36 | W003 | file-srv-01 10.20.1.21:51528 -> 10.20.1.41:873 | service=RSYNC pattern=backup_sync | bytes_out=46338 bytes_in=17230 | related_audit=B000326
+- BF000127 | 2026-01-20 09:33:51~2026-01-20 09:34:04 | W003 | ws-finance-01 10.20.1.11:59980 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=3128 bytes_in=65217 | related_audit=B000323
+- BF000130 | 2026-01-20 09:34:06~2026-01-20 09:34:10 | W003 | mon-srv-01 10.20.1.41:53779 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1769 bytes_in=4395 | related_audit=B000332
+- BF000129 | 2026-01-20 09:34:11~2026-01-20 09:34:15 | W003 | mon-srv-01 10.20.1.41:55002 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=854 bytes_in=6407 | related_audit=B000331
+- BF000131 | 2026-01-20 09:34:12~2026-01-20 09:34:17 | W003 | mon-srv-01 10.20.1.41:60727 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1367 bytes_in=8251 | related_audit=B000333
+- BF000132 | 2026-01-20 09:34:17~2026-01-20 09:34:22 | W003 | mon-srv-01 10.20.1.41:60992 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1143 bytes_in=8091 | related_audit=B000334
+- BF000133 | 2026-01-20 09:35:05~2026-01-20 09:35:13 | W003 | mon-srv-01 10.20.1.41:56923 -> 10.20.1.11:6514 | service=SYSLOG pattern=log_collection | bytes_out=1774 bytes_in=11385 | related_audit=B000342
+- BF000136 | 2026-01-20 09:35:12~2026-01-20 09:35:18 | W003 | ws-finance-01 10.20.1.11:53250 -> 192.0.2.40:993 | service=IMAPS pattern=mail_sync | bytes_out=1964 bytes_in=29989 | related_audit=B000345
+- BF000134 | 2026-01-20 09:35:38~2026-01-20 09:35:45 | W003 | mon-srv-01 10.20.1.41:43079 -> 10.20.1.12:6514 | service=SYSLOG pattern=log_collection | bytes_out=1219 bytes_in=16042 | related_audit=B000343
+- BF000135 | 2026-01-20 09:35:54~2026-01-20 09:35:58 | W003 | mon-srv-01 10.20.1.41:52532 -> 10.20.1.31:6514 | service=SYSLOG pattern=log_collection | bytes_out=1227 bytes_in=16399 | related_audit=B000344
+- BF000140 | 2026-01-20 09:36:06~2026-01-20 09:36:09 | W003 | mon-srv-01 10.20.1.41:49781 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1630 bytes_in=6234 | related_audit=B000352
+- BF000139 | 2026-01-20 09:36:07~2026-01-20 09:36:11 | W003 | mon-srv-01 10.20.1.41:46206 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1133 bytes_in=5971 | related_audit=B000351
+- BF000138 | 2026-01-20 09:36:10~2026-01-20 09:36:15 | W003 | mon-srv-01 10.20.1.41:60078 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1796 bytes_in=8758 | related_audit=B000350
+- BF000137 | 2026-01-20 09:36:16~2026-01-20 09:36:21 | W003 | mon-srv-01 10.20.1.41:60089 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=991 bytes_in=6696 | related_audit=B000349
+- BF000142 | 2026-01-20 09:36:26~2026-01-20 09:36:59 | W003 | ws-dev-02 10.20.1.12:42327 -> 10.20.1.31:22 | service=SSH pattern=dev_ssh | bytes_out=40963 bytes_in=29007 | related_audit=B000358
+- BF000141 | 2026-01-20 09:36:34~2026-01-20 09:36:50 | W003 | ws-finance-01 10.20.1.11:44580 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=3826 bytes_in=40801 | related_audit=B000354
+- BF000143 | 2026-01-20 09:37:44~2026-01-20 09:38:05 | W003 | ws-dev-02 10.20.1.12:55553 -> 192.0.2.30:443 | service=HTTPS pattern=dev_repo_access | bytes_out=11140 bytes_in=189247 | related_audit=B000366
+- BF000147 | 2026-01-20 09:38:03~2026-01-20 09:38:09 | W003 | mon-srv-01 10.20.1.41:45789 -> 10.20.1.31:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1316 bytes_in=7556 | related_audit=B000373
+- BF000144 | 2026-01-20 09:38:08~2026-01-20 09:38:14 | W003 | mon-srv-01 10.20.1.41:43132 -> 10.20.1.11:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1426 bytes_in=7728 | related_audit=B000370
+- BF000146 | 2026-01-20 09:38:12~2026-01-20 09:38:18 | W003 | mon-srv-01 10.20.1.41:55463 -> 10.20.1.21:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1260 bytes_in=8440 | related_audit=B000372
+- BF000145 | 2026-01-20 09:38:21~2026-01-20 09:38:24 | W003 | mon-srv-01 10.20.1.41:51066 -> 10.20.1.12:9100 | service=METRIC pattern=metrics_scrape | bytes_out=1587 bytes_in=5968 | related_audit=B000371
+- F0002 | 2026-01-20 09:38:40~2026-01-20 09:38:48 | W003 | ws-finance-01 10.20.1.11:49221 -> 10.20.1.21:445 | service=SMB pattern=internal_probe | bytes_out=920 bytes_in=640 | related_audit=E0012
+- BF000148 | 2026-01-20 09:39:14~2026-01-20 09:39:29 | W003 | ws-finance-01 10.20.1.11:44492 -> 10.20.1.31:443 | service=HTTPS pattern=portal_browsing | bytes_out=3519 bytes_in=17804 | related_audit=B000379
+- F0003 | 2026-01-20 09:39:16~2026-01-20 09:39:23 | W003 | ws-finance-01 10.20.1.11:49231 -> 10.20.1.31:443 | service=HTTPS pattern=internal_probe | bytes_out=880 bytes_in=720 | related_audit=E0013
+
+### Host metric samples
+- M000155 | 2026-01-20 09:30:00 | W003 | host=mon-srv-01 | cpu=23.64 mem=61.26 disk_read=131844 disk_write=183102 net_in=16443 net_out=13595 proc_count=115 open_files=422 | hint=prometheus | note=normal baseline
+- M000152 | 2026-01-20 09:30:00 | W003 | host=ws-dev-02 | cpu=22.83 mem=50.23 disk_read=142014 disk_write=84236 net_in=4585 net_out=5069 proc_count=122 open_files=378 | hint=dev-shell | note=normal baseline
+- M000160 | 2026-01-20 09:31:00 | W003 | host=mon-srv-01 | cpu=25.74 mem=62.97 disk_read=147273 disk_write=168728 net_in=10491 net_out=10086 proc_count=115 open_files=428 | hint=prometheus | note=normal baseline
+- M000157 | 2026-01-20 09:31:00 | W003 | host=ws-dev-02 | cpu=25.81 mem=50.41 disk_read=136562 disk_write=93892 net_in=4907 net_out=5724 proc_count=124 open_files=328 | hint=dev-shell | note=normal baseline
+- M000165 | 2026-01-20 09:32:00 | W003 | host=mon-srv-01 | cpu=28.92 mem=63.37 disk_read=129301 disk_write=181297 net_in=10710 net_out=7640 proc_count=112 open_files=413 | hint=prometheus | note=normal baseline
+- M000164 | 2026-01-20 09:32:00 | W003 | host=portal-web-01 | cpu=22.39 mem=56.2 disk_read=106509 disk_write=128389 net_in=12339 net_out=11887 proc_count=104 open_files=346 | hint=nginx | note=normal baseline
+- M000162 | 2026-01-20 09:32:00 | W003 | host=ws-dev-02 | cpu=24.01 mem=51.17 disk_read=125494 disk_write=103307 net_in=6588 net_out=6894 proc_count=128 open_files=398 | hint=dev-shell | note=normal baseline
+- M000161 | 2026-01-20 09:32:00 | W003 | host=ws-finance-01 | cpu=22.16 mem=47.14 disk_read=96088 disk_write=90488 net_in=5783 net_out=4501 proc_count=112 open_files=295 | hint=office-apps | note=normal baseline
+- M000170 | 2026-01-20 09:33:00 | W003 | host=mon-srv-01 | cpu=26.95 mem=62.11 disk_read=111364 disk_write=183668 net_in=14066 net_out=11189 proc_count=120 open_files=425 | hint=prometheus | note=normal baseline
+- M000169 | 2026-01-20 09:33:00 | W003 | host=portal-web-01 | cpu=20.79 mem=58.16 disk_read=102264 disk_write=88548 net_in=5392 net_out=7099 proc_count=101 open_files=353 | hint=nginx | note=normal baseline
+- M000167 | 2026-01-20 09:33:00 | W003 | host=ws-dev-02 | cpu=27.99 mem=52.98 disk_read=148674 disk_write=82267 net_in=6884 net_out=6791 proc_count=123 open_files=341 | hint=dev-shell | note=normal baseline
+- M000175 | 2026-01-20 09:34:00 | W003 | host=mon-srv-01 | cpu=25.76 mem=61.48 disk_read=111739 disk_write=247776 net_in=8398 net_out=10299 proc_count=114 open_files=421 | hint=prometheus | note=normal baseline
+- M000174 | 2026-01-20 09:34:00 | W003 | host=portal-web-01 | cpu=23.13 mem=55.6 disk_read=106622 disk_write=86962 net_in=8335 net_out=8275 proc_count=103 open_files=375 | hint=nginx | note=normal baseline
+- M000172 | 2026-01-20 09:34:00 | W003 | host=ws-dev-02 | cpu=23.42 mem=51.26 disk_read=136202 disk_write=141938 net_in=4040 net_out=4896 proc_count=129 open_files=338 | hint=dev-shell | note=normal baseline
+- M000180 | 2026-01-20 09:35:00 | W003 | host=mon-srv-01 | cpu=26.65 mem=63.3 disk_read=142323 disk_write=190060 net_in=19556 net_out=10650 proc_count=118 open_files=422 | hint=prometheus | note=normal baseline
+- M000179 | 2026-01-20 09:35:00 | W003 | host=portal-web-01 | cpu=20.86 mem=56.09 disk_read=104708 disk_write=107689 net_in=9136 net_out=10409 proc_count=98 open_files=392 | hint=nginx | note=normal baseline
+- M000177 | 2026-01-20 09:35:00 | W003 | host=ws-dev-02 | cpu=24.32 mem=51.29 disk_read=131034 disk_write=122254 net_in=7306 net_out=7481 proc_count=123 open_files=327 | hint=dev-shell | note=normal baseline
+- M000185 | 2026-01-20 09:36:00 | W003 | host=mon-srv-01 | cpu=24.08 mem=61.72 disk_read=87657 disk_write=228315 net_in=11349 net_out=11513 proc_count=118 open_files=409 | hint=prometheus | note=normal baseline
+- M000182 | 2026-01-20 09:36:00 | W003 | host=ws-dev-02 | cpu=20.49 mem=51.83 disk_read=106365 disk_write=107252 net_in=2018 net_out=5668 proc_count=129 open_files=352 | hint=dev-shell | note=normal baseline
+- M000190 | 2026-01-20 09:37:00 | W003 | host=mon-srv-01 | cpu=26.85 mem=63.59 disk_read=104316 disk_write=207388 net_in=6781 net_out=11694 proc_count=122 open_files=425 | hint=prometheus | note=normal baseline
+- M000189 | 2026-01-20 09:37:00 | W003 | host=portal-web-01 | cpu=21.54 mem=56.6 disk_read=83101 disk_write=90311 net_in=7148 net_out=11851 proc_count=101 open_files=380 | hint=nginx | note=normal baseline
+- M000187 | 2026-01-20 09:37:00 | W003 | host=ws-dev-02 | cpu=24.17 mem=52.68 disk_read=129372 disk_write=90906 net_in=7082 net_out=5867 proc_count=132 open_files=358 | hint=dev-shell | note=normal baseline
+- M000186 | 2026-01-20 09:37:00 | W003 | host=ws-finance-01 | cpu=34.6 mem=48.7 disk_read=162000 disk_write=118000 net_in=8200 net_out=7900 proc_count=123 open_files=361 | hint=update-check | note=light internal discovery/probing activity
+- M000195 | 2026-01-20 09:38:00 | W003 | host=mon-srv-01 | cpu=25.26 mem=63.56 disk_read=153437 disk_write=115093 net_in=18598 net_out=7834 proc_count=119 open_files=432 | hint=prometheus | note=normal baseline
+- M000194 | 2026-01-20 09:38:00 | W003 | host=portal-web-01 | cpu=21.76 mem=58.47 disk_read=121400 disk_write=116886 net_in=9640 net_out=7443 proc_count=104 open_files=342 | hint=nginx | note=normal baseline
+- M000192 | 2026-01-20 09:38:00 | W003 | host=ws-dev-02 | cpu=26.21 mem=51.9 disk_read=95626 disk_write=106916 net_in=7283 net_out=5365 proc_count=123 open_files=382 | hint=dev-shell | note=normal baseline
+- M000200 | 2026-01-20 09:39:00 | W003 | host=mon-srv-01 | cpu=25.94 mem=62.86 disk_read=166114 disk_write=168015 net_in=14765 net_out=12403 proc_count=114 open_files=371 | hint=prometheus | note=normal baseline
+- M000199 | 2026-01-20 09:39:00 | W003 | host=portal-web-01 | cpu=26.92 mem=57.28 disk_read=117136 disk_write=67943 net_in=11167 net_out=4989 proc_count=97 open_files=366 | hint=nginx | note=normal baseline
+- M000197 | 2026-01-20 09:39:00 | W003 | host=ws-dev-02 | cpu=26.22 mem=52.78 disk_read=93894 disk_write=103287 net_in=5082 net_out=5803 proc_count=131 open_files=335 | hint=dev-shell | note=normal baseline
+- M000196 | 2026-01-20 09:39:00 | W003 | host=ws-finance-01 | cpu=34.6 mem=48.74 disk_read=162000 disk_write=118000 net_in=8200 net_out=7900 proc_count=123 open_files=361 | hint=update-check | note=light internal discovery/probing activity
+
+### Host metric clue events
+- ME0002 | 2026-01-20 09:37:00~2026-01-20 09:40:00 | W003 | host=ws-finance-01 event_type=internal_probe_activity metric=net_out_bytes z=3.1 | hint=update-check | desc=short internal probes to file and portal servers
+
+---

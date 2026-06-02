@@ -1,0 +1,48 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W002",
+      "approx_timestamp": "2026-01-20 09:24:17",
+      "host": "ws-finance-01",
+      "user": "u_fin",
+      "src_entity": "firefox:2412@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.23:443",
+      "dst_type": "socket",
+      "command": "firefox",
+      "args": "download malicious update",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0001",
+        "ME0001"
+      ],
+      "confidence_rationale": "High-confidence match to external HTTPS flow (F0001) and host metric burst (ME0001) indicating suspicious download activity."
+    },
+    {
+      "window_id": "W002",
+      "approx_timestamp": "2026-01-20 09:24:51",
+      "host": "ws-finance-01",
+      "user": "u_fin",
+      "src_entity": "update-check:2440@ws-finance-01",
+      "src_type": "process",
+      "relation": "execute",
+      "dst_entity": "/tmp/.session-x1",
+      "dst_type": "file",
+      "command": "update-check",
+      "args": "create local session marker",
+      "supporting_side_views": [
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "E0006",
+        "ME0001"
+      ],
+      "confidence_rationale": "Correlated to prior suspicious download and associated with a metric burst (ME0001) indicating payload execution."
+    }
+  ]
+}

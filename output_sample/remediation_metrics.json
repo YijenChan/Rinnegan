@@ -1,0 +1,103 @@
+{
+  "candidate_mode": "gt_corrupted_windows",
+  "candidate_windows": [
+    "W002",
+    "W006",
+    "W021",
+    "W022",
+    "W023",
+    "W024"
+  ],
+  "N_runs": 5,
+  "model": "gpt-4o",
+  "temperature": 0.45,
+  "gt_removed_events": 15,
+  "predicted_hypotheses": 19,
+  "tp": 6,
+  "fp": 13,
+  "fn": 9,
+  "precision": 0.3158,
+  "recall": 0.4,
+  "f1": 0.3529,
+  "matched_removed_event_ids": [
+    "R0001",
+    "R0009",
+    "R0011",
+    "R0012",
+    "R0013",
+    "R0014"
+  ],
+  "missed_removed_event_ids": [
+    "R0002",
+    "R0003",
+    "R0004",
+    "R0005",
+    "R0006",
+    "R0007",
+    "R0008",
+    "R0010",
+    "R0015"
+  ],
+  "by_window": {
+    "W002": {
+      "gt_removed_events": 4,
+      "predicted_hypotheses": 4,
+      "tp": 1,
+      "fp": 3,
+      "fn": 3,
+      "precision": 0.25,
+      "recall": 0.25,
+      "f1": 0.25
+    },
+    "W006": {
+      "gt_removed_events": 5,
+      "predicted_hypotheses": 5,
+      "tp": 1,
+      "fp": 4,
+      "fn": 4,
+      "precision": 0.2,
+      "recall": 0.2,
+      "f1": 0.2
+    },
+    "W021": {
+      "gt_removed_events": 3,
+      "predicted_hypotheses": 2,
+      "tp": 2,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.6667,
+      "f1": 0.8
+    },
+    "W022": {
+      "gt_removed_events": 1,
+      "predicted_hypotheses": 3,
+      "tp": 1,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.3333,
+      "recall": 1.0,
+      "f1": 0.5
+    },
+    "W023": {
+      "gt_removed_events": 1,
+      "predicted_hypotheses": 2,
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6667
+    },
+    "W024": {
+      "gt_removed_events": 1,
+      "predicted_hypotheses": 3,
+      "tp": 0,
+      "fp": 3,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  }
+}

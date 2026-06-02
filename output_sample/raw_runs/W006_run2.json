@@ -1,0 +1,44 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:06:18",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "sh:3011@ws-finance-01",
+      "src_type": "process",
+      "relation": "write",
+      "dst_entity": "/etc/cron.d/syswatch",
+      "dst_type": "file",
+      "command": "write",
+      "args": "add persistence entry for syswatch",
+      "supporting_side_views": [
+        "metrics"
+      ],
+      "supporting_observations": [
+        "ME0004: persistence_write_burst"
+      ],
+      "confidence_rationale": "High disk write burst aligned with syswatch persistence addition."
+    },
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:06:18",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "sh:3011@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "external HTTPS check-in",
+      "supporting_side_views": [
+        "traffic"
+      ],
+      "supporting_observations": [
+        "F0004: first_checkin flow"
+      ],
+      "confidence_rationale": "Unique external connection observed in traffic side-view."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W002",
+      "approx_timestamp": "2026-01-20 09:24:17",
+      "host": "ws-finance-01",
+      "user": "u_fin",
+      "src_entity": "firefox:2412@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.23:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "download suspicious update container",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0001",
+        "ME0001"
+      ],
+      "confidence_rationale": "Network flow F0001 shows large inbound transfer from external IP, aligned with ME0001 disk burst on ws-finance-01 and related E0002 write event."
+    },
+    {
+      "window_id": "W002",
+      "approx_timestamp": "2026-01-20 09:24:51",
+      "host": "ws-finance-01",
+      "user": "u_fin",
+      "src_entity": "firefox:2412@ws-finance-01",
+      "src_type": "process",
+      "relation": "write",
+      "dst_entity": "/home/u_fin/Downloads/report_update.pdf",
+      "dst_type": "file",
+      "command": "write",
+      "args": "downloaded suspicious update container",
+      "supporting_side_views": [
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "ME0001",
+        "E0002"
+      ],
+      "confidence_rationale": "Host metrics ME0001 indicate a disk write burst, and log continuity confirms related E0002 write event for suspicious file creation."
+    }
+  ]
+}

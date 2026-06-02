@@ -1,0 +1,45 @@
+Rinnegan Stage-4: R-GAE Data Preparation Summary
+
+Configuration
+  train_ratio: 0.7
+  exclude_malicious_endpoints: True
+  exclude_attack_windows_for_train_val: False
+
+Attack filtering
+  attack_event_ids_count: 56
+  attack_windows: W002, W003, W005, W006, W007, W008, W009, W012, W013, W015, W018, W020, W021, W022, W023, W024, W025, W027, W028, W031, W034
+
+Clean graph filtering
+  original_clean_edges: 5656
+  after_source_observed: 5656
+  after_is_attack_edge_filter: 5600
+  after_label_filter: 5600
+  after_attack_event_id_filter: 5600
+  after_attack_window_filter: 5600
+  after_malicious_endpoint_filter: 5048
+  removed_by_all_filters: 608
+
+Benign background graph
+  nodes: 502
+  edges: 5048
+  windows: W000, W001, W002, W003, W004, W005, W006, W007, W008, W009, W010, W011, W012, W013, W014, W015, W016, W017, W018, W019, W020, W021, W022, W023, W024, W025, W026, W027, W028, W029, W030, W031, W032, W033, W034, W035
+
+Train benign graph
+  nodes: 368
+  edges: 3499
+  windows: W000, W001, W002, W003, W004, W005, W006, W007, W008, W009, W010, W011, W012, W013, W014, W015, W016, W017, W018, W019, W020, W021, W022, W023, W024
+
+Validation benign graph
+  nodes: 196
+  edges: 1549
+  windows: W025, W026, W027, W028, W029, W030, W031, W032, W033, W034, W035
+
+Test graphs copied from Stage-3
+  test_clean_graph:      F:\Rinnegan\outputs\rinnegan_stage4_rgai_data\test_clean_graph
+  test_corrupted_graph:  F:\Rinnegan\outputs\rinnegan_stage4_rgai_data\test_corrupted_graph
+  test_remediated_graph: F:\Rinnegan\outputs\rinnegan_stage4_rgai_data\test_remediated_graph
+
+Next step
+  Train R-GAE on train_benign_graph.
+  Calibrate delta on val_benign_graph.
+  Evaluate on test_clean_graph, test_corrupted_graph, and test_remediated_graph.

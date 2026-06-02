@@ -1,0 +1,26 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W023",
+      "approx_timestamp": "2026-01-20 12:55:13",
+      "host": "ws-finance-01",
+      "user": "u_fin",
+      "src_entity": "syswatch:3001@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "syswatch",
+      "args": "beacon transmission",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0013",
+        "ME0011"
+      ],
+      "confidence_rationale": "Network flow F0013 shows HTTPS connection to external IP 198.51.100.77 with beacon pattern. Metric clue ME0011 indicates periodic outbound network peak from ws-finance-01, consistent with beacon-like behavior."
+    }
+  ]
+}

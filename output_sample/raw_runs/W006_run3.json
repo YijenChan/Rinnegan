@@ -1,0 +1,46 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:06:18",
+      "host": "ws-finance-01",
+      "user": "u_fin",
+      "src_entity": "firefox:2101@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "first external check-in",
+      "supporting_side_views": [
+        "traffic"
+      ],
+      "supporting_observations": [
+        "F0004 | 2026-01-20 10:06:18~2026-01-20 10:06:30 | ws-finance-01 10.20.1.11:49310 -> 198.51.100.77:443 | service=HTTPS pattern=first_checkin | bytes_out=1140 bytes_in=1780"
+      ],
+      "confidence_rationale": "Directly supported by network flow evidence indicating external HTTPS connection."
+    },
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:04:30",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "sh:3011@ws-finance-01",
+      "src_type": "process",
+      "relation": "write",
+      "dst_entity": "/etc/cron.d/syswatch",
+      "dst_type": "file",
+      "command": "write",
+      "args": "create persistence entry",
+      "supporting_side_views": [
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "ME0004 | 2026-01-20 10:05:00~2026-01-20 10:07:00 | ws-finance-01 | abnormal disk writes before syswatch appears in later logs",
+        "E0020 | 2026-01-20 10:08:30 | ws-finance-01 | cron reads new persistence entry"
+      ],
+      "confidence_rationale": "High disk write burst and subsequent cron read indicate persistence creation."
+    }
+  ]
+}

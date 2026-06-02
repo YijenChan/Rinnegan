@@ -1,0 +1,1111 @@
+[
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:17",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2412@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.23:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "download payload",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0001",
+      "ME0001"
+    ],
+    "confidence_rationale": "Network flow shows a connection to an external IP with significant data transfer, supported by host metric burst.",
+    "_run_id": 1,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:51",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2412@ws-finance-01",
+    "src_type": "process",
+    "relation": "write",
+    "dst_entity": "/home/u_fin/Downloads/report_update.pdf",
+    "dst_type": "file",
+    "command": "write",
+    "args": "downloaded suspicious update container",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "E0002",
+      "ME0001"
+    ],
+    "confidence_rationale": "Host metric indicates a burst in disk write activity, matching the download completion.",
+    "_run_id": 1,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:17",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2412@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.23:443",
+    "dst_type": "socket",
+    "command": "firefox",
+    "args": "download malicious update",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0001",
+      "ME0001"
+    ],
+    "confidence_rationale": "High-confidence match to external HTTPS flow (F0001) and host metric burst (ME0001) indicating suspicious download activity.",
+    "_run_id": 2,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:51",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "update-check:2440@ws-finance-01",
+    "src_type": "process",
+    "relation": "execute",
+    "dst_entity": "/tmp/.session-x1",
+    "dst_type": "file",
+    "command": "update-check",
+    "args": "create local session marker",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "E0006",
+      "ME0001"
+    ],
+    "confidence_rationale": "Correlated to prior suspicious download and associated with a metric burst (ME0001) indicating payload execution.",
+    "_run_id": 2,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:17",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2412@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.23:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "download suspicious update container",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0001",
+      "ME0001"
+    ],
+    "confidence_rationale": "Network flow F0001 shows large inbound transfer from external IP, aligned with ME0001 disk burst on ws-finance-01 and related E0002 write event.",
+    "_run_id": 3,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:51",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2412@ws-finance-01",
+    "src_type": "process",
+    "relation": "write",
+    "dst_entity": "/home/u_fin/Downloads/report_update.pdf",
+    "dst_type": "file",
+    "command": "write",
+    "args": "downloaded suspicious update container",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "ME0001",
+      "E0002"
+    ],
+    "confidence_rationale": "Host metrics ME0001 indicate a disk write burst, and log continuity confirms related E0002 write event for suspicious file creation.",
+    "_run_id": 3,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:17",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2412@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.23:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "download suspicious update container",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0001",
+      "ME0001"
+    ],
+    "confidence_rationale": "Network flow F0001 and metric clue ME0001 indicate large inbound transfer followed by local disk write.",
+    "_run_id": 4,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:51",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2412@ws-finance-01",
+    "src_type": "process",
+    "relation": "write",
+    "dst_entity": "/home/u_fin/Downloads/report_update.pdf",
+    "dst_type": "file",
+    "command": "write",
+    "args": "downloaded suspicious update container",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "E0002",
+      "ME0001"
+    ],
+    "confidence_rationale": "Log E0002 and metric clue ME0001 confirm suspicious payload written locally after download.",
+    "_run_id": 4,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:51",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2412@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.23:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "download suspicious update container",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0001 network flow evidence",
+      "ME0001 metric clue event"
+    ],
+    "confidence_rationale": "High confidence due to direct network flow and correlated metric burst indicating payload download.",
+    "_run_id": 5,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W002",
+    "approx_timestamp": "2026-01-20 09:24:51",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2412@ws-finance-01",
+    "src_type": "process",
+    "relation": "write",
+    "dst_entity": "/tmp/.session-x1",
+    "dst_type": "file",
+    "command": "write",
+    "args": "create local session marker",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "ME0001 metric clue event",
+      "E0006 audit log context"
+    ],
+    "confidence_rationale": "High confidence due to disk write burst and continuity with observed session marker creation.",
+    "_run_id": 5,
+    "_target_window": "W002"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:06:18",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "sh:3011@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "first_checkin",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "BF000257",
+      "ME0003"
+    ],
+    "confidence_rationale": "Network flow indicates external HTTPS check-in with anomalous metrics burst suggesting privilege escalation.",
+    "_run_id": 1,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:08:30",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "cron:902@ws-finance-01",
+    "src_type": "process",
+    "relation": "write",
+    "dst_entity": "/etc/cron.d/syswatch",
+    "dst_type": "file",
+    "command": "write",
+    "args": "cron persists new entry",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "ME0004",
+      "E0020"
+    ],
+    "confidence_rationale": "Metrics show abnormal disk write burst aligned with log context indicating new persistence entry.",
+    "_run_id": 1,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:06:18",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "sh:3011@ws-finance-01",
+    "src_type": "process",
+    "relation": "write",
+    "dst_entity": "/etc/cron.d/syswatch",
+    "dst_type": "file",
+    "command": "write",
+    "args": "add persistence entry for syswatch",
+    "supporting_side_views": [
+      "metrics"
+    ],
+    "supporting_observations": [
+      "ME0004: persistence_write_burst"
+    ],
+    "confidence_rationale": "High disk write burst aligned with syswatch persistence addition.",
+    "_run_id": 2,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:06:18",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "sh:3011@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "external HTTPS check-in",
+    "supporting_side_views": [
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0004: first_checkin flow"
+    ],
+    "confidence_rationale": "Unique external connection observed in traffic side-view.",
+    "_run_id": 2,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:06:18",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2101@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "first external check-in",
+    "supporting_side_views": [
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0004 | 2026-01-20 10:06:18~2026-01-20 10:06:30 | ws-finance-01 10.20.1.11:49310 -> 198.51.100.77:443 | service=HTTPS pattern=first_checkin | bytes_out=1140 bytes_in=1780"
+    ],
+    "confidence_rationale": "Directly supported by network flow evidence indicating external HTTPS connection.",
+    "_run_id": 3,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:04:30",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "sh:3011@ws-finance-01",
+    "src_type": "process",
+    "relation": "write",
+    "dst_entity": "/etc/cron.d/syswatch",
+    "dst_type": "file",
+    "command": "write",
+    "args": "create persistence entry",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "ME0004 | 2026-01-20 10:05:00~2026-01-20 10:07:00 | ws-finance-01 | abnormal disk writes before syswatch appears in later logs",
+      "E0020 | 2026-01-20 10:08:30 | ws-finance-01 | cron reads new persistence entry"
+    ],
+    "confidence_rationale": "High disk write burst and subsequent cron read indicate persistence creation.",
+    "_run_id": 3,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:06:18",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "sh:3011@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "first external check-in",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0004: ws-finance-01 10.20.1.11:49310 -> 198.51.100.77:443 (HTTPS pattern=first_checkin)",
+      "ME0004: ws-finance-01 persistence write burst before syswatch entry"
+    ],
+    "confidence_rationale": "Network flow evidence aligns with external connection during elevated disk writes indicative of persistence activity.",
+    "_run_id": 4,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:08:30",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "cron:902@ws-finance-01",
+    "src_type": "process",
+    "relation": "write",
+    "dst_entity": "/etc/cron.d/syswatch",
+    "dst_type": "file",
+    "command": "write",
+    "args": "cron writes new persistence entry",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "ME0004: abnormal disk writes before syswatch appears in later logs",
+      "E0020: cron reads new persistence entry"
+    ],
+    "confidence_rationale": "Host metrics indicate persistence write burst coinciding with cron activity.",
+    "_run_id": 4,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:06:18",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "sh:3011@ws-finance-01",
+    "src_type": "process",
+    "relation": "execute",
+    "dst_entity": "/etc/cron.d/syswatch",
+    "dst_type": "file",
+    "command": "sh",
+    "args": "execute maintenance helper script",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "ME0003",
+      "ME0004",
+      "E0020"
+    ],
+    "confidence_rationale": "High CPU and disk write burst on ws-finance-01 during the suspected persistence activity window, followed by a cron read event.",
+    "_run_id": 5,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W006",
+    "approx_timestamp": "2026-01-20 10:06:18",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "sh:3011@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "sh",
+    "args": "first_checkin",
+    "supporting_side_views": [
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0004"
+    ],
+    "confidence_rationale": "Network flow indicates a first check-in to an external IP without a corresponding audit log.",
+    "_run_id": 5,
+    "_target_window": "W006"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:31:04",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "syswatch:3280@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "syswatch",
+    "args": "TLS-like beacon to external endpoint",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0009",
+      "ME0009"
+    ],
+    "confidence_rationale": "Periodic outbound network burst (ME0009) aligns with unsupported external flow (F0009).",
+    "_run_id": 1,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:33:08",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "portal-sync:4022@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "portal-sync",
+    "args": "TLS-like beacon to external endpoint",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0010",
+      "ME0010"
+    ],
+    "confidence_rationale": "Periodic outbound network burst (ME0010) aligns with unsupported external flow (F0010).",
+    "_run_id": 1,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:31:04",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "syswatch:3280@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "syswatch",
+    "args": "beacon periodic outbound connection",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0009",
+      "ME0009"
+    ],
+    "confidence_rationale": "Periodic outbound TLS-like flow to external endpoint with matching metric anomaly and traffic evidence.",
+    "_run_id": 2,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:33:08",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "portal-sync:4022@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "portal-sync",
+    "args": "beacon periodic outbound connection",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0010",
+      "ME0010"
+    ],
+    "confidence_rationale": "Periodic outbound TLS-like flow to external endpoint with matching metric anomaly and traffic evidence.",
+    "_run_id": 2,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:31:04",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "syswatch:3280@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "syswatch",
+    "args": "beacon external endpoint",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0009 network flow showing outbound HTTPS beacon to 198.51.100.77",
+      "ME0009 metric anomaly indicating periodic outbound TLS-like flows"
+    ],
+    "confidence_rationale": "Strong alignment between traffic flow, host metric anomaly, and beacon pattern.",
+    "_run_id": 3,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:33:08",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "portal-sync:4022@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "portal-sync",
+    "args": "beacon external endpoint",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0010 network flow showing outbound HTTPS beacon to 198.51.100.77",
+      "ME0010 metric anomaly indicating periodic outbound TLS-like flows"
+    ],
+    "confidence_rationale": "Strong alignment between traffic flow, host metric anomaly, and beacon pattern.",
+    "_run_id": 3,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:31:04",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "syswatch:3280@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "syswatch",
+    "args": "periodic beaconing to external endpoint",
+    "supporting_side_views": [
+      "log_context",
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0009",
+      "ME0009",
+      "E0042"
+    ],
+    "confidence_rationale": "Periodic outbound TLS-like flow with matching metric spike and external destination.",
+    "_run_id": 4,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:33:08",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "portal-sync:4022@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "portal-sync",
+    "args": "periodic helper beacon to external endpoint",
+    "supporting_side_views": [
+      "log_context",
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0010",
+      "ME0010",
+      "E0043"
+    ],
+    "confidence_rationale": "Periodic outbound TLS-like flow with matching metric spike and external destination.",
+    "_run_id": 4,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:31:10",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "syswatch:3280@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "beacon",
+    "supporting_side_views": [
+      "log_context",
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0009",
+      "ME0009",
+      "E0042"
+    ],
+    "confidence_rationale": "Network flow F0009 shows periodic outbound TLS-like flow matching the syswatch process, supported by metric clue ME0009 and log event E0042 indicating a read from a session file before beaconing.",
+    "_run_id": 5,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W021",
+    "approx_timestamp": "2026-01-20 12:33:10",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "portal-sync:4022@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "beacon",
+    "supporting_side_views": [
+      "log_context",
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0010",
+      "ME0010",
+      "E0043"
+    ],
+    "confidence_rationale": "Network flow F0010 shows outbound TLS-like flow matching portal-sync process, supported by metric clue ME0010 and log event E0043 indicating a read from a portal cache before beaconing.",
+    "_run_id": 5,
+    "_target_window": "W021"
+  },
+  {
+    "window_id": "W022",
+    "approx_timestamp": "2026-01-20 12:40:44",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "portal-sync:4022@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "periodic beacon to external endpoint",
+    "supporting_side_views": [
+      "log_context",
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0012",
+      "ME0010",
+      "E0050"
+    ],
+    "confidence_rationale": "Periodic outbound TLS-like flow to external endpoint with matching beacon audit event and metric burst.",
+    "_run_id": 1,
+    "_target_window": "W022"
+  },
+  {
+    "window_id": "W022",
+    "approx_timestamp": "2026-01-20 12:44:28",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "portal-sync:4022@portal-web-01",
+    "src_type": "process",
+    "relation": "read",
+    "dst_entity": "/var/www/portal/.cache/portal-sync",
+    "dst_type": "file",
+    "command": "read",
+    "args": "read portal helper before beacon",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "E0050",
+      "ME0010"
+    ],
+    "confidence_rationale": "Local file read preceding external beacon event, supported by temporal alignment and metric burst.",
+    "_run_id": 1,
+    "_target_window": "W022"
+  },
+  {
+    "window_id": "W022",
+    "approx_timestamp": "2026-01-20 12:42:15",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "portal-sync:4022@portal-web-01",
+    "src_type": "process",
+    "relation": "read",
+    "dst_entity": "/var/www/portal/.cache/portal-sync",
+    "dst_type": "file",
+    "command": "read",
+    "args": "read portal helper before beacon",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "M001134",
+      "E0050"
+    ],
+    "confidence_rationale": "Observed network peaks and missing log context suggest periodic beacon activity.",
+    "_run_id": 3,
+    "_target_window": "W022"
+  },
+  {
+    "window_id": "W022",
+    "approx_timestamp": "2026-01-20 12:40:15",
+    "host": "ws-finance-01",
+    "user": "root",
+    "src_entity": "syswatch:3280@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "syswatch",
+    "args": "beacon to external endpoint",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0012",
+      "ME0010"
+    ],
+    "confidence_rationale": "Evidence from network flow (F0012) and periodic outbound metric clue (ME0010) indicates external beacon-like behavior.",
+    "_run_id": 4,
+    "_target_window": "W022"
+  },
+  {
+    "window_id": "W022",
+    "approx_timestamp": "2026-01-20 12:44:28",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "portal-sync:4022@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "portal-sync",
+    "args": "beacon to external endpoint",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0012",
+      "ME0010"
+    ],
+    "confidence_rationale": "Network flow (F0012) and periodic outbound metric clue (ME0010) suggest portal-sync beacon activity.",
+    "_run_id": 4,
+    "_target_window": "W022"
+  },
+  {
+    "window_id": "W023",
+    "approx_timestamp": "2026-01-20 12:55:13",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "syswatch:3001@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "syswatch",
+    "args": "beacon-like periodicity",
+    "supporting_side_views": [
+      "log_context",
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0013",
+      "ME0011"
+    ],
+    "confidence_rationale": "Beacon-like periodic traffic and host metric anomaly detected; no matching audit event.",
+    "_run_id": 1,
+    "_target_window": "W023"
+  },
+  {
+    "window_id": "W023",
+    "approx_timestamp": "2026-01-20 12:55:13",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2101@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "firefox",
+    "args": "beacon network connection",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0013: ws-finance-01 10.20.1.11:49750 -> 198.51.100.77:443",
+      "ME0011: continued_c2_periodicity metric=net_out_bytes z=4.2"
+    ],
+    "confidence_rationale": "Network flow (F0013) indicates an outbound HTTPS connection to an external IP (198.51.100.77) without matching audit log. Host metric clue (ME0011) corroborates beacon-like behavior.",
+    "_run_id": 2,
+    "_target_window": "W023"
+  },
+  {
+    "window_id": "W023",
+    "approx_timestamp": "2026-01-20 12:55:13",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2101@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "firefox",
+    "args": "beacon activity",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0013",
+      "ME0011"
+    ],
+    "confidence_rationale": "Beacon-like periodicity detected in outbound traffic to external IP, aligned with host metric anomaly.",
+    "_run_id": 3,
+    "_target_window": "W023"
+  },
+  {
+    "window_id": "W023",
+    "approx_timestamp": "2026-01-20 12:55:15",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "firefox:2101@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "firefox",
+    "args": "unknown",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0013",
+      "ME0011"
+    ],
+    "confidence_rationale": "Unexplained outbound HTTPS flow to external IP with periodicity clue and no matching audit log.",
+    "_run_id": 4,
+    "_target_window": "W023"
+  },
+  {
+    "window_id": "W023",
+    "approx_timestamp": "2026-01-20 12:55:13",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "syswatch:3001@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "syswatch",
+    "args": "beacon transmission",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0013",
+      "ME0011"
+    ],
+    "confidence_rationale": "Network flow F0013 shows HTTPS connection to external IP 198.51.100.77 with beacon pattern. Metric clue ME0011 indicates periodic outbound network peak from ws-finance-01, consistent with beacon-like behavior.",
+    "_run_id": 5,
+    "_target_window": "W023"
+  },
+  {
+    "window_id": "W024",
+    "approx_timestamp": "2026-01-20 13:08:17",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "nginx:1301@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "periodic tls-like beacon to c2",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0014"
+    ],
+    "confidence_rationale": "Network flow F0014 indicates a beacon-like connection from portal-web-01 to 198.51.100.77:443, which is not supported by any audit log event in W024.",
+    "_run_id": 1,
+    "_target_window": "W024"
+  },
+  {
+    "window_id": "W024",
+    "approx_timestamp": "2026-01-20 13:08:15",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "nginx:1301@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "nginx",
+    "args": "periodic tls-like beacon to c2",
+    "supporting_side_views": [
+      "log_context",
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "BF000913: portal-web-01 10.20.1.31:49838 -> 198.51.100.77:443 | service=HTTPS pattern=beacon | bytes_out=1300 bytes_in=840",
+      "M001244: portal-web-01 cpu=33.4 mem=54.33 disk_read=119453 disk_write=95171 net_in=11894 net_out=18000 | hint=portal-sync | note=small periodic outbound network peak without matching rich audit context",
+      "No matching audit log for this flow in W024"
+    ],
+    "confidence_rationale": "High confidence due to direct network flow evidence (BF000913) showing unexplained outbound traffic to 198.51.100.77:443, supported by host metrics (M001244) indicating unusual network activity at the same time.",
+    "_run_id": 2,
+    "_target_window": "W024"
+  },
+  {
+    "window_id": "W024",
+    "approx_timestamp": "2026-01-20 13:00:13",
+    "host": "ws-finance-01",
+    "user": "u_fin",
+    "src_entity": "syswatch:3280@ws-finance-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "periodic tls-like beacon to c2",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0014",
+      "M001244"
+    ],
+    "confidence_rationale": "Network flow with beacon pattern and metric peak without matching rich audit context indicates potential C2 connection.",
+    "_run_id": 3,
+    "_target_window": "W024"
+  },
+  {
+    "window_id": "W024",
+    "approx_timestamp": "2026-01-20 13:08:15",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "nginx:1301@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "connect",
+    "args": "periodic tls-like beacon to c2",
+    "supporting_side_views": [
+      "log_context",
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0014"
+    ],
+    "confidence_rationale": "Network flow evidence (F0014) indicates a beacon-like HTTPS connection from portal-web-01 to external IP 198.51.100.77:443 during W024, consistent with attack-related activity.",
+    "_run_id": 4,
+    "_target_window": "W024"
+  },
+  {
+    "window_id": "W024",
+    "approx_timestamp": "2026-01-20 13:08:15",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "logrotate:1335@portal-web-01",
+    "src_type": "process",
+    "relation": "write",
+    "dst_entity": "/var/log/nginx/access.log",
+    "dst_type": "file",
+    "command": "logrotate",
+    "args": "rotate access log",
+    "supporting_side_views": [
+      "log_context",
+      "metrics"
+    ],
+    "supporting_observations": [
+      "M001244 | periodic outbound network peak without matching rich audit context",
+      "audit log continuity surrounding B002322"
+    ],
+    "confidence_rationale": "Temporal alignment with periodic network peak and log rotation pattern observed in neighboring contexts.",
+    "_run_id": 5,
+    "_target_window": "W024"
+  },
+  {
+    "window_id": "W024",
+    "approx_timestamp": "2026-01-20 13:08:23",
+    "host": "portal-web-01",
+    "user": "svc_web",
+    "src_entity": "nginx:1301@portal-web-01",
+    "src_type": "process",
+    "relation": "connect",
+    "dst_entity": "198.51.100.77:443",
+    "dst_type": "socket",
+    "command": "nginx",
+    "args": "external beacon connection",
+    "supporting_side_views": [
+      "metrics",
+      "traffic"
+    ],
+    "supporting_observations": [
+      "F0014 | beacon-like HTTPS flow to external IP",
+      "M001244 | small outbound network peak without matching audit context"
+    ],
+    "confidence_rationale": "Direct support from traffic flow and metric anomaly indicating external connection activity.",
+    "_run_id": 5,
+    "_target_window": "W024"
+  }
+]

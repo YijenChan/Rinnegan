@@ -1,0 +1,48 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:06:18",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "sh:3011@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "first external check-in",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0004: ws-finance-01 10.20.1.11:49310 -> 198.51.100.77:443 (HTTPS pattern=first_checkin)",
+        "ME0004: ws-finance-01 persistence write burst before syswatch entry"
+      ],
+      "confidence_rationale": "Network flow evidence aligns with external connection during elevated disk writes indicative of persistence activity."
+    },
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:08:30",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "cron:902@ws-finance-01",
+      "src_type": "process",
+      "relation": "write",
+      "dst_entity": "/etc/cron.d/syswatch",
+      "dst_type": "file",
+      "command": "write",
+      "args": "cron writes new persistence entry",
+      "supporting_side_views": [
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "ME0004: abnormal disk writes before syswatch appears in later logs",
+        "E0020: cron reads new persistence entry"
+      ],
+      "confidence_rationale": "Host metrics indicate persistence write burst coinciding with cron activity."
+    }
+  ]
+}

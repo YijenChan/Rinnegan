@@ -1,0 +1,48 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:06:18",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "sh:3011@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "first_checkin",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "BF000257",
+        "ME0003"
+      ],
+      "confidence_rationale": "Network flow indicates external HTTPS check-in with anomalous metrics burst suggesting privilege escalation."
+    },
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:08:30",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "cron:902@ws-finance-01",
+      "src_type": "process",
+      "relation": "write",
+      "dst_entity": "/etc/cron.d/syswatch",
+      "dst_type": "file",
+      "command": "write",
+      "args": "cron persists new entry",
+      "supporting_side_views": [
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "ME0004",
+        "E0020"
+      ],
+      "confidence_rationale": "Metrics show abnormal disk write burst aligned with log context indicating new persistence entry."
+    }
+  ]
+}

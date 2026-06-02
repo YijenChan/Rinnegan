@@ -1,0 +1,48 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W022",
+      "approx_timestamp": "2026-01-20 12:40:15",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "syswatch:3280@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "syswatch",
+      "args": "beacon to external endpoint",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0012",
+        "ME0010"
+      ],
+      "confidence_rationale": "Evidence from network flow (F0012) and periodic outbound metric clue (ME0010) indicates external beacon-like behavior."
+    },
+    {
+      "window_id": "W022",
+      "approx_timestamp": "2026-01-20 12:44:28",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "portal-sync:4022@portal-web-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "portal-sync",
+      "args": "beacon to external endpoint",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0012",
+        "ME0010"
+      ],
+      "confidence_rationale": "Network flow (F0012) and periodic outbound metric clue (ME0010) suggest portal-sync beacon activity."
+    }
+  ]
+}

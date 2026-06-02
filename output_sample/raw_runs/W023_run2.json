@@ -1,0 +1,26 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W023",
+      "approx_timestamp": "2026-01-20 12:55:13",
+      "host": "ws-finance-01",
+      "user": "u_fin",
+      "src_entity": "firefox:2101@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "firefox",
+      "args": "beacon network connection",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0013: ws-finance-01 10.20.1.11:49750 -> 198.51.100.77:443",
+        "ME0011: continued_c2_periodicity metric=net_out_bytes z=4.2"
+      ],
+      "confidence_rationale": "Network flow (F0013) indicates an outbound HTTPS connection to an external IP (198.51.100.77) without matching audit log. Host metric clue (ME0011) corroborates beacon-like behavior."
+    }
+  ]
+}

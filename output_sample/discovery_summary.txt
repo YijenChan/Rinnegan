@@ -1,0 +1,88 @@
+Rinnegan Stage-1 v1.1: Cross-modal Transformer + Explicit Inconsistency Clues
+
+DATA_ROOT: F:\Rinnegan\OfficeFog_desensitized_version\full-dataset
+OUT_DIR: F:\Rinnegan\outputs\rinnegan_stage1_discovery
+DEVICE: cpu
+GAMMA: 0.6
+K_CORRUPTIONS: 5
+HYBRID_SCORE: 0.25 * transformer_corruption_score + 0.75 * clue_score
+
+Training setup
+  train_windows: W000, W001, W002, W003, W004, W005, W006, W007, W008, W009, W010, W011, W012, W013, W014, W015, W016, W017, W018, W019, W020, W021, W022, W023, W024
+  val_windows: W025, W026, W027, W028, W029, W030, W031, W032, W033, W034, W035
+  training_samples: 150
+  validation_samples: 66
+  best_epoch: 1
+  best_val_f1: 0.0690
+
+Hybrid gamma-threshold protocol on corrupted logs
+  tp: 6
+  fp: 4
+  tn: 26
+  fn: 0
+  precision: 0.6
+  recall: 1.0
+  f1: 0.75
+  accuracy: 0.8889
+  predicted windows: W021, W006, W022, W023, W002, W033, W016, W000, W013, W024
+
+Hybrid Top-K protocol on corrupted logs
+  K: 6
+  tp: 5
+  fp: 1
+  tn: 29
+  fn: 1
+  precision: 0.8333
+  recall: 0.8333
+  f1: 0.8333
+  accuracy: 0.9444
+  predicted windows: W021, W006, W022, W023, W002, W033
+
+Transformer-only Top-K protocol on corrupted logs
+  tp: 2
+  fp: 4
+  tn: 26
+  fn: 4
+  precision: 0.3333
+  recall: 0.3333
+  f1: 0.3333
+  accuracy: 0.7778
+  predicted windows: W018, W006, W028, W008, W010, W021
+
+Clue-only Top-K protocol on corrupted logs
+  tp: 5
+  fp: 1
+  tn: 29
+  fn: 1
+  precision: 0.8333
+  recall: 0.8333
+  f1: 0.8333
+  accuracy: 0.9444
+  predicted windows: W021, W006, W022, W023, W002, W033
+
+Best test-sweep threshold on corrupted logs, hybrid score
+  threshold=0.7 | P=0.8333 R=0.8333 F1=0.8333
+
+Top suspicious windows
+  W021 | p=0.4827 | tr_score=0.5173 | clue=0.9856 | score=0.8685 | sim=0.1901 | gt=1 | removed=3 | stage=C2 | flow_gap=5 | ext_gap=3 | metric_gap=1 | metric_zsum=4.50 | ext_flow_log_gap=3.00
+  W006 | p=0.4775 | tr_score=0.5225 | clue=0.9332 | score=0.8305 | sim=0.0992 | gt=1 | removed=5 | stage=PE/Persistence | flow_gap=3 | ext_gap=1 | metric_gap=1 | metric_zsum=4.80 | ext_flow_log_gap=1.00
+  W022 | p=0.4838 | tr_score=0.5162 | clue=0.8328 | score=0.7536 | sim=0.2441 | gt=1 | removed=1 | stage=C2 | flow_gap=2 | ext_gap=1 | metric_gap=0 | metric_zsum=0.00 | ext_flow_log_gap=1.00
+  W023 | p=0.4861 | tr_score=0.5139 | clue=0.8186 | score=0.7424 | sim=0.2719 | gt=1 | removed=1 | stage=C2 | flow_gap=1 | ext_gap=1 | metric_gap=1 | metric_zsum=4.20 | ext_flow_log_gap=1.00
+  W002 | p=0.4858 | tr_score=0.5142 | clue=0.8178 | score=0.7419 | sim=0.2214 | gt=1 | removed=4 | stage=Execution/IA | flow_gap=2 | ext_gap=1 | metric_gap=0 | metric_zsum=0.00 | ext_flow_log_gap=1.00
+  W033 | p=0.4996 | tr_score=0.5004 | clue=0.7699 | score=0.7025 | sim=-0.0719 | gt=0 | removed=0 | stage=none | flow_gap=1 | ext_gap=0 | metric_gap=0 | metric_zsum=0.00 | ext_flow_log_gap=0.00
+  W016 | p=0.4846 | tr_score=0.5154 | clue=0.7244 | score=0.6722 | sim=0.2427 | gt=0 | removed=0 | stage=none | flow_gap=2 | ext_gap=0 | metric_gap=0 | metric_zsum=0.00 | ext_flow_log_gap=0.00
+  W000 | p=0.4838 | tr_score=0.5162 | clue=0.7100 | score=0.6616 | sim=0.2490 | gt=0 | removed=0 | stage=none | flow_gap=2 | ext_gap=0 | metric_gap=0 | metric_zsum=0.00 | ext_flow_log_gap=0.00
+  W013 | p=0.4834 | tr_score=0.5166 | clue=0.7084 | score=0.6605 | sim=0.2053 | gt=0 | removed=0 | stage=Collection | flow_gap=2 | ext_gap=0 | metric_gap=0 | metric_zsum=0.00 | ext_flow_log_gap=0.00
+  W024 | p=0.4836 | tr_score=0.5164 | clue=0.6790 | score=0.6384 | sim=0.2629 | gt=1 | removed=1 | stage=C2 | flow_gap=1 | ext_gap=1 | metric_gap=0 | metric_zsum=0.00 | ext_flow_log_gap=1.00
+  W015 | p=0.4860 | tr_score=0.5140 | clue=0.6251 | score=0.5974 | sim=0.2444 | gt=0 | removed=0 | stage=Collection | flow_gap=1 | ext_gap=0 | metric_gap=0 | metric_zsum=0.00 | ext_flow_log_gap=0.00
+  W018 | p=0.4759 | tr_score=0.5241 | clue=0.6214 | score=0.5970 | sim=0.1648 | gt=0 | removed=0 | stage=Discovery/Lateral/Persistence | flow_gap=1 | ext_gap=0 | metric_gap=0 | metric_zsum=0.00 | ext_flow_log_gap=0.00
+
+Outputs
+  F:\Rinnegan\outputs\rinnegan_stage1_discovery\cross_modal_transformer_verifier.pt
+  F:\Rinnegan\outputs\rinnegan_stage1_discovery\training_history.csv
+  F:\Rinnegan\outputs\rinnegan_stage1_discovery\corrupted_window_scores.csv
+  F:\Rinnegan\outputs\rinnegan_stage1_discovery\clean_window_scores.csv
+  F:\Rinnegan\outputs\rinnegan_stage1_discovery\threshold_sweep_corrupted.csv
+  F:\Rinnegan\outputs\rinnegan_stage1_discovery\threshold_sweep_corrupted_transformer.csv
+  F:\Rinnegan\outputs\rinnegan_stage1_discovery\threshold_sweep_corrupted_clue.csv
+  F:\Rinnegan\outputs\rinnegan_stage1_discovery\window_contexts

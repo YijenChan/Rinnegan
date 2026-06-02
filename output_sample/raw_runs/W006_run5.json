@@ -1,0 +1,47 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:06:18",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "sh:3011@ws-finance-01",
+      "src_type": "process",
+      "relation": "execute",
+      "dst_entity": "/etc/cron.d/syswatch",
+      "dst_type": "file",
+      "command": "sh",
+      "args": "execute maintenance helper script",
+      "supporting_side_views": [
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "ME0003",
+        "ME0004",
+        "E0020"
+      ],
+      "confidence_rationale": "High CPU and disk write burst on ws-finance-01 during the suspected persistence activity window, followed by a cron read event."
+    },
+    {
+      "window_id": "W006",
+      "approx_timestamp": "2026-01-20 10:06:18",
+      "host": "ws-finance-01",
+      "user": "root",
+      "src_entity": "sh:3011@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "sh",
+      "args": "first_checkin",
+      "supporting_side_views": [
+        "traffic"
+      ],
+      "supporting_observations": [
+        "F0004"
+      ],
+      "confidence_rationale": "Network flow indicates a first check-in to an external IP without a corresponding audit log."
+    }
+  ]
+}

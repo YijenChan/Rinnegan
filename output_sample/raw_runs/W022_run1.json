@@ -1,0 +1,50 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W022",
+      "approx_timestamp": "2026-01-20 12:40:44",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "portal-sync:4022@portal-web-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "periodic beacon to external endpoint",
+      "supporting_side_views": [
+        "traffic",
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "F0012",
+        "ME0010",
+        "E0050"
+      ],
+      "confidence_rationale": "Periodic outbound TLS-like flow to external endpoint with matching beacon audit event and metric burst."
+    },
+    {
+      "window_id": "W022",
+      "approx_timestamp": "2026-01-20 12:44:28",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "portal-sync:4022@portal-web-01",
+      "src_type": "process",
+      "relation": "read",
+      "dst_entity": "/var/www/portal/.cache/portal-sync",
+      "dst_type": "file",
+      "command": "read",
+      "args": "read portal helper before beacon",
+      "supporting_side_views": [
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "E0050",
+        "ME0010"
+      ],
+      "confidence_rationale": "Local file read preceding external beacon event, supported by temporal alignment and metric burst."
+    }
+  ]
+}

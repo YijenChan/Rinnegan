@@ -1,0 +1,265 @@
+{
+  "model": "cross_modal_transformer_plus_inconsistency_clues",
+  "gamma": 0.6,
+  "hybrid_transformer_weight": 0.25,
+  "hybrid_clue_weight": 0.75,
+  "train_windows": [
+    "W000",
+    "W001",
+    "W002",
+    "W003",
+    "W004",
+    "W005",
+    "W006",
+    "W007",
+    "W008",
+    "W009",
+    "W010",
+    "W011",
+    "W012",
+    "W013",
+    "W014",
+    "W015",
+    "W016",
+    "W017",
+    "W018",
+    "W019",
+    "W020",
+    "W021",
+    "W022",
+    "W023",
+    "W024"
+  ],
+  "val_windows": [
+    "W025",
+    "W026",
+    "W027",
+    "W028",
+    "W029",
+    "W030",
+    "W031",
+    "W032",
+    "W033",
+    "W034",
+    "W035"
+  ],
+  "training_samples": 150,
+  "validation_samples": 66,
+  "corrupted_eval_hybrid": {
+    "score_col": "corruption_score",
+    "gamma": 0.6,
+    "gamma_metrics": {
+      "tp": 6,
+      "fp": 4,
+      "tn": 26,
+      "fn": 0,
+      "precision": 0.6,
+      "recall": 1.0,
+      "f1": 0.75,
+      "accuracy": 0.8889
+    },
+    "gamma_windows": [
+      "W021",
+      "W006",
+      "W022",
+      "W023",
+      "W002",
+      "W033",
+      "W016",
+      "W000",
+      "W013",
+      "W024"
+    ],
+    "topk_k": 6,
+    "topk_metrics": {
+      "tp": 5,
+      "fp": 1,
+      "tn": 29,
+      "fn": 1,
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8333,
+      "accuracy": 0.9444
+    },
+    "topk_windows": [
+      "W021",
+      "W006",
+      "W022",
+      "W023",
+      "W002",
+      "W033"
+    ],
+    "best_threshold_from_test_sweep": {
+      "threshold": 0.7,
+      "score_col": "corruption_score",
+      "tp": 5,
+      "fp": 1,
+      "tn": 29,
+      "fn": 1,
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8333,
+      "accuracy": 0.9444
+    }
+  },
+  "corrupted_eval_transformer_only": {
+    "score_col": "transformer_corruption_score",
+    "gamma": 0.6,
+    "gamma_metrics": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 30,
+      "fn": 6,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.8333
+    },
+    "gamma_windows": [],
+    "topk_k": 6,
+    "topk_metrics": {
+      "tp": 2,
+      "fp": 4,
+      "tn": 26,
+      "fn": 4,
+      "precision": 0.3333,
+      "recall": 0.3333,
+      "f1": 0.3333,
+      "accuracy": 0.7778
+    },
+    "topk_windows": [
+      "W018",
+      "W006",
+      "W028",
+      "W008",
+      "W010",
+      "W021"
+    ],
+    "best_threshold_from_test_sweep": {
+      "threshold": 0.5,
+      "score_col": "transformer_corruption_score",
+      "tp": 6,
+      "fp": 29,
+      "tn": 1,
+      "fn": 0,
+      "precision": 0.1714,
+      "recall": 1.0,
+      "f1": 0.2927,
+      "accuracy": 0.1944
+    }
+  },
+  "corrupted_eval_clue_only": {
+    "score_col": "clue_score",
+    "gamma": 0.6,
+    "gamma_metrics": {
+      "tp": 6,
+      "fp": 7,
+      "tn": 23,
+      "fn": 0,
+      "precision": 0.4615,
+      "recall": 1.0,
+      "f1": 0.6316,
+      "accuracy": 0.8056
+    },
+    "gamma_windows": [
+      "W021",
+      "W006",
+      "W022",
+      "W023",
+      "W002",
+      "W033",
+      "W016",
+      "W000",
+      "W013",
+      "W024",
+      "W015",
+      "W018",
+      "W001"
+    ],
+    "topk_k": 6,
+    "topk_metrics": {
+      "tp": 5,
+      "fp": 1,
+      "tn": 29,
+      "fn": 1,
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8333,
+      "accuracy": 0.9444
+    },
+    "topk_windows": [
+      "W021",
+      "W006",
+      "W022",
+      "W023",
+      "W002",
+      "W033"
+    ],
+    "best_threshold_from_test_sweep": {
+      "threshold": 0.8,
+      "score_col": "clue_score",
+      "tp": 5,
+      "fp": 0,
+      "tn": 30,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.8333,
+      "f1": 0.9091,
+      "accuracy": 0.9722
+    }
+  },
+  "clean_eval_hybrid": {
+    "score_col": "corruption_score",
+    "gamma": 0.6,
+    "gamma_metrics": {
+      "tp": 3,
+      "fp": 4,
+      "tn": 26,
+      "fn": 3,
+      "precision": 0.4286,
+      "recall": 0.5,
+      "f1": 0.4615,
+      "accuracy": 0.8056
+    },
+    "gamma_windows": [
+      "W006",
+      "W033",
+      "W016",
+      "W021",
+      "W000",
+      "W013",
+      "W022"
+    ],
+    "topk_k": 6,
+    "topk_metrics": {
+      "tp": 2,
+      "fp": 4,
+      "tn": 26,
+      "fn": 4,
+      "precision": 0.3333,
+      "recall": 0.3333,
+      "f1": 0.3333,
+      "accuracy": 0.7778
+    },
+    "topk_windows": [
+      "W006",
+      "W033",
+      "W016",
+      "W021",
+      "W000",
+      "W013"
+    ],
+    "best_threshold_from_test_sweep": {
+      "threshold": 0.6,
+      "score_col": "corruption_score",
+      "tp": 3,
+      "fp": 4,
+      "tn": 26,
+      "fn": 3,
+      "precision": 0.4286,
+      "recall": 0.5,
+      "f1": 0.4615,
+      "accuracy": 0.8056
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W024",
+      "approx_timestamp": "2026-01-20 13:08:15",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "nginx:1301@portal-web-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "nginx",
+      "args": "periodic tls-like beacon to c2",
+      "supporting_side_views": [
+        "traffic",
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "BF000913: portal-web-01 10.20.1.31:49838 -> 198.51.100.77:443 | service=HTTPS pattern=beacon | bytes_out=1300 bytes_in=840",
+        "M001244: portal-web-01 cpu=33.4 mem=54.33 disk_read=119453 disk_write=95171 net_in=11894 net_out=18000 | hint=portal-sync | note=small periodic outbound network peak without matching rich audit context",
+        "No matching audit log for this flow in W024"
+      ],
+      "confidence_rationale": "High confidence due to direct network flow evidence (BF000913) showing unexplained outbound traffic to 198.51.100.77:443, supported by host metrics (M001244) indicating unusual network activity at the same time."
+    }
+  ]
+}

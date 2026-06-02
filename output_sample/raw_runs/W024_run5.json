@@ -1,0 +1,48 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W024",
+      "approx_timestamp": "2026-01-20 13:08:15",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "logrotate:1335@portal-web-01",
+      "src_type": "process",
+      "relation": "write",
+      "dst_entity": "/var/log/nginx/access.log",
+      "dst_type": "file",
+      "command": "logrotate",
+      "args": "rotate access log",
+      "supporting_side_views": [
+        "metrics",
+        "log_context"
+      ],
+      "supporting_observations": [
+        "M001244 | periodic outbound network peak without matching rich audit context",
+        "audit log continuity surrounding B002322"
+      ],
+      "confidence_rationale": "Temporal alignment with periodic network peak and log rotation pattern observed in neighboring contexts."
+    },
+    {
+      "window_id": "W024",
+      "approx_timestamp": "2026-01-20 13:08:23",
+      "host": "portal-web-01",
+      "user": "svc_web",
+      "src_entity": "nginx:1301@portal-web-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "nginx",
+      "args": "external beacon connection",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0014 | beacon-like HTTPS flow to external IP",
+        "M001244 | small outbound network peak without matching audit context"
+      ],
+      "confidence_rationale": "Direct support from traffic flow and metric anomaly indicating external connection activity."
+    }
+  ]
+}

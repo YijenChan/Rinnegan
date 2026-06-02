@@ -1,0 +1,168 @@
+# Window Context: W026
+
+consistency_probability: 0.34083107113838196
+corruption_score: 0.6591689586639404
+log_side_similarity: 0.20205862820148468
+unsupported_flow_count: 0
+unsupported_external_flow_count: 0
+unsupported_metric_clue_count: 0
+unsupported_metric_zsum: 0.0
+
+## Observed audit events in corrupted logs
+- B002465 | 2026-01-20 13:20:00 | ws-finance-01 | u_fin | thunderbird | connect | 192.0.2.40:993 | socket | connect | imap mail synchronization
+- B002466 | 2026-01-20 13:20:02 | ws-finance-01 | u_fin | thunderbird | write | /home/u_fin/.thunderbird/cache/index.sqlite | file | write | update mail cache
+- B002468 | 2026-01-20 13:20:03 | portal-web-01 | svc_web | nginx | accept | 10.20.1.12:51048 | socket | accept | normal internal https request
+- B002469 | 2026-01-20 13:20:04 | portal-web-01 | svc_web | nginx | write | /var/log/nginx/access.log | file | write | append benign portal access log
+- B004720 | 2026-01-20 13:20:06 | ws-dev-02 | u_dev | docker | read | /var/lib/docker/containers/config.v2.json | file | read | normal docker metadata read
+- B002456 | 2026-01-20 13:20:07 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.11:9100 | socket | connect | scrape node_exporter on ws-finance-01
+- B002459 | 2026-01-20 13:20:08 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.31:9100 | socket | connect | scrape node_exporter on portal-web-01
+- B002461 | 2026-01-20 13:20:08 | mon-srv-01 | svc_mon | log_collector | connect | 10.20.1.11:6514 | socket | connect | collect syslog stream from ws-finance-01
+- B002458 | 2026-01-20 13:20:13 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.21:9100 | socket | connect | scrape node_exporter on file-srv-01
+- B002457 | 2026-01-20 13:20:18 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.12:9100 | socket | connect | scrape node_exporter on ws-dev-02
+- B002462 | 2026-01-20 13:20:18 | mon-srv-01 | svc_mon | log_collector | connect | 10.20.1.12:6514 | socket | connect | collect syslog stream from ws-dev-02
+- B002464 | 2026-01-20 13:20:23 | ws-finance-01 | u_fin | gvfsd | read | /home/u_fin/docs/payroll_notes.docx | file | read | normal document access
+- B002467 | 2026-01-20 13:20:26 | file-srv-01 | svc_backup | smbd | read | /srv/share/finance/budget_q1.xlsx | file | read | normal smb/nfs shared file access
+- B004855 | 2026-01-20 13:20:27 | file-srv-01 | svc_backup | rsyncd | write | /var/log/rsyncd.log | file | write | normal rsync log append
+- B002463 | 2026-01-20 13:20:35 | mon-srv-01 | svc_mon | log_collector | connect | 10.20.1.31:6514 | socket | connect | collect syslog stream from portal-web-01
+- B002460 | 2026-01-20 13:20:39 | mon-srv-01 | svc_mon | log_collector | write | /var/log/collector/ingest.log | file | write | append log ingestion summary
+- B003486 | 2026-01-20 13:20:40 | portal-web-01 | svc_web | python3 | read | /var/www/portal/app.py | file | read | normal portal deploy verification
+- B003487 | 2026-01-20 13:20:41 | portal-web-01 | svc_web | python3 | write | /var/cache/portal/session.cache | file | write | normal portal deploy verification
+- B004373 | 2026-01-20 13:20:55 | ws-dev-02 | u_dev | bash | execute | /usr/bin/make | file | execute | normal build command
+- B005598 | 2026-01-20 13:21:03 | portal-web-01 | svc_web | nginx | write | /var/log/nginx/access.log | file | write | normal web access log append
+- B004361 | 2026-01-20 13:21:04 | ws-finance-01 | u_fin | libreoffice | read | /home/u_fin/docs/budget_q2.xlsx | file | read | normal spreadsheet read
+- B002475 | 2026-01-20 13:21:06 | ws-dev-02 | u_dev | git | connect | 192.0.2.30:443 | socket | connect | normal package/source repository access
+- B002476 | 2026-01-20 13:21:09 | ws-dev-02 | u_dev | git | write | /home/u_dev/src/portal/requirements.txt | file | write | normal development file/cache update
+- B005471 | 2026-01-20 13:21:16 | mon-srv-01 | svc_mon | prometheus | write | /var/lib/prometheus/wal/000001 | file | write | normal metric wal write
+- B002471 | 2026-01-20 13:21:19 | ws-finance-01 | u_fin | firefox | connect | 10.20.1.31:443 | socket | connect | open internal portal page
+- B002472 | 2026-01-20 13:21:20 | ws-finance-01 | u_fin | firefox | write | /home/u_fin/.cache/mozilla/portal-cache.sqlite | file | write | update browser portal cache
+- B002473 | 2026-01-20 13:21:26 | ws-dev-02 | u_dev | ssh | connect | 10.20.1.31:22 | socket | connect | normal developer ssh to portal
+- B002474 | 2026-01-20 13:21:27 | portal-web-01 | svc_web | sshd | accept | 10.20.1.12:45422 | socket | accept | normal developer ssh accepted
+- B003952 | 2026-01-20 13:21:29 | ws-finance-01 | u_fin | libreoffice | read | /home/u_fin/docs/budget_q2.xlsx | file | read | normal spreadsheet read
+- B004092 | 2026-01-20 13:21:36 | file-srv-01 | svc_backup | rsyncd | write | /var/log/rsyncd.log | file | write | normal rsync log append
+- B002477 | 2026-01-20 13:21:37 | portal-web-01 | svc_web | nginx | accept | 10.20.1.41:46938 | socket | accept | normal internal https request
+- B002478 | 2026-01-20 13:21:38 | portal-web-01 | svc_web | nginx | write | /var/log/nginx/access.log | file | write | append benign portal access log
+- B003723 | 2026-01-20 13:21:38 | mon-srv-01 | svc_mon | prometheus | write | /var/lib/prometheus/wal/000001 | file | write | normal metric wal write
+- B004498 | 2026-01-20 13:21:38 | ws-finance-01 | u_fin | libreoffice | read | /home/u_fin/docs/budget_q2.xlsx | file | read | normal spreadsheet read
+- B002479 | 2026-01-20 13:21:39 | portal-web-01 | svc_web | uwsgi | read | /var/www/portal/app.py | file | read | serve internal portal request
+- B003488 | 2026-01-20 13:21:42 | portal-web-01 | svc_web | python3 | read | /var/www/portal/app.py | file | read | normal portal deploy verification
+- B003489 | 2026-01-20 13:21:43 | portal-web-01 | svc_web | python3 | write | /var/cache/portal/session.cache | file | write | normal portal deploy verification
+- B002470 | 2026-01-20 13:21:50 | mon-srv-01 | svc_mon | log_collector | write | /var/log/collector/ingest.log | file | write | append log ingestion summary
+- B004990 | 2026-01-20 13:22:04 | mon-srv-01 | svc_mon | suricata | write | /var/log/suricata/eve.json | file | write | normal network sensor write
+- B002481 | 2026-01-20 13:22:07 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.12:9100 | socket | connect | scrape node_exporter on ws-dev-02
+- B002482 | 2026-01-20 13:22:10 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.21:9100 | socket | connect | scrape node_exporter on file-srv-01
+- B002483 | 2026-01-20 13:22:11 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.31:9100 | socket | connect | scrape node_exporter on portal-web-01
+- B003738 | 2026-01-20 13:22:11 | ws-dev-02 | u_dev | python3 | read | /home/u_dev/src/portal/tests/test_api.py | file | read | normal test file read
+- B004176 | 2026-01-20 13:22:12 | ws-finance-01 | u_fin | gvfsd | write | /run/user/1001/gvfs/metadata | file | write | desktop metadata update
+- B002480 | 2026-01-20 13:22:13 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.11:9100 | socket | connect | scrape node_exporter on ws-finance-01
+- B004123 | 2026-01-20 13:22:18 | ws-dev-02 | u_dev | python3 | read | /home/u_dev/src/portal/tests/test_api.py | file | read | normal test file read
+- B002486 | 2026-01-20 13:22:20 | file-srv-01 | svc_backup | smbd | read | /srv/share/finance/vendor_invoice.pdf | file | read | normal smb/nfs shared file access
+- B002487 | 2026-01-20 13:22:21 | file-srv-01 | svc_backup | smbd | write | /srv/share/finance/vendor_invoice.pdf.lock | file | write | benign lock/update file created by share service
+- B003490 | 2026-01-20 13:22:24 | portal-web-01 | svc_web | python3 | read | /var/www/portal/app.py | file | read | normal portal deploy verification
+- B003491 | 2026-01-20 13:22:25 | portal-web-01 | svc_web | python3 | write | /var/cache/portal/session.cache | file | write | normal portal deploy verification
+- B002488 | 2026-01-20 13:22:30 | portal-web-01 | svc_web | nginx | accept | 10.20.1.11:53947 | socket | accept | normal internal https request
+- B004218 | 2026-01-20 13:22:30 | mon-srv-01 | svc_mon | prometheus | write | /var/lib/prometheus/wal/000001 | file | write | normal metric wal write
+- B002489 | 2026-01-20 13:22:31 | portal-web-01 | svc_web | nginx | write | /var/log/nginx/access.log | file | write | append benign portal access log
+- B005254 | 2026-01-20 13:22:33 | file-srv-01 | svc_backup | rsyncd | write | /var/log/rsyncd.log | file | write | normal rsync log append
+- B002485 | 2026-01-20 13:22:35 | ws-dev-02 | u_dev | python3 | read | /var/lib/docker/tmp/build-context.tar | file | read | normal local development/test activity
+- B002484 | 2026-01-20 13:22:41 | mon-srv-01 | svc_mon | log_collector | write | /var/log/collector/ingest.log | file | write | append log ingestion summary
+- B005215 | 2026-01-20 13:22:50 | portal-web-01 | svc_web | nginx | write | /var/log/nginx/access.log | file | write | normal web access log append
+- B004617 | 2026-01-20 13:22:51 | ws-finance-01 | u_fin | libreoffice | read | /home/u_fin/docs/budget_q2.xlsx | file | read | normal spreadsheet read
+- B003674 | 2026-01-20 13:22:52 | mon-srv-01 | svc_mon | prometheus | write | /var/lib/prometheus/wal/000001 | file | write | normal metric wal write
+- B004961 | 2026-01-20 13:23:04 | mon-srv-01 | svc_mon | suricata | write | /var/log/suricata/eve.json | file | write | normal network sensor write
+- B004518 | 2026-01-20 13:23:13 | portal-web-01 | svc_web | nginx | write | /var/log/nginx/access.log | file | write | normal web access log append
+- B003492 | 2026-01-20 13:23:23 | portal-web-01 | svc_web | python3 | read | /var/www/portal/app.py | file | read | normal portal deploy verification
+- B003493 | 2026-01-20 13:23:24 | portal-web-01 | svc_web | python3 | write | /var/cache/portal/session.cache | file | write | normal portal deploy verification
+- B002491 | 2026-01-20 13:23:36 | portal-web-01 | svc_web | nginx | accept | 10.20.1.41:54283 | socket | accept | normal internal https request
+- B002492 | 2026-01-20 13:23:37 | portal-web-01 | svc_web | nginx | write | /var/log/nginx/access.log | file | write | append benign portal access log
+- B004744 | 2026-01-20 13:23:37 | file-srv-01 | svc_backup | smbd | read | /srv/share/public/office_schedule.xlsx | file | read | normal shared file read
+- B002490 | 2026-01-20 13:23:49 | mon-srv-01 | svc_mon | log_collector | write | /var/log/collector/ingest.log | file | write | append log ingestion summary
+- B005481 | 2026-01-20 13:23:57 | portal-web-01 | svc_web | nginx | write | /var/log/nginx/access.log | file | write | normal web access log append
+- B004154 | 2026-01-20 13:23:59 | ws-dev-02 | u_dev | docker | read | /var/lib/docker/containers/config.v2.json | file | read | normal docker metadata read
+- B002506 | 2026-01-20 13:24:02 | portal-web-01 | svc_web | logrotate | rename | /var/log/nginx/access.log | file | rename | benign log rotation
+- B002507 | 2026-01-20 13:24:03 | portal-web-01 | svc_web | logrotate | write | /var/log/nginx/access.log | file | write | create new access log
+- B003494 | 2026-01-20 13:24:07 | portal-web-01 | svc_web | python3 | read | /var/www/portal/app.py | file | read | normal portal deploy verification
+- B002495 | 2026-01-20 13:24:08 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.21:9100 | socket | connect | scrape node_exporter on file-srv-01
+- B003495 | 2026-01-20 13:24:08 | portal-web-01 | svc_web | python3 | write | /var/cache/portal/session.cache | file | write | normal portal deploy verification
+- B002496 | 2026-01-20 13:24:12 | mon-srv-01 | svc_mon | prometheus | connect | 10.20.1.31:9100 | socket | connect | scrape node_exporter on portal-web-01
+- B004201 | 2026-01-20 13:24:13 | ws-dev-02 | u_dev | docker | read | /var/lib/docker/containers/config.v2.json | file | read | normal docker metadata read
+- B002503 | 2026-01-20 13:24:14 | portal-web-01 | svc_web | nginx | accept | 10.20.1.12:57339 | socket | accept | normal internal https request
+- B002504 | 2026-01-20 13:24:15 | portal-web-01 | svc_web | nginx | write | /var/log/nginx/access.log | file | write | append benign portal access log
+- B002505 | 2026-01-20 13:24:16 | portal-web-01 | svc_web | uwsgi | read | /var/www/portal/config.yaml | file | read | serve internal portal request
+- B005221 | 2026-01-20 13:24:16 | portal-web-01 | svc_web | uwsgi | read | /var/www/portal/config.yaml | file | read | normal portal config read
+... (97 more audit events omitted)
+
+## Unsupported network flows
+
+## Unsupported host metric clues
+
+## All network flows in this window
+- BF000961 | 2026-01-20 13:20:00 | ws-finance-01 | 10.20.1.11 | 192.0.2.40 | 993 | IMAPS | 3830 | 21120 | mail_sync
+- BF000957 | 2026-01-20 13:20:03 | mon-srv-01 | 10.20.1.41 | 10.20.1.31 | 9100 | METRIC | 911 | 4281 | metrics_scrape
+- BF000956 | 2026-01-20 13:20:04 | mon-srv-01 | 10.20.1.41 | 10.20.1.21 | 9100 | METRIC | 1309 | 5784 | metrics_scrape
+- BF000954 | 2026-01-20 13:20:08 | mon-srv-01 | 10.20.1.41 | 10.20.1.11 | 9100 | METRIC | 1235 | 5433 | metrics_scrape
+- BF000955 | 2026-01-20 13:20:09 | mon-srv-01 | 10.20.1.41 | 10.20.1.12 | 9100 | METRIC | 880 | 8040 | metrics_scrape
+- BF000959 | 2026-01-20 13:20:10 | mon-srv-01 | 10.20.1.41 | 10.20.1.12 | 6514 | SYSLOG | 1395 | 8109 | log_collection
+- BF000960 | 2026-01-20 13:20:18 | mon-srv-01 | 10.20.1.41 | 10.20.1.31 | 6514 | SYSLOG | 1601 | 17054 | log_collection
+- BF000958 | 2026-01-20 13:20:45 | mon-srv-01 | 10.20.1.41 | 10.20.1.11 | 6514 | SYSLOG | 1837 | 14636 | log_collection
+- BF000964 | 2026-01-20 13:21:06 | ws-dev-02 | 10.20.1.12 | 192.0.2.30 | 443 | HTTPS | 8955 | 125049 | dev_repo_access
+- BF000962 | 2026-01-20 13:21:19 | ws-finance-01 | 10.20.1.11 | 10.20.1.31 | 443 | HTTPS | 2763 | 32447 | portal_browsing
+- BF000963 | 2026-01-20 13:21:26 | ws-dev-02 | 10.20.1.12 | 10.20.1.31 | 22 | SSH | 34198 | 13251 | dev_ssh
+- BF000965 | 2026-01-20 13:22:02 | mon-srv-01 | 10.20.1.41 | 10.20.1.11 | 9100 | METRIC | 1793 | 8030 | metrics_scrape
+- BF000966 | 2026-01-20 13:22:06 | mon-srv-01 | 10.20.1.41 | 10.20.1.12 | 9100 | METRIC | 1717 | 8971 | metrics_scrape
+- BF000968 | 2026-01-20 13:22:15 | mon-srv-01 | 10.20.1.41 | 10.20.1.31 | 9100 | METRIC | 1242 | 5792 | metrics_scrape
+- BF000967 | 2026-01-20 13:22:19 | mon-srv-01 | 10.20.1.41 | 10.20.1.21 | 9100 | METRIC | 1233 | 3633 | metrics_scrape
+- BF000970 | 2026-01-20 13:24:04 | mon-srv-01 | 10.20.1.41 | 10.20.1.12 | 9100 | METRIC | 1081 | 8180 | metrics_scrape
+- BF000971 | 2026-01-20 13:24:11 | mon-srv-01 | 10.20.1.41 | 10.20.1.21 | 9100 | METRIC | 1644 | 4968 | metrics_scrape
+- BF000972 | 2026-01-20 13:24:13 | mon-srv-01 | 10.20.1.41 | 10.20.1.31 | 9100 | METRIC | 1518 | 7196 | metrics_scrape
+- BF000969 | 2026-01-20 13:24:19 | mon-srv-01 | 10.20.1.41 | 10.20.1.11 | 9100 | METRIC | 1643 | 7111 | metrics_scrape
+- BF000973 | 2026-01-20 13:24:39 | ws-finance-01 | 10.20.1.11 | 10.20.1.31 | 443 | HTTPS | 4366 | 61825 | portal_browsing
+- BF000977 | 2026-01-20 13:25:11 | ws-finance-01 | 10.20.1.11 | 192.0.2.40 | 993 | IMAPS | 3937 | 32392 | mail_sync
+- BF000974 | 2026-01-20 13:25:15 | mon-srv-01 | 10.20.1.41 | 10.20.1.11 | 6514 | SYSLOG | 1677 | 14205 | log_collection
+- BF000976 | 2026-01-20 13:25:34 | mon-srv-01 | 10.20.1.41 | 10.20.1.31 | 6514 | SYSLOG | 1993 | 14419 | log_collection
+- BF000975 | 2026-01-20 13:25:36 | mon-srv-01 | 10.20.1.41 | 10.20.1.12 | 6514 | SYSLOG | 1659 | 8642 | log_collection
+- BF000978 | 2026-01-20 13:26:03 | mon-srv-01 | 10.20.1.41 | 10.20.1.11 | 9100 | METRIC | 1368 | 6135 | metrics_scrape
+- BF000980 | 2026-01-20 13:26:03 | mon-srv-01 | 10.20.1.41 | 10.20.1.21 | 9100 | METRIC | 1070 | 6654 | metrics_scrape
+- BF000981 | 2026-01-20 13:26:15 | mon-srv-01 | 10.20.1.41 | 10.20.1.31 | 9100 | METRIC | 1621 | 4692 | metrics_scrape
+- BF000979 | 2026-01-20 13:26:16 | mon-srv-01 | 10.20.1.41 | 10.20.1.12 | 9100 | METRIC | 908 | 5599 | metrics_scrape
+- BF000982 | 2026-01-20 13:26:28 | ws-dev-02 | 10.20.1.12 | 10.20.1.31 | 22 | SSH | 26586 | 18054 | dev_ssh
+- BF000983 | 2026-01-20 13:27:44 | ws-finance-01 | 10.20.1.11 | 10.20.1.31 | 443 | HTTPS | 1712 | 37462 | portal_browsing
+- BF000984 | 2026-01-20 13:28:07 | mon-srv-01 | 10.20.1.41 | 10.20.1.11 | 9100 | METRIC | 1032 | 5422 | metrics_scrape
+- BF000985 | 2026-01-20 13:28:07 | mon-srv-01 | 10.20.1.41 | 10.20.1.12 | 9100 | METRIC | 1558 | 6534 | metrics_scrape
+- BF000986 | 2026-01-20 13:28:12 | mon-srv-01 | 10.20.1.41 | 10.20.1.21 | 9100 | METRIC | 1220 | 4068 | metrics_scrape
+- BF000988 | 2026-01-20 13:28:19 | ws-dev-02 | 10.20.1.12 | 192.0.2.30 | 443 | HTTPS | 5323 | 23108 | dev_repo_access
+- BF000987 | 2026-01-20 13:28:21 | mon-srv-01 | 10.20.1.41 | 10.20.1.31 | 9100 | METRIC | 1342 | 6378 | metrics_scrape
+
+## Host metric samples
+- M001303 | 2026-01-20 13:20:00 | file-srv-01 | 14.1 | 42.16 | 97657 | 8715 | 93 | 402 | smbd | normal baseline
+- M001305 | 2026-01-20 13:20:00 | mon-srv-01 | 22.03 | 60.8 | 245360 | 9277 | 114 | 406 | prometheus | normal baseline
+- M001304 | 2026-01-20 13:20:00 | portal-web-01 | 44.89 | 56.26 | 502323 | 29551 | 113 | 487 | python3 | normal portal deploy verification
+- M001302 | 2026-01-20 13:20:00 | ws-dev-02 | 21.92 | 50.19 | 146523 | 5588 | 122 | 402 | dev-shell | normal baseline
+- M001301 | 2026-01-20 13:20:00 | ws-finance-01 | 14.8 | 45.35 | 76371 | 3971 | 109 | 320 | office-apps | normal baseline
+- M001308 | 2026-01-20 13:21:00 | file-srv-01 | 14.86 | 41.33 | 103235 | 14691 | 98 | 418 | smbd | normal baseline
+- M001310 | 2026-01-20 13:21:00 | mon-srv-01 | 15.95 | 61.42 | 178025 | 12931 | 117 | 446 | prometheus | normal baseline
+- M001309 | 2026-01-20 13:21:00 | portal-web-01 | 46.46 | 55.5 | 522586 | 29472 | 111 | 480 | python3 | normal portal deploy verification
+- M001307 | 2026-01-20 13:21:00 | ws-dev-02 | 20.46 | 50.03 | 124671 | 5572 | 125 | 334 | dev-shell | normal baseline
+- M001306 | 2026-01-20 13:21:00 | ws-finance-01 | 14.33 | 46.24 | 104335 | 4989 | 115 | 330 | office-apps | normal baseline
+- M001313 | 2026-01-20 13:22:00 | file-srv-01 | 12.65 | 42.24 | 98061 | 10111 | 97 | 414 | smbd | normal baseline
+- M001315 | 2026-01-20 13:22:00 | mon-srv-01 | 16.68 | 60.0 | 174858 | 10320 | 120 | 435 | prometheus | normal baseline
+- M001314 | 2026-01-20 13:22:00 | portal-web-01 | 43.5 | 53.83 | 519068 | 31032 | 114 | 467 | python3 | normal portal deploy verification
+- M001312 | 2026-01-20 13:22:00 | ws-dev-02 | 21.02 | 49.76 | 90703 | 6044 | 120 | 378 | dev-shell | normal baseline
+- M001311 | 2026-01-20 13:22:00 | ws-finance-01 | 16.1 | 45.22 | 56718 | 1783 | 116 | 314 | office-apps | normal baseline
+- M001318 | 2026-01-20 13:23:00 | file-srv-01 | 11.45 | 41.09 | 65077 | 7849 | 93 | 424 | smbd | normal baseline
+- M001320 | 2026-01-20 13:23:00 | mon-srv-01 | 22.34 | 59.77 | 191536 | 15642 | 117 | 356 | prometheus | normal baseline
+- M001319 | 2026-01-20 13:23:00 | portal-web-01 | 46.78 | 53.74 | 491386 | 29992 | 111 | 458 | python3 | normal portal deploy verification
+- M001317 | 2026-01-20 13:23:00 | ws-dev-02 | 17.19 | 50.54 | 117234 | 3149 | 130 | 394 | dev-shell | normal baseline
+- M001316 | 2026-01-20 13:23:00 | ws-finance-01 | 14.05 | 45.29 | 50616 | 5705 | 112 | 307 | office-apps | normal baseline
+- M001323 | 2026-01-20 13:24:00 | file-srv-01 | 13.75 | 40.89 | 96314 | 17022 | 90 | 421 | smbd | normal baseline
+- M001325 | 2026-01-20 13:24:00 | mon-srv-01 | 22.09 | 61.23 | 191881 | 7248 | 120 | 379 | prometheus | normal baseline
+- M001324 | 2026-01-20 13:24:00 | portal-web-01 | 46.31 | 55.01 | 505977 | 30582 | 113 | 459 | python3 | normal portal deploy verification
+- M001322 | 2026-01-20 13:24:00 | ws-dev-02 | 18.69 | 50.53 | 116475 | 5718 | 122 | 345 | dev-shell | normal baseline
+- M001321 | 2026-01-20 13:24:00 | ws-finance-01 | 14.94 | 45.38 | 62040 | 3865 | 111 | 328 | office-apps | normal baseline
+- M001328 | 2026-01-20 13:25:00 | file-srv-01 | 11.9 | 41.18 | 59114 | 8808 | 93 | 435 | smbd | normal baseline
+- M001330 | 2026-01-20 13:25:00 | mon-srv-01 | 19.53 | 61.37 | 199791 | 14217 | 117 | 430 | prometheus | normal baseline
+- M001329 | 2026-01-20 13:25:00 | portal-web-01 | 46.1 | 53.08 | 510277 | 32191 | 114 | 423 | python3 | normal portal deploy verification
+- M001327 | 2026-01-20 13:25:00 | ws-dev-02 | 23.48 | 51.42 | 88795 | 5268 | 131 | 363 | dev-shell | normal baseline
+- M001326 | 2026-01-20 13:25:00 | ws-finance-01 | 14.85 | 46.02 | 51386 | 3676 | 104 | 317 | office-apps | normal baseline
+
+## Host metric events
+- BME000005 | 2026-01-20 13:20:00 | portal-web-01 | deploy_check | python3 | 3.67 | normal portal deploy verification

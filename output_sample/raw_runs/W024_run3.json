@@ -1,0 +1,26 @@
+{
+  "recovered_events": [
+    {
+      "window_id": "W024",
+      "approx_timestamp": "2026-01-20 13:00:13",
+      "host": "ws-finance-01",
+      "user": "u_fin",
+      "src_entity": "syswatch:3280@ws-finance-01",
+      "src_type": "process",
+      "relation": "connect",
+      "dst_entity": "198.51.100.77:443",
+      "dst_type": "socket",
+      "command": "connect",
+      "args": "periodic tls-like beacon to c2",
+      "supporting_side_views": [
+        "traffic",
+        "metrics"
+      ],
+      "supporting_observations": [
+        "F0014",
+        "M001244"
+      ],
+      "confidence_rationale": "Network flow with beacon pattern and metric peak without matching rich audit context indicates potential C2 connection."
+    }
+  ]
+}

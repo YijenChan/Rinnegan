@@ -1,0 +1,25 @@
+OfficeFog PG build summary
+
+Clean raw audit events:      5656
+Corrupted raw audit events:  5641
+Delta events:                15
+
+Clean nodes:                 545
+Corrupted nodes:             540
+Delta nodes:                 5
+
+Clean raw edges:             5656
+Corrupted raw edges:         5641
+Delta raw edges:             15
+
+Clean attack edges:          56
+Corrupted attack edges:      41
+Delta attack edges:          15
+
+Expected check:
+  clean should contain removed events.
+  corrupted should miss removed events.
+
+Output folders:
+  F:\Rinnegan\outputs\clean_pg
+  F:\Rinnegan\outputs\corrupted_pg
