@@ -1,0 +1,6 @@
+host_id,hostname,ip,role,os_profile
+H01,ws-finance-01,10.20.1.11,finance workstation,ubuntu-desktop-like
+H02,ws-dev-02,10.20.1.12,developer workstation,ubuntu-desktop-like
+H03,file-srv-01,10.20.1.21,file server,linux-server
+H04,portal-web-01,10.20.1.31,internal portal web server,linux-server
+H05,mon-srv-01,10.20.1.41,monitoring server,linux-server

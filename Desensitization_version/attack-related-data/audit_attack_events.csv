@@ -1,0 +1,57 @@
+event_id,timestamp,window_id,host,user,process,pid,ppid,src_entity,src_type,relation,dst_entity,dst_type,command,args,return_code,label,stage,attack_step
+E0001,2026-01-20 09:24:18,W002,ws-finance-01,u_fin,firefox,2412,1380,firefox:2412@ws-finance-01,process,connect,198.51.100.23:443,socket,connect,tls session to external update-like endpoint,0,malicious,IA,A1
+E0002,2026-01-20 09:24:51,W002,ws-finance-01,u_fin,firefox,2412,1380,firefox:2412@ws-finance-01,process,write,/home/u_fin/Downloads/report_update.pdf,file,write,downloaded suspicious update container,0,malicious,IA,A1
+E0003,2026-01-20 09:25:06,W002,ws-finance-01,u_fin,firefox,2412,1380,firefox:2412@ws-finance-01,process,spawn,update-check:2440@ws-finance-01,process,spawn,browser helper launches disguised updater,0,malicious,IA,A2
+E0004,2026-01-20 09:25:13,W002,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,write,/home/u_fin/.cache/update-check,file,write,drop user-level payload copy,0,malicious,IA,A2
+E0005,2026-01-20 09:25:20,W002,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,execute,/home/u_fin/.cache/update-check,file,execute,execute dropped user-level payload,0,malicious,IA,A2
+E0006,2026-01-20 09:29:48,W002,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,write,/tmp/.session-x1,file,write,create local session marker,0,malicious,Execution,A3
+E0007,2026-01-20 09:36:10,W003,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,read,/home/u_fin/.ssh/config,file,read,collect ssh configuration,0,malicious,Discovery,A4
+E0008,2026-01-20 09:36:29,W003,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,read,/etc/hosts,file,read,collect host aliases,0,malicious,Discovery,A4
+E0009,2026-01-20 09:37:05,W003,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,spawn,bash:2502@ws-finance-01,process,spawn,open local shell for environment checks,0,malicious,Discovery,A4
+E0010,2026-01-20 09:37:08,W003,ws-finance-01,u_fin,bash,2502,2440,bash:2502@ws-finance-01,process,execute,/usr/bin/whoami,file,execute,identity check,0,malicious,Discovery,A4
+E0011,2026-01-20 09:37:17,W003,ws-finance-01,u_fin,bash,2502,2440,bash:2502@ws-finance-01,process,execute,/usr/bin/hostname,file,execute,host check,0,malicious,Discovery,A4
+E0012,2026-01-20 09:38:40,W003,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,connect,10.20.1.21:445,socket,connect,probe file server smb,0,malicious,Discovery,A5
+E0013,2026-01-20 09:39:16,W003,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,connect,10.20.1.31:443,socket,connect,probe internal portal,0,malicious,Discovery,A5
+E0014,2026-01-20 09:52:04,W005,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,read,/home/u_fin/.config/portal/session.dat,file,read,inspect cached portal session,0,malicious,Discovery,A5
+E0015,2026-01-20 10:04:58,W006,ws-finance-01,u_fin,update-check,2440,2412,update-check:2440@ws-finance-01,process,execute,/usr/bin/maintenance-helper,file,execute,invoke misconfigured maintenance helper,0,malicious,PE,A6
+E0016,2026-01-20 10:05:06,W006,ws-finance-01,root,maintenance-helper,3008,2440,maintenance-helper:3008@ws-finance-01,process,spawn,sh:3011@ws-finance-01,process,spawn,spawn elevated shell,0,malicious,PE,A6
+E0017,2026-01-20 10:05:17,W006,ws-finance-01,root,sh,3011,3008,sh:3011@ws-finance-01,process,write,/usr/local/bin/syswatch,file,write,install persistence binary,0,malicious,PE,A7
+E0018,2026-01-20 10:05:29,W006,ws-finance-01,root,sh,3011,3008,sh:3011@ws-finance-01,process,chmod,/usr/local/bin/syswatch,file,chmod,make syswatch executable,0,malicious,PE,A7
+E0019,2026-01-20 10:05:44,W006,ws-finance-01,root,sh,3011,3008,sh:3011@ws-finance-01,process,write,/etc/cron.d/syswatch,file,write,install cron persistence,0,malicious,PE,A7
+E0020,2026-01-20 10:08:30,W006,ws-finance-01,root,cron,902,1,cron:902@ws-finance-01,process,read,/etc/cron.d/syswatch,file,read,cron loads new persistence entry,0,malicious,Persistence,A8
+E0021,2026-01-20 10:12:12,W007,ws-finance-01,root,sh,3011,3008,sh:3011@ws-finance-01,process,unlink,/home/u_fin/Downloads/report_update.pdf,file,unlink,remove downloaded container,0,malicious,Defense-Evasion,A8
+E0022,2026-01-20 10:20:03,W008,ws-finance-01,root,cron,902,1,cron:902@ws-finance-01,process,spawn,syswatch:3280@ws-finance-01,process,spawn,run persistent backdoor component,0,malicious,Persistence,A9
+E0023,2026-01-20 10:20:07,W008,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,read,/etc/hosts,file,read,re-check internal hosts,0,malicious,Discovery,A9
+E0024,2026-01-20 10:20:16,W008,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,read,/home/u_fin/.ssh/known_hosts,file,read,inspect known hosts,0,malicious,Discovery,A9
+E0025,2026-01-20 10:21:50,W008,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,connect,10.20.1.21:445,socket,connect,connect to file server,0,malicious,Discovery,A10
+E0026,2026-01-20 10:22:31,W008,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,connect,10.20.1.31:443,socket,connect,connect to internal portal,0,malicious,Discovery,A10
+E0027,2026-01-20 10:31:05,W009,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,write,/tmp/.session-x1,file,write,update session marker,0,malicious,Persistence,A10
+E0028,2026-01-20 11:05:16,W012,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,connect,10.20.1.21:445,socket,connect,open smb session to file server,0,malicious,Collection,A11
+E0029,2026-01-20 11:07:41,W012,file-srv-01,svc_backup,smbd,1170,1,smbd:1170@file-srv-01,process,read,/srv/share/finance/budget.xlsx,file,read,remote read via compromised workstation,0,malicious,Collection,A11
+E0030,2026-01-20 11:09:18,W012,file-srv-01,svc_backup,smbd,1170,1,smbd:1170@file-srv-01,process,read,/srv/share/hr/staff.csv,file,read,remote read via compromised workstation,0,malicious,Collection,A11
+E0031,2026-01-20 11:10:02,W013,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,spawn,tar:3412@ws-finance-01,process,spawn,stage collected files,0,malicious,Collection,A12
+E0032,2026-01-20 11:10:12,W013,ws-finance-01,root,tar,3412,3280,tar:3412@ws-finance-01,process,read,/srv/share/finance/budget.xlsx,file,read,add finance document to archive,0,malicious,Collection,A12
+E0033,2026-01-20 11:10:20,W013,ws-finance-01,root,tar,3412,3280,tar:3412@ws-finance-01,process,read,/srv/share/hr/staff.csv,file,read,add hr document to archive,0,malicious,Collection,A12
+E0034,2026-01-20 11:10:38,W013,ws-finance-01,root,tar,3412,3280,tar:3412@ws-finance-01,process,write,/tmp/finance_pack.tmp,file,write,write staged archive,0,malicious,Collection,A12
+E0035,2026-01-20 11:32:09,W015,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,read,/tmp/finance_pack.tmp,file,read,verify staged archive,0,malicious,Collection,A13
+E0036,2026-01-20 12:01:15,W018,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,connect,10.20.1.31:22,socket,connect,ssh touchpoint to portal server,0,malicious,Lateral,A14
+E0037,2026-01-20 12:02:01,W018,portal-web-01,svc_web,sshd,1288,1,sshd:1288@portal-web-01,process,spawn,sh:4015@portal-web-01,process,spawn,remote shell from compromised workstation,0,malicious,Lateral,A14
+E0038,2026-01-20 12:02:35,W018,portal-web-01,svc_web,sh,4015,1288,sh:4015@portal-web-01,process,write,/var/www/portal/.cache/portal-sync,file,write,drop portal helper,0,malicious,Persistence,A15
+E0039,2026-01-20 12:02:50,W018,portal-web-01,svc_web,sh,4015,1288,sh:4015@portal-web-01,process,chmod,/var/www/portal/.cache/portal-sync,file,chmod,make portal helper executable,0,malicious,Persistence,A15
+E0040,2026-01-20 12:04:09,W018,portal-web-01,svc_web,portal-sync,4022,4015,portal-sync:4022@portal-web-01,process,read,/var/www/portal/app.py,file,read,inspect portal application context,0,malicious,Discovery,A15
+E0041,2026-01-20 12:20:14,W020,portal-web-01,svc_web,portal-sync,4022,4015,portal-sync:4022@portal-web-01,process,write,/var/www/portal/.cache/.sync-state,file,write,write helper state,0,malicious,Persistence,A16
+E0042,2026-01-20 12:31:12,W021,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,connect,198.51.100.77:443,socket,connect,periodic tls-like beacon to c2,0,malicious,C2,A17
+E0043,2026-01-20 12:33:13,W021,portal-web-01,svc_web,portal-sync,4022,4015,portal-sync:4022@portal-web-01,process,connect,198.51.100.77:443,socket,connect,periodic tls-like beacon to c2,0,malicious,C2,A17
+E0044,2026-01-20 12:39:14,W021,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,connect,198.51.100.77:443,socket,connect,periodic tls-like beacon to c2,0,malicious,C2,A18
+E0045,2026-01-20 12:46:15,W022,portal-web-01,svc_web,portal-sync,4022,4015,portal-sync:4022@portal-web-01,process,connect,198.51.100.77:443,socket,connect,periodic tls-like beacon to c2,0,malicious,C2,A18
+E0046,2026-01-20 12:55:16,W023,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,connect,198.51.100.77:443,socket,connect,periodic tls-like beacon to c2,0,malicious,C2,A18
+E0047,2026-01-20 13:08:17,W024,portal-web-01,svc_web,portal-sync,4022,4015,portal-sync:4022@portal-web-01,process,connect,198.51.100.77:443,socket,connect,periodic tls-like beacon to c2,0,malicious,C2,A18
+E0048,2026-01-20 13:18:18,W025,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,connect,198.51.100.77:443,socket,connect,periodic tls-like beacon to c2,0,malicious,C2,A18
+E0049,2026-01-20 12:36:04,W021,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,read,/tmp/.session-x1,file,read,read local session state before beacon,0,malicious,C2,A17
+E0050,2026-01-20 12:44:28,W022,portal-web-01,svc_web,portal-sync,4022,4015,portal-sync:4022@portal-web-01,process,read,/var/www/portal/.cache/portal-sync,file,read,read portal helper before beacon,0,malicious,C2,A18
+E0051,2026-01-20 13:36:18,W027,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,read,/tmp/finance_pack.tmp,file,read,prepare staged archive for upload,0,malicious,Exfiltration,A19
+E0052,2026-01-20 13:36:25,W027,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,connect,203.0.113.88:443,socket,connect,upload staged finance archive,0,malicious,Exfiltration,A19
+E0053,2026-01-20 13:41:50,W028,ws-finance-01,root,syswatch,3280,902,syswatch:3280@ws-finance-01,process,write,/tmp/.session-x1,file,write,update session marker after upload,0,malicious,Exfiltration,A19
+E0054,2026-01-20 14:10:04,W031,ws-finance-01,root,cron,902,1,cron:902@ws-finance-01,process,spawn,syswatch:4890@ws-finance-01,process,spawn,residual scheduled run,0,malicious,C2,A20
+E0055,2026-01-20 14:10:22,W031,ws-finance-01,root,syswatch,4890,902,syswatch:4890@ws-finance-01,process,connect,198.51.100.77:443,socket,connect,late weak beacon,0,malicious,C2,A20
+E0056,2026-01-20 14:42:31,W034,portal-web-01,svc_web,portal-sync,4022,4015,portal-sync:4022@portal-web-01,process,connect,198.51.100.77:443,socket,connect,late weak beacon from portal helper,0,malicious,C2,A20

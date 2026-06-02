@@ -1,0 +1,36 @@
+metric_id,timestamp,window_id,host,cpu_percent,mem_percent,disk_read_bytes,disk_write_bytes,net_in_bytes,net_out_bytes,proc_count,file_open_count,login_count,top_process_hint,metric_note,label,stage,attack_step
+M0001,2026-01-20 09:24:00,W002,ws-finance-01,31.2,47.5,128000,310000,18000,2100,119,346,1,firefox,pre-download activity,suspicious,IA,"A1,A2"
+M0002,2026-01-20 09:25:00,W002,ws-finance-01,64.8,49.2,244000,1420000,93400,3200,126,388,1,update-check,payload download and write burst,suspicious,IA,"A1,A2"
+M0003,2026-01-20 09:26:00,W002,ws-finance-01,58.1,49.0,196000,940000,12600,2700,127,376,1,update-check,short process and disk burst,suspicious,IA,"A1,A2"
+M0004,2026-01-20 09:37:00,W003,ws-finance-01,34.6,48.7,162000,118000,8200,7900,123,361,1,update-check,light internal discovery/probing activity,suspicious,Discovery,"A4,A5"
+M0005,2026-01-20 09:39:00,W003,ws-finance-01,34.6,48.7,162000,118000,8200,7900,123,361,1,update-check,light internal discovery/probing activity,suspicious,Discovery,"A4,A5"
+M0006,2026-01-20 09:52:00,W005,ws-finance-01,34.6,48.7,162000,118000,8200,7900,123,361,1,update-check,light internal discovery/probing activity,suspicious,Discovery,"A4,A5"
+M0007,2026-01-20 10:04:00,W006,ws-finance-01,46.2,50.1,182000,340000,2600,2200,129,402,1,update-check,pre-helper activity,suspicious,PE,"A6,A7,A8"
+M0008,2026-01-20 10:05:00,W006,ws-finance-01,82.4,53.8,248000,2750000,2400,4100,145,548,1,maintenance-helper,elevated shell and persistence write burst,suspicious,PE,"A6,A7,A8"
+M0009,2026-01-20 10:06:00,W006,ws-finance-01,77.1,54.2,220000,2140000,3100,3900,143,531,1,sh,continued persistence disk writes,suspicious,PE,"A6,A7,A8"
+M0010,2026-01-20 10:08:00,W006,ws-finance-01,48.6,52.7,196000,620000,2100,2600,132,421,1,cron,cron reads new entry,suspicious,PE,"A6,A7,A8"
+M0011,2026-01-20 10:20:00,W008,ws-finance-01,41.9,51.4,176000,240000,5800,7600,134,398,1,syswatch,periodic syswatch execution and internal access,suspicious,Persistence/Discovery,"A9,A10"
+M0012,2026-01-20 10:21:00,W008,ws-finance-01,41.9,51.4,176000,240000,5800,7600,134,398,1,syswatch,periodic syswatch execution and internal access,suspicious,Persistence/Discovery,"A9,A10"
+M0013,2026-01-20 10:22:00,W008,ws-finance-01,41.9,51.4,176000,240000,5800,7600,134,398,1,syswatch,periodic syswatch execution and internal access,suspicious,Persistence/Discovery,"A9,A10"
+M0014,2026-01-20 10:31:00,W009,ws-finance-01,41.9,51.4,176000,240000,5800,7600,134,398,1,syswatch,periodic syswatch execution and internal access,suspicious,Persistence/Discovery,"A9,A10"
+M0015,2026-01-20 11:05:00,W012,ws-finance-01,38.4,53.2,210000,180000,126000,22600,137,463,1,syswatch,smb session setup,suspicious,Collection,"A11,A12,A13"
+M0016,2026-01-20 11:07:00,W012,file-srv-01,35.8,53.2,1120000,120000,8200,98600,137,463,1,smbd,remote reads from finance share,suspicious,Collection,"A11,A12,A13"
+M0017,2026-01-20 11:09:00,W012,file-srv-01,37.9,53.2,1380000,118000,9400,121000,137,463,1,smbd,remote reads from hr share,suspicious,Collection,"A11,A12,A13"
+M0018,2026-01-20 11:10:00,W013,ws-finance-01,68.6,53.2,2480000,3920000,3840000,96600,137,463,1,tar,local staging archive write,suspicious,Collection,"A11,A12,A13"
+M0019,2026-01-20 11:32:00,W015,ws-finance-01,42.1,53.2,720000,188000,14400,5600,137,463,1,syswatch,archive verification read,suspicious,Collection,"A11,A12,A13"
+M0020,2026-01-20 12:01:00,W018,ws-finance-01,36.2,57.1,168000,132000,18800,28600,118,379,1,syswatch,ssh connection to portal,suspicious,Lateral/Persistence,"A14,A15,A16"
+M0021,2026-01-20 12:02:00,W018,portal-web-01,62.8,57.1,244000,1350000,22400,12800,118,379,1,sh,portal helper write,suspicious,Lateral/Persistence,"A14,A15,A16"
+M0022,2026-01-20 12:04:00,W018,portal-web-01,43.6,57.1,412000,182000,8400,5600,118,379,1,portal-sync,portal app inspection,suspicious,Lateral/Persistence,"A14,A15,A16"
+M0023,2026-01-20 12:20:00,W020,portal-web-01,39.9,57.1,118000,620000,7200,4900,118,379,1,portal-sync,helper state write,suspicious,Lateral/Persistence,"A14,A15,A16"
+M0024,2026-01-20 12:31:00,W021,ws-finance-01,29.5,52.4,84000,72000,1300,18000,126,341,1,syswatch,small periodic outbound network peak without matching rich audit context,suspicious,C2,A17
+M0025,2026-01-20 12:33:00,W021,portal-web-01,33.4,52.4,84000,72000,1300,18000,116,341,1,portal-sync,small periodic outbound network peak without matching rich audit context,suspicious,C2,A17
+M0026,2026-01-20 12:39:00,W021,ws-finance-01,29.5,52.4,84000,72000,1300,18000,126,341,1,syswatch,small periodic outbound network peak without matching rich audit context,suspicious,C2,A18
+M0027,2026-01-20 12:46:00,W022,portal-web-01,33.4,52.4,84000,72000,1300,18000,116,341,1,portal-sync,small periodic outbound network peak without matching rich audit context,suspicious,C2,A18
+M0028,2026-01-20 12:55:00,W023,ws-finance-01,29.5,52.4,84000,72000,1300,18000,126,341,1,syswatch,small periodic outbound network peak without matching rich audit context,suspicious,C2,A18
+M0029,2026-01-20 13:08:00,W024,portal-web-01,33.4,52.4,84000,72000,1300,18000,116,341,1,portal-sync,small periodic outbound network peak without matching rich audit context,suspicious,C2,A18
+M0030,2026-01-20 13:18:00,W025,ws-finance-01,29.5,52.4,84000,72000,1300,18000,126,341,1,syswatch,small periodic outbound network peak without matching rich audit context,suspicious,C2,A18
+M0031,2026-01-20 13:36:00,W027,ws-finance-01,53.2,53.9,1780000,220000,24000,1910000,132,452,1,syswatch,archive read and upload start,suspicious,Exfiltration,A19
+M0032,2026-01-20 13:37:00,W027,ws-finance-01,57.8,53.9,820000,96000,18200,3820000,132,452,1,syswatch,continued upload,suspicious,Exfiltration,A19
+M0033,2026-01-20 13:38:00,W027,ws-finance-01,49.3,53.9,320000,68000,12600,1840000,132,452,1,syswatch,upload tail,suspicious,Exfiltration,A19
+M0034,2026-01-20 14:10:00,W031,ws-finance-01,28.0,51.1,78000,66000,860,7200,119,326,1,syswatch,late weak beacon-like activity,suspicious,C2,A20
+M0035,2026-01-20 14:42:00,W034,portal-web-01,28.0,51.1,78000,66000,860,7200,119,326,1,portal-sync,late weak beacon-like activity,suspicious,C2,A20

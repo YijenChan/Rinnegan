@@ -1,0 +1,45 @@
+{
+  "entity_types": [
+    "process",
+    "file",
+    "socket"
+  ],
+  "relations": {
+    "read": [
+      "process",
+      "file"
+    ],
+    "write": [
+      "process",
+      "file"
+    ],
+    "execute": [
+      "process",
+      "file"
+    ],
+    "spawn": [
+      "process",
+      "process"
+    ],
+    "connect": [
+      "process",
+      "socket"
+    ],
+    "accept": [
+      "process",
+      "socket"
+    ],
+    "chmod": [
+      "process",
+      "file"
+    ],
+    "unlink": [
+      "process",
+      "file"
+    ],
+    "rename": [
+      "process",
+      "file"
+    ]
+  }
+}

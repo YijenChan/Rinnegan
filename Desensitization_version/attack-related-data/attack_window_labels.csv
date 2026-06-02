@@ -1,0 +1,22 @@
+window_id,start_time,end_time,attack_stage,has_attack_events,has_network_evidence,has_metric_evidence,is_corruption_target,removed_event_count,affected_hosts,notes
+W002,2026-01-20 09:20:00,2026-01-20 09:30:00,Execution/IA,1,1,1,1,4,ws-finance-01,remove key initial-access audit events while retaining download flow and metric burst
+W003,2026-01-20 09:30:00,2026-01-20 09:40:00,Discovery,1,1,1,0,0,,attack-related evidence exists
+W005,2026-01-20 09:50:00,2026-01-20 10:00:00,Discovery,1,0,1,0,0,,attack-related evidence exists
+W006,2026-01-20 10:00:00,2026-01-20 10:10:00,PE/Persistence,1,1,1,1,5,ws-finance-01,remove PE and persistence installation audit events while retaining metric burst
+W007,2026-01-20 10:10:00,2026-01-20 10:20:00,Defense-Evasion,1,0,0,0,0,,attack-related evidence exists
+W008,2026-01-20 10:20:00,2026-01-20 10:30:00,Discovery/Persistence/Persistence/Discovery,1,1,1,0,0,,attack-related evidence exists
+W009,2026-01-20 10:30:00,2026-01-20 10:40:00,Persistence/Persistence/Discovery,1,0,1,0,0,,attack-related evidence exists
+W012,2026-01-20 11:00:00,2026-01-20 11:10:00,Collection,1,1,1,0,0,,attack-related evidence exists
+W013,2026-01-20 11:10:00,2026-01-20 11:20:00,Collection,1,0,1,0,0,,attack-related evidence exists
+W015,2026-01-20 11:30:00,2026-01-20 11:40:00,Collection,1,0,1,0,0,,attack-related evidence exists
+W018,2026-01-20 12:00:00,2026-01-20 12:10:00,Discovery/Lateral/Lateral/Persistence/Persistence,1,1,1,0,0,,attack-related evidence exists
+W020,2026-01-20 12:20:00,2026-01-20 12:30:00,Lateral/Persistence/Persistence,1,0,1,0,0,,attack-related evidence exists
+W021,2026-01-20 12:30:00,2026-01-20 12:40:00,C2,1,1,1,1,4,ws-finance-01;portal-web-01,remove early C2 audit connect events while retaining network flows
+W022,2026-01-20 12:40:00,2026-01-20 12:50:00,C2,1,1,1,0,0,,attack-related evidence exists
+W023,2026-01-20 12:50:00,2026-01-20 13:00:00,C2,1,1,1,1,2,ws-finance-01;portal-web-01,remove repeated C2 audit connect events while retaining beacon flows
+W024,2026-01-20 13:00:00,2026-01-20 13:10:00,C2,1,1,1,0,0,,attack-related evidence exists
+W025,2026-01-20 13:10:00,2026-01-20 13:20:00,C2,1,1,1,0,0,,attack-related evidence exists
+W027,2026-01-20 13:30:00,2026-01-20 13:40:00,Exfiltration,1,1,1,0,0,,attack-related evidence exists
+W028,2026-01-20 13:40:00,2026-01-20 13:50:00,Exfiltration,1,0,0,0,0,,attack-related evidence exists
+W031,2026-01-20 14:10:00,2026-01-20 14:20:00,C2,1,1,1,0,0,,attack-related evidence exists
+W034,2026-01-20 14:40:00,2026-01-20 14:50:00,C2,1,1,1,0,0,,attack-related evidence exists

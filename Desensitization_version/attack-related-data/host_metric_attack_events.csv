@@ -1,0 +1,15 @@
+metric_event_id,start_time,end_time,window_id,host,event_type,affected_metric,value,baseline,z_score,related_hint,description,label,stage,attack_step
+ME0001,2026-01-20 09:24:00,2026-01-20 09:27:00,W002,ws-finance-01,download_and_disk_burst,net_in_bytes+disk_write_bytes,2350000,380000,5.6,firefox/update-check,large inbound transfer followed by local payload write,suspicious,IA,"A1,A2"
+ME0002,2026-01-20 09:37:00,2026-01-20 09:40:00,W003,ws-finance-01,internal_probe_activity,net_out_bytes,18200,4200,3.1,update-check,short internal probes to file and portal servers,suspicious,Discovery,A5
+ME0003,2026-01-20 10:04:30,2026-01-20 10:07:00,W006,ws-finance-01,privilege_escalation_burst,cpu_percent+proc_count,82.4,31.0,4.8,maintenance-helper,short CPU/process burst during missing PE context,suspicious,PE,A6
+ME0004,2026-01-20 10:05:00,2026-01-20 10:07:00,W006,ws-finance-01,persistence_write_burst,disk_write_bytes,4890000,520000,6.4,sh/syswatch,abnormal disk writes before syswatch appears in later logs,suspicious,PE,A7
+ME0005,2026-01-20 10:20:00,2026-01-20 10:23:00,W008,ws-finance-01,periodic_component_start,proc_count+net_out_bytes,134,116,3.2,syswatch,new recurring component accesses internal servers,suspicious,Persistence/Discovery,"A9,A10"
+ME0006,2026-01-20 11:05:00,2026-01-20 11:12:00,W012,ws-finance-01,collection_staging,net_in_bytes+disk_write_bytes,7760000,680000,6.1,syswatch/tar,large file-server read followed by local archive write,suspicious,Collection,"A11,A12"
+ME0007,2026-01-20 11:07:00,2026-01-20 11:10:00,W012,file-srv-01,remote_file_read_burst,disk_read_bytes,2500000,430000,4.9,smbd,file server read burst aligned with compromised workstation SMB session,suspicious,Collection,A11
+ME0008,2026-01-20 12:01:00,2026-01-20 12:04:00,W018,portal-web-01,remote_helper_drop,disk_write_bytes+proc_count,1530000,260000,5.2,sh/portal-sync,portal helper written after ssh touchpoint,suspicious,Lateral/Persistence,"A14,A15"
+ME0009,2026-01-20 12:30:00,2026-01-20 12:40:00,W021,ws-finance-01,periodic_c2_burst,net_out_bytes,33400,5200,4.7,syswatch,small regular outbound TLS-like flows to external endpoint,suspicious,C2,"A17,A18"
+ME0010,2026-01-20 12:30:00,2026-01-20 12:40:00,W021,portal-web-01,periodic_c2_burst,net_out_bytes,29800,4600,4.5,portal-sync,portal helper shows outbound periodic TLS-like flows,suspicious,C2,A17
+ME0011,2026-01-20 12:50:00,2026-01-20 13:20:00,W023,ws-finance-01,continued_c2_periodicity,net_out_bytes,51100,5900,4.2,syswatch,continued beacon-like behavior across neighboring windows,suspicious,C2,A18
+ME0012,2026-01-20 13:36:00,2026-01-20 13:39:00,W027,ws-finance-01,exfiltration_upload,net_out_bytes,7570000,21000,7.3,syswatch,large outbound transfer after local archive read,suspicious,Exfiltration,A19
+ME0013,2026-01-20 14:10:00,2026-01-20 14:11:00,W031,ws-finance-01,late_weak_beacon,net_out_bytes,7200,4200,2.4,syswatch,weak residual beacon-like activity,suspicious,C2,A20
+ME0014,2026-01-20 14:42:00,2026-01-20 14:43:00,W034,portal-web-01,late_weak_beacon,net_out_bytes,7200,4100,2.5,portal-sync,weak residual beacon-like activity from portal helper,suspicious,C2,A20

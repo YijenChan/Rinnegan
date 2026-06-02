@@ -1,0 +1,193 @@
+{
+  "dataset": "OfficeFog",
+  "version": "attack-related-v1",
+  "time_range": [
+    "2026-01-20 09:00:00",
+    "2026-01-20 15:00:00"
+  ],
+  "window_size_minutes": 10,
+  "note": "This package contains attack-related observations only. Benign background noise is intended to be inserted later.",
+  "hosts": [
+    {
+      "host_id": "H01",
+      "hostname": "ws-finance-01",
+      "ip": "10.20.1.11",
+      "role": "finance workstation",
+      "os_profile": "ubuntu-desktop-like"
+    },
+    {
+      "host_id": "H02",
+      "hostname": "ws-dev-02",
+      "ip": "10.20.1.12",
+      "role": "developer workstation",
+      "os_profile": "ubuntu-desktop-like"
+    },
+    {
+      "host_id": "H03",
+      "hostname": "file-srv-01",
+      "ip": "10.20.1.21",
+      "role": "file server",
+      "os_profile": "linux-server"
+    },
+    {
+      "host_id": "H04",
+      "hostname": "portal-web-01",
+      "ip": "10.20.1.31",
+      "role": "internal portal web server",
+      "os_profile": "linux-server"
+    },
+    {
+      "host_id": "H05",
+      "hostname": "mon-srv-01",
+      "ip": "10.20.1.41",
+      "role": "monitoring server",
+      "os_profile": "linux-server"
+    }
+  ],
+  "stages": [
+    {
+      "stage_id": "S1",
+      "name": "Initial Access / Execution",
+      "time_range": [
+        "2026-01-20 09:24:00",
+        "2026-01-20 09:32:00"
+      ],
+      "host": "ws-finance-01",
+      "summary": "Firefox reaches an external update-like endpoint and launches update-check.",
+      "key_entities": [
+        "firefox:2412@ws-finance-01",
+        "update-check:2440@ws-finance-01",
+        "198.51.100.23:443"
+      ],
+      "corruption_target": true
+    },
+    {
+      "stage_id": "S2",
+      "name": "User-level Foothold and Discovery",
+      "time_range": [
+        "2026-01-20 09:36:00",
+        "2026-01-20 09:55:00"
+      ],
+      "host": "ws-finance-01",
+      "summary": "update-check reads local configuration and probes file/portal servers.",
+      "key_entities": [
+        "update-check:2440@ws-finance-01",
+        "10.20.1.21:445",
+        "10.20.1.31:443"
+      ],
+      "corruption_target": false
+    },
+    {
+      "stage_id": "S3",
+      "name": "Privilege Escalation and Persistence Installation",
+      "time_range": [
+        "2026-01-20 10:04:00",
+        "2026-01-20 10:13:00"
+      ],
+      "host": "ws-finance-01",
+      "summary": "update-check invokes maintenance-helper and an elevated shell installs syswatch.",
+      "key_entities": [
+        "maintenance-helper:3008@ws-finance-01",
+        "sh:3011@ws-finance-01",
+        "/usr/local/bin/syswatch",
+        "/etc/cron.d/syswatch"
+      ],
+      "corruption_target": true
+    },
+    {
+      "stage_id": "S4",
+      "name": "Persistence and Internal Discovery",
+      "time_range": [
+        "2026-01-20 10:20:00",
+        "2026-01-20 10:50:00"
+      ],
+      "host": "ws-finance-01",
+      "summary": "cron starts syswatch, which probes internal services.",
+      "key_entities": [
+        "syswatch:3280@ws-finance-01",
+        "10.20.1.21:445",
+        "10.20.1.31:443"
+      ],
+      "corruption_target": false
+    },
+    {
+      "stage_id": "S5",
+      "name": "Collection from File Server",
+      "time_range": [
+        "2026-01-20 11:05:00",
+        "2026-01-20 11:35:00"
+      ],
+      "host": "ws-finance-01/file-srv-01",
+      "summary": "syswatch accesses the file server and stages finance/HR documents into a temporary archive.",
+      "key_entities": [
+        "/srv/share/finance/budget.xlsx",
+        "/srv/share/hr/staff.csv",
+        "tar:3412@ws-finance-01",
+        "/tmp/finance_pack.tmp"
+      ],
+      "corruption_target": false
+    },
+    {
+      "stage_id": "S6",
+      "name": "Portal Server Touchpoint",
+      "time_range": [
+        "2026-01-20 12:00:00",
+        "2026-01-20 12:25:00"
+      ],
+      "host": "portal-web-01",
+      "summary": "syswatch creates a remote portal helper named portal-sync.",
+      "key_entities": [
+        "portal-sync:4022@portal-web-01",
+        "/var/www/portal/.cache/portal-sync"
+      ],
+      "corruption_target": false
+    },
+    {
+      "stage_id": "S7",
+      "name": "Command and Control",
+      "time_range": [
+        "2026-01-20 12:30:00",
+        "2026-01-20 13:20:00"
+      ],
+      "host": "ws-finance-01/portal-web-01",
+      "summary": "syswatch and portal-sync perform periodic TLS-like connections to the C2 endpoint.",
+      "key_entities": [
+        "198.51.100.77:443",
+        "syswatch:3280@ws-finance-01",
+        "portal-sync:4022@portal-web-01"
+      ],
+      "corruption_target": true
+    },
+    {
+      "stage_id": "S8",
+      "name": "Data Exfiltration",
+      "time_range": [
+        "2026-01-20 13:35:00",
+        "2026-01-20 13:50:00"
+      ],
+      "host": "ws-finance-01",
+      "summary": "syswatch uploads the staged archive to an external exfiltration endpoint.",
+      "key_entities": [
+        "/tmp/finance_pack.tmp",
+        "203.0.113.88:443"
+      ],
+      "corruption_target": false
+    },
+    {
+      "stage_id": "S9",
+      "name": "Low-noise Tail",
+      "time_range": [
+        "2026-01-20 14:00:00",
+        "2026-01-20 15:00:00"
+      ],
+      "host": "ws-finance-01/portal-web-01",
+      "summary": "Weak residual beacon-like activity remains.",
+      "key_entities": [
+        "syswatch:4890@ws-finance-01",
+        "portal-sync:4022@portal-web-01",
+        "198.51.100.77:443"
+      ],
+      "corruption_target": false
+    }
+  ]
+}

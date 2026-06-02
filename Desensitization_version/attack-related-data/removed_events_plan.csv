@@ -1,0 +1,16 @@
+removed_event_id,original_event_id,timestamp,window_id,host,user,src_entity,src_type,relation,dst_entity,dst_type,stage,attack_step,removed_reason
+R0001,E0001,2026-01-20 09:24:18,W002,ws-finance-01,u_fin,firefox:2412@ws-finance-01,process,connect,198.51.100.23:443,socket,IA,A1,hide initial payload server connection
+R0002,E0003,2026-01-20 09:25:06,W002,ws-finance-01,u_fin,firefox:2412@ws-finance-01,process,spawn,update-check:2440@ws-finance-01,process,IA,A2,hide browser helper process launch
+R0003,E0004,2026-01-20 09:25:13,W002,ws-finance-01,u_fin,update-check:2440@ws-finance-01,process,write,/home/u_fin/.cache/update-check,file,IA,A2,hide payload copy write
+R0004,E0005,2026-01-20 09:25:20,W002,ws-finance-01,u_fin,update-check:2440@ws-finance-01,process,execute,/home/u_fin/.cache/update-check,file,IA,A2,hide execution of user-level payload
+R0005,E0015,2026-01-20 10:04:58,W006,ws-finance-01,u_fin,update-check:2440@ws-finance-01,process,execute,/usr/bin/maintenance-helper,file,PE,A6,hide invocation of misconfigured helper
+R0006,E0016,2026-01-20 10:05:06,W006,ws-finance-01,root,maintenance-helper:3008@ws-finance-01,process,spawn,sh:3011@ws-finance-01,process,PE,A6,hide elevated shell spawn
+R0007,E0017,2026-01-20 10:05:17,W006,ws-finance-01,root,sh:3011@ws-finance-01,process,write,/usr/local/bin/syswatch,file,PE,A7,hide persistence binary write
+R0008,E0018,2026-01-20 10:05:29,W006,ws-finance-01,root,sh:3011@ws-finance-01,process,chmod,/usr/local/bin/syswatch,file,PE,A7,hide chmod of persistence binary
+R0009,E0019,2026-01-20 10:05:44,W006,ws-finance-01,root,sh:3011@ws-finance-01,process,write,/etc/cron.d/syswatch,file,PE,A7,hide cron persistence write
+R0010,E0042,2026-01-20 12:31:12,W021,ws-finance-01,root,syswatch:3280@ws-finance-01,process,connect,198.51.100.77:443,socket,C2,A17,hide syswatch C2 connect edge
+R0011,E0043,2026-01-20 12:33:13,W021,portal-web-01,svc_web,portal-sync:4022@portal-web-01,process,connect,198.51.100.77:443,socket,C2,A17,hide portal-sync C2 connect edge
+R0012,E0044,2026-01-20 12:39:14,W021,ws-finance-01,root,syswatch:3280@ws-finance-01,process,connect,198.51.100.77:443,socket,C2,A18,hide repeated syswatch C2 connect edge
+R0013,E0045,2026-01-20 12:46:15,W022,portal-web-01,svc_web,portal-sync:4022@portal-web-01,process,connect,198.51.100.77:443,socket,C2,A18,hide repeated portal-sync C2 connect edge
+R0014,E0046,2026-01-20 12:55:16,W023,ws-finance-01,root,syswatch:3280@ws-finance-01,process,connect,198.51.100.77:443,socket,C2,A18,hide later syswatch C2 connect edge
+R0015,E0047,2026-01-20 13:08:17,W024,portal-web-01,svc_web,portal-sync:4022@portal-web-01,process,connect,198.51.100.77:443,socket,C2,A18,hide later portal-sync C2 connect edge

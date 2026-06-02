@@ -1,0 +1,57 @@
+event_id,is_attack_event,stage,is_removed_in_corrupted,attack_step,description
+E0001,1,IA,1,A1,tls session to external update-like endpoint
+E0002,1,IA,0,A1,downloaded suspicious update container
+E0003,1,IA,1,A2,browser helper launches disguised updater
+E0004,1,IA,1,A2,drop user-level payload copy
+E0005,1,IA,1,A2,execute dropped user-level payload
+E0006,1,Execution,0,A3,create local session marker
+E0007,1,Discovery,0,A4,collect ssh configuration
+E0008,1,Discovery,0,A4,collect host aliases
+E0009,1,Discovery,0,A4,open local shell for environment checks
+E0010,1,Discovery,0,A4,identity check
+E0011,1,Discovery,0,A4,host check
+E0012,1,Discovery,0,A5,probe file server smb
+E0013,1,Discovery,0,A5,probe internal portal
+E0014,1,Discovery,0,A5,inspect cached portal session
+E0015,1,PE,1,A6,invoke misconfigured maintenance helper
+E0016,1,PE,1,A6,spawn elevated shell
+E0017,1,PE,1,A7,install persistence binary
+E0018,1,PE,1,A7,make syswatch executable
+E0019,1,PE,1,A7,install cron persistence
+E0020,1,Persistence,0,A8,cron loads new persistence entry
+E0021,1,Defense-Evasion,0,A8,remove downloaded container
+E0022,1,Persistence,0,A9,run persistent backdoor component
+E0023,1,Discovery,0,A9,re-check internal hosts
+E0024,1,Discovery,0,A9,inspect known hosts
+E0025,1,Discovery,0,A10,connect to file server
+E0026,1,Discovery,0,A10,connect to internal portal
+E0027,1,Persistence,0,A10,update session marker
+E0028,1,Collection,0,A11,open smb session to file server
+E0029,1,Collection,0,A11,remote read via compromised workstation
+E0030,1,Collection,0,A11,remote read via compromised workstation
+E0031,1,Collection,0,A12,stage collected files
+E0032,1,Collection,0,A12,add finance document to archive
+E0033,1,Collection,0,A12,add hr document to archive
+E0034,1,Collection,0,A12,write staged archive
+E0035,1,Collection,0,A13,verify staged archive
+E0036,1,Lateral,0,A14,ssh touchpoint to portal server
+E0037,1,Lateral,0,A14,remote shell from compromised workstation
+E0038,1,Persistence,0,A15,drop portal helper
+E0039,1,Persistence,0,A15,make portal helper executable
+E0040,1,Discovery,0,A15,inspect portal application context
+E0041,1,Persistence,0,A16,write helper state
+E0042,1,C2,1,A17,periodic tls-like beacon to c2
+E0043,1,C2,1,A17,periodic tls-like beacon to c2
+E0044,1,C2,1,A18,periodic tls-like beacon to c2
+E0045,1,C2,1,A18,periodic tls-like beacon to c2
+E0046,1,C2,1,A18,periodic tls-like beacon to c2
+E0047,1,C2,1,A18,periodic tls-like beacon to c2
+E0048,1,C2,0,A18,periodic tls-like beacon to c2
+E0049,1,C2,0,A17,read local session state before beacon
+E0050,1,C2,0,A18,read portal helper before beacon
+E0051,1,Exfiltration,0,A19,prepare staged archive for upload
+E0052,1,Exfiltration,0,A19,upload staged finance archive
+E0053,1,Exfiltration,0,A19,update session marker after upload
+E0054,1,C2,0,A20,residual scheduled run
+E0055,1,C2,0,A20,late weak beacon
+E0056,1,C2,0,A20,late weak beacon from portal helper
